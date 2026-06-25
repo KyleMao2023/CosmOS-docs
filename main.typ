@@ -107,23 +107,36 @@ if y == 0 {
 
 = 概述
 
-== 系统简介
-
-== 系统整体结构
-
+#include "ch1-summary.typ"
 
 = 任务调度
 
+#include "ch2-task.typ"
+
 = 进程管理
+
+#include "ch3-process.typ"
 
 = 内存管理
 
+#include "ch4-mm.typ"
+
 = 文件子系统
+
+#include "ch5-fs.typ"
 
 = 信号、等待队列与Polling子系统
 
+#include "ch6-signal.typ"
+
 = 网络栈
+
+#include "ch7-net.typ"
 
 = 硬件抽象层
 
+#include "ch8-hal.typ"
+
 = 总结与展望
+
+#include "ch9-conclusion.typ"
