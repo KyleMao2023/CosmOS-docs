@@ -1,0 +1,915 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 800 1130"
+   width="100%"
+   height="100%"
+   version="1.1"
+   id="svg75"
+   sodipodi:docname="cover.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview75"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.3964602"
+     inkscape:cx="399.9398"
+     inkscape:cy="565"
+     inkscape:window-width="3200"
+     inkscape:window-height="1876"
+     inkscape:window-x="-12"
+     inkscape:window-y="-12"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg75" />
+  <defs
+     id="defs21">
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#dotGrid"
+       id="pattern75"
+       patternTransform="translate(2.8643853,2.148289)" />
+    <!-- 背景渐变：柔和的浅蓝绿色 -->
+    <linearGradient
+       id="bgGrad"
+       x1="0%"
+       y1="0%"
+       x2="100%"
+       y2="100%">
+      <stop
+         offset="0%"
+         stop-color="#F2FCFC"
+         id="stop1" />
+      <stop
+         offset="40%"
+         stop-color="#EAF6F6"
+         id="stop2" />
+      <stop
+         offset="100%"
+         stop-color="#D5EEEE"
+         id="stop3" />
+    </linearGradient>
+    <!-- 极轻量的科技网格点阵 -->
+    <pattern
+       id="dotGrid"
+       width="40"
+       height="40"
+       patternUnits="userSpaceOnUse">
+      <circle
+         cx="2"
+         cy="2"
+         r="1.5"
+         fill="#00838F"
+         opacity="0.1"
+         id="circle3" />
+    </pattern>
+    <!-- 硬件层（底层）渐变色 -->
+    <linearGradient
+       id="hwTop"
+       x1="0%"
+       y1="100%"
+       x2="100%"
+       y2="0%">
+      <stop
+         offset="0%"
+         stop-color="#00695C"
+         id="stop4" />
+      <stop
+         offset="100%"
+         stop-color="#009688"
+         id="stop5" />
+    </linearGradient>
+    <linearGradient
+       id="hwLeft"
+       x1="0%"
+       y1="0%"
+       x2="0%"
+       y2="100%">
+      <stop
+         offset="0%"
+         stop-color="#004D40"
+         id="stop6" />
+      <stop
+         offset="100%"
+         stop-color="#005A4E"
+         id="stop7" />
+    </linearGradient>
+    <linearGradient
+       id="hwRight"
+       x1="0%"
+       y1="0%"
+       x2="0%"
+       y2="100%">
+      <stop
+         offset="0%"
+         stop-color="#00796B"
+         id="stop8" />
+      <stop
+         offset="100%"
+         stop-color="#00897B"
+         id="stop9" />
+    </linearGradient>
+    <!-- 内核层（中层）高亮渐变 -->
+    <linearGradient
+       id="kernTop"
+       x1="98.994949"
+       y1="1074.8023"
+       x2="466.69048"
+       y2="707.10678"
+       gradientTransform="scale(1.4142136,0.70710678)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#00838F"
+         id="stop10" />
+      <stop
+         offset="100%"
+         stop-color="#00E5FF"
+         id="stop11" />
+    </linearGradient>
+    <linearGradient
+       id="kernLeft"
+       x1="104.91022"
+       y1="840.71887"
+       x2="104.91022"
+       y2="1035.5521"
+       gradientTransform="scale(1.3344744,0.7493587)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#006064"
+         id="stop12" />
+      <stop
+         offset="100%"
+         stop-color="#00838F"
+         id="stop13" />
+    </linearGradient>
+    <linearGradient
+       id="kernRight"
+       x1="299.74348"
+       y1="840.71887"
+       x2="299.74348"
+       y2="1035.5521"
+       gradientTransform="scale(1.3344744,0.7493587)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#0097A7"
+         id="stop14" />
+      <stop
+         offset="100%"
+         stop-color="#00B8D4"
+         id="stop15" />
+    </linearGradient>
+    <!-- 用户空间（顶层）半透明玻璃渐变 -->
+    <linearGradient
+       id="userTop"
+       x1="98.994949"
+       y1="848.52814"
+       x2="466.69048"
+       y2="480.83261"
+       gradientTransform="scale(1.4142136,0.70710678)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#E0F7FA"
+         stop-opacity="0.65"
+         id="stop16" />
+      <stop
+         offset="100%"
+         stop-color="#80DEEA"
+         stop-opacity="0.35"
+         id="stop17" />
+    </linearGradient>
+    <linearGradient
+       id="userLeft"
+       x1="102.73191"
+       y1="640.50204"
+       x2="102.73191"
+       y2="831.28988"
+       gradientTransform="scale(1.3627703,0.73379939)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#B2EBF2"
+         stop-opacity="0.5"
+         id="stop18" />
+      <stop
+         offset="100%"
+         stop-color="#4DD0E1"
+         stop-opacity="0.3"
+         id="stop19" />
+    </linearGradient>
+    <linearGradient
+       id="userRight"
+       x1="293.51975"
+       y1="640.50204"
+       x2="293.51975"
+       y2="831.28988"
+       gradientTransform="scale(1.3627703,0.73379939)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#E0F7FA"
+         stop-opacity="0.7"
+         id="stop20" />
+      <stop
+         offset="100%"
+         stop-color="#80DEEA"
+         stop-opacity="0.4"
+         id="stop21" />
+    </linearGradient>
+    <!-- 柔和辉光滤镜 -->
+    <filter
+       id="glow"
+       x="-inf"
+       y="-2.4"
+       width="inf"
+       height="5.8">
+      <feGaussianBlur
+         stdDeviation="6"
+         result="blur"
+         id="feGaussianBlur21" />
+      <feComposite
+         in="SourceGraphic"
+         in2="blur"
+         operator="over"
+         id="feComposite21" />
+    </filter>
+  </defs>
+  <!-- 背景填充 -->
+  <rect
+     width="800"
+     height="1130"
+     fill="url(#bgGrad)"
+     id="rect21" />
+  <rect
+     width="800"
+     height="1130"
+     fill="url(#dotGrid)"
+     id="rect22"
+     style="fill:url(#pattern75)"
+     x="2.8643854"
+     y="2.148289" />
+  <!-- 科技边框及几何角标 -->
+  <rect
+     x="30"
+     y="30"
+     width="740"
+     height="1070"
+     fill="none"
+     stroke="#00838F"
+     stroke-width="1"
+     opacity="0.15"
+     id="rect23" />
+  <rect
+     x="35"
+     y="35"
+     width="730"
+     height="1060"
+     fill="none"
+     stroke="#00838F"
+     stroke-width="1.5"
+     opacity="0.25"
+     id="rect24" />
+  <!-- 四角精细刻度 -->
+  <path
+     d="M 30 70 L 30 30 L 70 30"
+     fill="none"
+     stroke="#00838F"
+     stroke-width="3"
+     opacity="0.6"
+     id="path24" />
+  <path
+     d="M 770 70 L 770 30 L 730 30"
+     fill="none"
+     stroke="#00838F"
+     stroke-width="3"
+     opacity="0.6"
+     id="path25" />
+  <path
+     d="M 30 1060 L 30 1100 L 70 1100"
+     fill="none"
+     stroke="#00838F"
+     stroke-width="3"
+     opacity="0.6"
+     id="path26" />
+  <path
+     d="M 770 1060 L 770 1100 L 730 1100"
+     fill="none"
+     stroke="#00838F"
+     stroke-width="3"
+     opacity="0.6"
+     id="path27" />
+  <!-- 上半部分：极简制图测算装饰（为标题留白） -->
+  <g
+     opacity="0.12"
+     id="g34">
+    <!-- 右上角环形进度/规标 -->
+    <circle
+       cx="680"
+       cy="180"
+       r="100"
+       fill="none"
+       stroke="#00838F"
+       stroke-width="1"
+       stroke-dasharray="5,5"
+       id="circle27" />
+    <circle
+       cx="680"
+       cy="180"
+       r="80"
+       fill="none"
+       stroke="#00838F"
+       stroke-width="1.5"
+       id="circle28" />
+    <circle
+       cx="680"
+       cy="180"
+       r="40"
+       fill="none"
+       stroke="#00838F"
+       stroke-width="1"
+       id="circle29" />
+    <line
+       x1="560"
+       y1="180"
+       x2="800"
+       y2="180"
+       stroke="#00838F"
+       stroke-width="1"
+       id="line29" />
+    <line
+       x1="680"
+       y1="60"
+       x2="680"
+       y2="300"
+       stroke="#00838F"
+       stroke-width="1"
+       id="line30" />
+    <path
+       d="M 610 110 A 100 100 0 0 1 750 250"
+       fill="none"
+       stroke="#00ACC1"
+       stroke-width="4"
+       id="path30" />
+    <!-- 左侧结构参考线 -->
+    <line
+       x1="30"
+       y1="120"
+       x2="250"
+       y2="120"
+       stroke="#00838F"
+       stroke-width="1"
+       id="line31" />
+    <line
+       x1="30"
+       y1="125"
+       x2="180"
+       y2="125"
+       stroke="#00838F"
+       stroke-width="0.5"
+       id="line32" />
+    <line
+       x1="120"
+       y1="30"
+       x2="120"
+       y2="250"
+       stroke="#00838F"
+       stroke-width="1"
+       id="line33" />
+    <line
+       x1="125"
+       y1="30"
+       x2="125"
+       y2="180"
+       stroke="#00838F"
+       stroke-width="0.5"
+       id="line34" />
+    <circle
+       cx="120"
+       cy="120"
+       r="6"
+       fill="#00838F"
+       id="circle34" />
+  </g>
+  <!-- 下半部分：内核等距架构堆栈 -->
+  <g
+     id="system-stack">
+    <!-- 核心垂直贯穿数据总线（后侧通道线） -->
+    <line
+       x1="400"
+       y1="920"
+       x2="400"
+       y2="400"
+       stroke="#00E5FF"
+       stroke-width="3"
+       stroke-dasharray="10,10"
+       opacity="0.6"
+       filter="url(#glow)"
+       id="line35" />
+    <line
+       x1="320"
+       y1="880"
+       x2="320"
+       y2="440"
+       stroke="#00B8D4"
+       stroke-width="1.5"
+       stroke-dasharray="5,5"
+       opacity="0.3"
+       id="line36" />
+    <line
+       x1="480"
+       y1="880"
+       x2="480"
+       y2="440"
+       stroke="#00B8D4"
+       stroke-width="1.5"
+       stroke-dasharray="5,5"
+       opacity="0.3"
+       id="line37" />
+    <!-- LAYER 1: HARDWARE (底层硬件) -->
+    <g
+       id="layer-hardware">
+      <!-- 投影 -->
+      <polygon
+         points="140,810 400,940 660,810 400,680"
+         fill="#00362F"
+         opacity="0.12"
+         filter="url(#glow)"
+         id="polygon37" />
+      <!-- 左侧板厚 -->
+      <polygon
+         points="140,790 140,806 400,936 400,920"
+         fill="url(#hwLeft)"
+         id="polygon38" />
+      <!-- 右侧板厚 -->
+      <polygon
+         points="400,920 400,936 660,806 660,790"
+         fill="url(#hwRight)"
+         id="polygon39" />
+      <!-- 顶面 -->
+      <polygon
+         points="400,920 660,790 400,660 140,790"
+         fill="url(#hwTop)"
+         id="polygon40" />
+      <!-- 硬件微电路细节 -->
+      <polygon
+         points="400,840 500,790 400,740 300,790"
+         fill="none"
+         stroke="#004D40"
+         stroke-width="2"
+         id="polygon41" />
+      <polygon
+         points="400,835 490,790 400,745 310,790"
+         fill="#004D40"
+         opacity="0.25"
+         id="polygon42" />
+      <path
+         d="M 200 760 L 300 790 M 600 760 L 500 790 M 400 680 L 400 740 M 400 900 L 400 840"
+         stroke="#00796B"
+         stroke-width="2"
+         opacity="0.7"
+         id="path42" />
+      <circle
+         cx="300"
+         cy="790"
+         r="3"
+         fill="#00E5FF"
+         id="circle42" />
+      <circle
+         cx="500"
+         cy="790"
+         r="3"
+         fill="#00E5FF"
+         id="circle43" />
+      <circle
+         cx="400"
+         cy="740"
+         r="3"
+         fill="#00E5FF"
+         id="circle44" />
+      <circle
+         cx="400"
+         cy="840"
+         r="3"
+         fill="#00E5FF"
+         id="circle45" />
+    </g>
+    <!-- 硬件到内核的连接柱 -->
+    <line
+       x1="250"
+       y1="735"
+       x2="250"
+       y2="630"
+       stroke="#00ACC1"
+       stroke-width="2"
+       opacity="0.4"
+       id="line45" />
+    <line
+       x1="550"
+       y1="735"
+       x2="550"
+       y2="630"
+       stroke="#00ACC1"
+       stroke-width="2"
+       opacity="0.4"
+       id="line46" />
+    <!-- LAYER 2: KERNEL (中层内核 - 动力源) -->
+    <g
+       id="layer-kernel"
+       transform="translate(0,14)">
+      <!-- 左侧板厚 -->
+      <polygon
+         points="400,760 140,630 140,646 400,776 "
+         fill="url(#kernLeft)"
+         id="polygon46"
+         style="fill:url(#kernLeft)" />
+      <!-- 右侧板厚 -->
+      <polygon
+         points="660,630 400,760 400,776 660,646 "
+         fill="url(#kernRight)"
+         id="polygon47"
+         style="fill:url(#kernRight)" />
+      <!-- 顶面 -->
+      <polygon
+         points="140,630 400,760 660,630 400,500 "
+         fill="url(#kernTop)"
+         id="polygon48"
+         style="fill:url(#kernTop)" />
+      <!-- 内核模块分割结构 -->
+      <path
+         d="M 400,760 V 500"
+         stroke="#e0f7fa"
+         stroke-width="1.5"
+         opacity="0.3"
+         id="path48" />
+      <path
+         d="M 140,630 H 660"
+         stroke="#e0f7fa"
+         stroke-width="1.5"
+         opacity="0.3"
+         id="path49" />
+      <!-- 中心微内核晶振环 -->
+      <polygon
+         points="270,625 400,690 530,625 400,560 "
+         fill="none"
+         stroke="#e0f7fa"
+         stroke-width="3"
+         filter="url(#glow)"
+         id="polygon49" />
+      <polygon
+         points="290,625 400,680 510,625 400,570 "
+         fill="none"
+         stroke="#00e5ff"
+         stroke-width="1.5"
+         id="polygon50" />
+      <!-- 内核子系统节点 -->
+      <circle
+         cx="400"
+         cy="625"
+         r="7"
+         fill="#ffffff"
+         filter="url(#glow)"
+         id="circle50" />
+      <circle
+         cx="400"
+         cy="625"
+         r="4"
+         fill="#00acc1"
+         id="circle51" />
+      <circle
+         cx="335"
+         cy="592"
+         r="5"
+         fill="#00e5ff"
+         id="circle52" />
+      <circle
+         cx="465"
+         cy="592"
+         r="5"
+         fill="#00e5ff"
+         id="circle53" />
+      <circle
+         cx="335"
+         cy="658"
+         r="5"
+         fill="#00e5ff"
+         id="circle54" />
+      <circle
+         cx="465"
+         cy="658"
+         r="5"
+         fill="#00e5ff"
+         id="circle55" />
+      <path
+         d="m 335,592 65,33 65,-33 m -130,66 65,-33 65,33"
+         fill="none"
+         stroke="#ffffff"
+         stroke-width="1.5"
+         opacity="0.6"
+         id="path55" />
+    </g>
+    <!-- 内核到用户空间的虚线通路 -->
+    <line
+       x1="200"
+       y1="560"
+       x2="200"
+       y2="470"
+       stroke="#00E5FF"
+       stroke-width="2"
+       stroke-dasharray="4,4"
+       opacity="0.5"
+       id="line55" />
+    <line
+       x1="600"
+       y1="560"
+       x2="600"
+       y2="470"
+       stroke="#00E5FF"
+       stroke-width="2"
+       stroke-dasharray="4,4"
+       opacity="0.5"
+       id="line56" />
+    <!-- LAYER 3: USER SPACE (顶层用户空间 - 磨砂玻璃质感) -->
+    <g
+       id="layer-userspace"
+       transform="translate(0,14)">
+      <!-- 左侧板厚 -->
+      <polygon
+         points="400,600 140,470 140,480 400,610 "
+         fill="url(#userLeft)"
+         id="polygon56"
+         style="fill:url(#userLeft)" />
+      <!-- 右侧板厚 -->
+      <polygon
+         points="660,470 400,600 400,610 660,480 "
+         fill="url(#userRight)"
+         id="polygon57"
+         style="fill:url(#userRight)" />
+      <!-- 顶面 -->
+      <polygon
+         points="140,470 400,600 660,470 400,340 "
+         fill="url(#userTop)"
+         id="polygon58"
+         style="fill:url(#userTop)" />
+      <!-- 玻璃高光边缘 -->
+      <path
+         d="M 140,470 400,600 660,470"
+         fill="none"
+         stroke="#ffffff"
+         stroke-width="2"
+         opacity="0.5"
+         id="path58" />
+      <path
+         d="M 140,470 400,340 660,470"
+         fill="none"
+         stroke="#ffffff"
+         stroke-width="1"
+         opacity="0.25"
+         id="path59" />
+      <!-- 飘浮的应用程序节点 -->
+      <g
+         transform="translate(0,-15)"
+         opacity="0.85"
+         id="g61">
+        <!-- 应用节点 A -->
+        <polygon
+           points="250,465 280,480 310,465 280,450 "
+           fill="#b2ebf2"
+           stroke="#00acc1"
+           stroke-width="1.5"
+           id="polygon59" />
+        <line
+           x1="280"
+           y1="480"
+           x2="280"
+           y2="495"
+           stroke="#00acc1"
+           stroke-width="1.5"
+           id="line59" />
+        <circle
+           cx="280"
+           cy="465"
+           r="3"
+           fill="#00838f"
+           id="circle59" />
+        <!-- 应用节点 B -->
+        <polygon
+           points="490,465 520,480 550,465 520,450 "
+           fill="#b2ebf2"
+           stroke="#00acc1"
+           stroke-width="1.5"
+           id="polygon60" />
+        <line
+           x1="520"
+           y1="480"
+           x2="520"
+           y2="495"
+           stroke="#00acc1"
+           stroke-width="1.5"
+           id="line60" />
+        <circle
+           cx="520"
+           cy="465"
+           r="3"
+           fill="#00838f"
+           id="circle60" />
+        <!-- 飘浮的系统网关/端口 -->
+        <polygon
+           points="360,410 400,430 440,410 400,390 "
+           fill="#e0f7fa"
+           stroke="#00e5ff"
+           stroke-width="2"
+           filter="url(#glow)"
+           id="polygon61" />
+        <line
+           x1="400"
+           y1="430"
+           x2="400"
+           y2="475"
+           stroke="#00e5ff"
+           stroke-width="2"
+           id="line61" />
+      </g>
+    </g>
+    <!-- 飘浮的信息粒子 -->
+    <g
+       id="sparks">
+      <circle
+         cx="310"
+         cy="380"
+         r="4"
+         fill="#00E5FF"
+         opacity="0.8"
+         filter="url(#glow)"
+         id="circle61" />
+      <path
+         d="M 310 380 L 330 395"
+         stroke="#00E5FF"
+         stroke-width="1"
+         opacity="0.4"
+         id="path61" />
+      <circle
+         cx="480"
+         cy="350"
+         r="3"
+         fill="#FFFFFF"
+         opacity="0.9"
+         filter="url(#glow)"
+         id="circle62" />
+      <circle
+         cx="220"
+         cy="520"
+         r="5"
+         fill="#00ACC1"
+         opacity="0.6"
+         id="circle63" />
+      <circle
+         cx="580"
+         cy="510"
+         r="4"
+         fill="#00ACC1"
+         opacity="0.6"
+         id="circle64" />
+    </g>
+  </g>
+  <!-- 页脚：精密测绘细节与抽象技术标识（无实际文字，仅条码和刻度占位） -->
+  <g
+     opacity="0.3"
+     transform="translate(60, 1020)"
+     id="g73">
+    <!-- 模拟版本控制条码 -->
+    <rect
+       x="0"
+       y="0"
+       width="3"
+       height="20"
+       fill="#00838F"
+       id="rect64" />
+    <rect
+       x="6"
+       y="0"
+       width="1"
+       height="20"
+       fill="#00838F"
+       id="rect65" />
+    <rect
+       x="10"
+       y="0"
+       width="4"
+       height="20"
+       fill="#00838F"
+       id="rect66" />
+    <rect
+       x="17"
+       y="0"
+       width="2"
+       height="20"
+       fill="#00838F"
+       id="rect67" />
+    <rect
+       x="22"
+       y="0"
+       width="5"
+       height="20"
+       fill="#00838F"
+       id="rect68" />
+    <rect
+       x="30"
+       y="0"
+       width="1"
+       height="20"
+       fill="#00838F"
+       id="rect69" />
+    <rect
+       x="34"
+       y="0"
+       width="3"
+       height="20"
+       fill="#00838F"
+       id="rect70" />
+    <!-- 模拟技术指标块 -->
+    <rect
+       x="50"
+       y="0"
+       width="40"
+       height="8"
+       fill="#00838F"
+       opacity="0.3"
+       id="rect71" />
+    <rect
+       x="95"
+       y="0"
+       width="60"
+       height="8"
+       fill="#00ACC1"
+       opacity="0.5"
+       id="rect72" />
+    <rect
+       x="50"
+       y="12"
+       width="105"
+       height="8"
+       fill="none"
+       stroke="#00838F"
+       stroke-width="1"
+       id="rect73" />
+  </g>
+  <g
+     opacity="0.3"
+     transform="translate(580, 1020)"
+     id="g75">
+    <!-- 页脚右侧校准标靶 -->
+    <circle
+       cx="100"
+       cy="10"
+       r="10"
+       fill="none"
+       stroke="#00838F"
+       stroke-width="1"
+       id="circle73" />
+    <line
+       x1="85"
+       y1="10"
+       x2="115"
+       y2="10"
+       stroke="#00838F"
+       stroke-width="1"
+       id="line73" />
+    <line
+       x1="100"
+       y1="-5"
+       x2="100"
+       y2="25"
+       stroke="#00838F"
+       stroke-width="1"
+       id="line74" />
+    <rect
+       x="0"
+       y="5"
+       width="70"
+       height="10"
+       fill="none"
+       stroke="#00838F"
+       stroke-width="1"
+       id="rect74" />
+    <line
+       x1="10"
+       y1="10"
+       x2="60"
+       y2="10"
+       stroke="#00838F"
+       stroke-width="2"
+       stroke-dasharray="4,2"
+       id="line75" />
+  </g>
+</svg>
