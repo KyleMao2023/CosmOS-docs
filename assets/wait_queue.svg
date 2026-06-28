@@ -1,0 +1,1232 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 820 540"
+   width="820"
+   height="540"
+   version="1.1"
+   id="svg72"
+   sodipodi:docname="wait_queue.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview72"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.6409037"
+     inkscape:cx="386.06776"
+     inkscape:cy="330.91522"
+     inkscape:window-width="3200"
+     inkscape:window-height="1876"
+     inkscape:window-x="-12"
+     inkscape:window-y="-12"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg72" />
+  <defs
+     id="defs9">
+    <!-- 渐变定义 -->
+    <linearGradient
+       id="headerGrad"
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="1">
+      <stop
+         offset="0%"
+         stop-color="#005F73"
+         id="stop1" />
+      <stop
+         offset="100%"
+         stop-color="#0A9396"
+         id="stop2" />
+    </linearGradient>
+    <linearGradient
+       id="subHeaderGrad"
+       x1="0"
+       y1="0"
+       x2="120.16655"
+       y2="120.16655"
+       gradientTransform="scale(3.1622777,0.31622777)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#0A9396"
+         id="stop3" />
+      <stop
+         offset="100%"
+         stop-color="#94D2BD"
+         id="stop4" />
+    </linearGradient>
+    <linearGradient
+       id="bgGrad"
+       x1="0"
+       y1="0"
+       x2="0"
+       y2="782.30426"
+       gradientTransform="scale(1.1504475,0.86922699)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#F4F9F9"
+         id="stop5" />
+      <stop
+         offset="100%"
+         stop-color="#EAF2F2"
+         id="stop6" />
+    </linearGradient>
+    <!-- 阴影滤镜 -->
+    <filter
+       id="dropShadow"
+       x="-45"
+       y="-34"
+       width="990"
+       height="782"
+       filterUnits="userSpaceOnUse">
+      <feComponentTransfer
+         id="feComponentTransfer6">
+        <feFuncA
+           type="linear"
+           slope="0.1"
+           id="feFuncA6" />
+        <feFuncR
+           id="feFuncR72"
+           type="identity" />
+        <feFuncG
+           id="feFuncG72"
+           type="identity" />
+        <feFuncB
+           id="feFuncB72"
+           type="identity" />
+      </feComponentTransfer>
+      <feMerge
+         id="feMerge7">
+        <feMergeNode
+           id="feMergeNode6" />
+        <feMergeNode
+           in="SourceGraphic"
+           id="feMergeNode7" />
+      </feMerge>
+    </filter>
+    <!-- 箭头定义 -->
+    <marker
+       id="arrow"
+       viewBox="0 0 10 10"
+       refX="6"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse"
+       preserveAspectRatio="xMidYMid">
+      <path
+         d="M 0,1.5 8,5 0,8.5 Z"
+         fill="#005f73"
+         id="path7" />
+    </marker>
+    <marker
+       id="arrow-dashed"
+       viewBox="0 0 10 10"
+       refX="6"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,1.5 8,5 0,8.5 Z"
+         fill="#0a9396"
+         id="path8" />
+    </marker>
+    <marker
+       id="arrow-accent"
+       viewBox="0 0 10 10"
+       refX="6"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,1.5 8,5 0,8.5 Z"
+         fill="#2d6a4f"
+         id="path9" />
+    </marker>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#headerGrad"
+       id="linearGradient77"
+       x1="0"
+       y1="0"
+       x2="120.16655"
+       y2="120.16655"
+       gradientTransform="scale(3.1622777,0.31622777)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#headerGrad"
+       id="linearGradient78"
+       x1="0"
+       y1="0"
+       x2="123.28828"
+       y2="123.28828"
+       gradientTransform="scale(3.2444284,0.3082207)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#headerGrad"
+       id="linearGradient79"
+       x1="0"
+       y1="0"
+       x2="123.28828"
+       y2="123.28828"
+       gradientTransform="scale(3.2444284,0.3082207)"
+       gradientUnits="userSpaceOnUse" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath79">
+      <rect
+         style="fill:none;fill-rule:evenodd;stroke:#006879;stroke-width:1.233;stroke-dasharray:1.233, 1.233;stroke-dashoffset:0;stroke-opacity:0.70068"
+         id="rect79"
+         width="820"
+         height="540"
+         x="40"
+         y="80" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath80">
+      <rect
+         style="fill:none;fill-rule:evenodd;stroke:#006879;stroke-width:1.233;stroke-dasharray:1.233, 1.233;stroke-dashoffset:0;stroke-opacity:0.70068"
+         id="rect80"
+         width="820"
+         height="540"
+         x="40"
+         y="80" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath81">
+      <rect
+         style="fill:none;fill-rule:evenodd;stroke:#006879;stroke-width:1.233;stroke-dasharray:1.233, 1.233;stroke-dashoffset:0;stroke-opacity:0.70068"
+         id="rect81"
+         width="820"
+         height="540"
+         x="40"
+         y="80" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath82">
+      <rect
+         style="fill:none;fill-rule:evenodd;stroke:#006879;stroke-width:1.233;stroke-dasharray:1.233, 1.233;stroke-dashoffset:0;stroke-opacity:0.70068"
+         id="rect82"
+         width="820"
+         height="540"
+         x="40"
+         y="80" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath83">
+      <rect
+         style="fill:none;fill-rule:evenodd;stroke:#006879;stroke-width:1.233;stroke-dasharray:1.233, 1.233;stroke-dashoffset:0;stroke-opacity:0.70068"
+         id="rect83"
+         width="820"
+         height="540"
+         x="40"
+         y="80" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath84">
+      <rect
+         style="fill:none;fill-rule:evenodd;stroke:#006879;stroke-width:1.233;stroke-dasharray:1.233, 1.233;stroke-dashoffset:0;stroke-opacity:0.70068"
+         id="rect84"
+         width="820"
+         height="540"
+         x="40"
+         y="80" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath85">
+      <rect
+         style="fill:none;fill-rule:evenodd;stroke:#006879;stroke-width:1.233;stroke-dasharray:1.233, 1.233;stroke-dashoffset:0;stroke-opacity:0.70068"
+         id="rect85"
+         width="820"
+         height="540"
+         x="-420"
+         y="-300" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath86">
+      <rect
+         style="fill:none;fill-rule:evenodd;stroke:#006879;stroke-width:1.233;stroke-dasharray:1.233, 1.233;stroke-dashoffset:0;stroke-opacity:0.70068"
+         id="rect86"
+         width="820"
+         height="540"
+         x="0"
+         y="-300" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath87">
+      <rect
+         style="fill:none;fill-rule:evenodd;stroke:#006879;stroke-width:1.233;stroke-dasharray:1.233, 1.233;stroke-dashoffset:0;stroke-opacity:0.70068"
+         id="rect87"
+         width="820"
+         height="540"
+         x="-420"
+         y="0" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath88">
+      <rect
+         style="fill:none;fill-rule:evenodd;stroke:#006879;stroke-width:1.233;stroke-dasharray:1.233, 1.233;stroke-dashoffset:0;stroke-opacity:0.70068"
+         id="rect88"
+         width="820"
+         height="540"
+         x="0"
+         y="0" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath89">
+      <rect
+         style="fill:none;fill-rule:evenodd;stroke:#006879;stroke-width:1.233;stroke-dasharray:1.233, 1.233;stroke-dashoffset:0;stroke-opacity:0.70068"
+         id="rect89"
+         width="820"
+         height="540"
+         x="40"
+         y="80" />
+    </clipPath>
+  </defs>
+  <!-- 全局背景 -->
+  <!-- 页面标题 -->
+  <!-- ==================== 左上：WaitQueue ==================== -->
+  <!-- ==================== 右上：WaitQueueKeyed<T> ==================== -->
+  <!-- ==================== 左下：TaskControlBlock ==================== -->
+  <!-- ==================== 右下：WaitQueueHandle ==================== -->
+  <!-- ==================== 关联指示箭头 ==================== -->
+  <!-- TCB 的 current_wq_handle 指向 WaitQueueHandle -->
+  <!-- WaitQueueHandle 的 ptr 指针向上回指 (一分二示意) -->
+  <!-- 主干线 -->
+  <!-- 指向 WaitQueue -->
+  <!-- 指向 WaitQueueKeyed -->
+  <rect
+     width="100%"
+     height="100%"
+     fill="url(#bgGrad)"
+     id="rect9"
+     style="fill:url(#bgGrad)"
+     x="0"
+     y="0"
+     clip-path="url(#clipPath89)"
+     transform="translate(-40,-80)" />
+  <g
+     filter="url(#dropShadow)"
+     id="g28"
+     clip-path="url(#clipPath88)">
+    <rect
+       width="380"
+       height="240"
+       rx="8"
+       fill="#ffffff"
+       stroke="#005f73"
+       stroke-width="1.5"
+       id="rect11"
+       x="0"
+       y="0" />
+    <!-- 标题栏 -->
+    <rect
+       width="380"
+       height="38"
+       rx="8"
+       fill="url(#headerGrad)"
+       id="rect12"
+       style="fill:url(#linearGradient77)"
+       x="0"
+       y="0" />
+    <!-- 修正底部圆角溢出 -->
+    <rect
+       y="30"
+       width="380"
+       height="8"
+       fill="#0a9396"
+       id="rect13"
+       x="0" />
+    <text
+       x="15"
+       y="24"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="14px"
+       font-weight="bold"
+       fill="#ffffff"
+       id="text13">WaitQueue (标准先进先出队列)</text>
+    <!-- 内部结构说明 -->
+    <text
+       x="9"
+       y="65"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="12px"
+       fill="#555555"
+       font-weight="bold"
+       id="text14">queue: <tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Cascadia Code PL';-inkscape-font-specification:'Cascadia Code PL Bold'"
+   id="tspan74">SpinNoIrqLock&lt;VecDeque&lt;Arc&lt;TaskControlBlock&gt;&gt;&gt;</tspan></text>
+    <!-- 队列可视化外框 -->
+    <rect
+       x="15"
+       y="85"
+       width="350"
+       height="135"
+       rx="6"
+       fill="#f0f7f7"
+       stroke="#94d2bd"
+       stroke-width="1"
+       id="rect14" />
+    <!-- 队列内部 TCB 节点 -->
+    <!-- 节点 1 -->
+    <g
+       transform="translate(30,115)"
+       id="g20">
+      <rect
+         width="95"
+         height="75"
+         rx="4"
+         fill="#ffffff"
+         stroke="#0a9396"
+         stroke-width="1.5"
+         id="rect15"
+         x="0"
+         y="0" />
+      <rect
+         width="93.734161"
+         height="19.784538"
+         rx="4"
+         fill="#e0f2f1"
+         id="rect16"
+         x="0.67332065"
+         y="-0.026932826" />
+      <rect
+         y="16.080799"
+         width="93.68029"
+         height="3.6768062"
+         fill="#e0f2f1"
+         id="rect17"
+         x="0.72718632" />
+      <text
+         x="47.5"
+         y="14"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="11px"
+         font-weight="bold"
+         fill="#005f73"
+         text-anchor="middle"
+         id="text17">Arc&lt;TCB&gt; (1)</text>
+      <text
+         x="10"
+         y="38"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="10px"
+         fill="#666666"
+         id="text18">Status: Inter..</text>
+      <text
+         x="10"
+         y="54"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="10px"
+         fill="#666666"
+         id="text19">Reason: Sleep</text>
+      <text
+         x="10"
+         y="68"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="9px"
+         fill="#999999"
+         id="text20">Ref Count: 2</text>
+    </g>
+    <!-- 链接箭头 -->
+    <path
+       d="m 125,152.5 h 30"
+       fill="none"
+       stroke="#0a9396"
+       stroke-width="2"
+       marker-end="url(#arrow)"
+       id="path20" />
+    <!-- 节点 2 -->
+    <g
+       transform="translate(165,115)"
+       id="g25">
+      <rect
+         width="95"
+         height="75"
+         rx="4"
+         fill="#ffffff"
+         stroke="#0a9396"
+         stroke-width="1.5"
+         id="rect20"
+         x="0"
+         y="0" />
+      <rect
+         width="93.49176"
+         height="19.932669"
+         rx="4"
+         fill="#e0f2f1"
+         id="rect21"
+         x="0.78105199"
+         y="0.067332067" />
+      <rect
+         y="16"
+         width="93.49176"
+         height="4"
+         fill="#e0f2f1"
+         id="rect22"
+         x="0.78105199" />
+      <text
+         x="47.5"
+         y="14"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="11px"
+         font-weight="bold"
+         fill="#005f73"
+         text-anchor="middle"
+         id="text22">Arc&lt;TCB&gt; (2)</text>
+      <text
+         x="10"
+         y="38"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="10px"
+         fill="#666666"
+         id="text23">Status: Inter..</text>
+      <text
+         x="10"
+         y="54"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="10px"
+         fill="#666666"
+         id="text24">Reason: Sleep</text>
+      <text
+         x="10"
+         y="68"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="9px"
+         fill="#999999"
+         id="text25">Ref Count: 2</text>
+    </g>
+    <!-- 链接箭头 -->
+    <path
+       d="m 260,152.5 h 25"
+       fill="none"
+       stroke="#0a9396"
+       stroke-width="2"
+       stroke-dasharray="3, 3"
+       id="path25" />
+    <!-- 省略号及队列方向 -->
+    <text
+       x="300"
+       y="156"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="16px"
+       font-weight="bold"
+       fill="#005f73"
+       id="text26">...</text>
+    <text
+       x="30"
+       y="105"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="10px"
+       fill="#0a9396"
+       font-weight="bold"
+       id="text27">▲ 头部 (Pop Front)</text>
+    <text
+       x="335"
+       y="105"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="10px"
+       fill="#0a9396"
+       font-weight="bold"
+       text-anchor="end"
+       id="text28">尾部 (Push Back) ▲</text>
+  </g>
+  <g
+     transform="translate(420)"
+     filter="url(#dropShadow)"
+     id="g49"
+     clip-path="url(#clipPath87)">
+    <rect
+       width="400"
+       height="240"
+       rx="8"
+       fill="#ffffff"
+       stroke="#005f73"
+       stroke-width="1.5"
+       id="rect28"
+       x="0"
+       y="0" />
+    <!-- 标题栏 -->
+    <rect
+       width="400"
+       height="38"
+       rx="8"
+       fill="url(#headerGrad)"
+       id="rect29"
+       style="fill:url(#linearGradient78)"
+       x="0"
+       y="0" />
+    <rect
+       y="30"
+       width="400"
+       height="8"
+       fill="#0a9396"
+       id="rect30"
+       x="0" />
+    <text
+       x="15"
+       y="24"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="14px"
+       font-weight="bold"
+       fill="#ffffff"
+       id="text30">WaitQueueKeyed&lt;T&gt; (键值匹配等待队列)</text>
+    <!-- queue: VecDeque<T> -->
+    <g
+       transform="translate(15,60)"
+       id="g36">
+      <text
+         x="-4"
+         y="15"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="11px"
+         font-weight="bold"
+         fill="#005f73"
+         id="text31">queue: <tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Cascadia Code PL';-inkscape-font-specification:'Cascadia Code PL Bold'"
+   id="tspan75">VecDeque&lt;T&gt;</tspan> (FIFO 键队列)</text>
+      <rect
+         y="23"
+         width="165"
+         height="42"
+         rx="4"
+         fill="#f0f7f7"
+         stroke="#94d2bd"
+         stroke-width="1"
+         id="rect31"
+         x="0" />
+      <!-- 键列表格子 -->
+      <g
+         transform="translate(10,31)"
+         id="g35">
+        <rect
+           x="0"
+           y="0"
+           width="32"
+           height="24"
+           fill="#ffffff"
+           stroke="#0a9396"
+           rx="2"
+           id="rect32" />
+        <text
+           x="16"
+           y="16"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="11px"
+           fill="#005f73"
+           text-anchor="middle"
+           font-weight="bold"
+           id="text32">K1</text>
+        <rect
+           x="38"
+           y="0"
+           width="32"
+           height="24"
+           fill="#ffffff"
+           stroke="#0a9396"
+           rx="2"
+           id="rect33" />
+        <text
+           x="54"
+           y="16"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="11px"
+           fill="#005f73"
+           text-anchor="middle"
+           font-weight="bold"
+           id="text33">K2</text>
+        <rect
+           x="76"
+           y="0"
+           width="32"
+           height="24"
+           fill="#ffffff"
+           stroke="#0a9396"
+           rx="2"
+           id="rect34" />
+        <text
+           x="92"
+           y="16"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="11px"
+           fill="#005f73"
+           text-anchor="middle"
+           font-weight="bold"
+           id="text34">K3</text>
+        <text
+           x="120"
+           y="16"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="12px"
+           fill="#0a9396"
+           id="text35">...</text>
+      </g>
+    </g>
+    <!-- next_key: T -->
+    <g
+       transform="translate(15,175)"
+       id="g38">
+      <text
+         x="0"
+         y="12"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="11px"
+         font-weight="bold"
+         fill="#005f73"
+         id="text36">next_key: SpinNoIrqLock&lt;T&gt;</text>
+      <rect
+         y="20"
+         width="165"
+         height="32"
+         rx="4"
+         fill="#ffffff"
+         stroke="#94d2bd"
+         stroke-dasharray="3, 3"
+         id="rect36"
+         x="0" />
+      <text
+         x="12"
+         y="40"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="11px"
+         fill="#555555"
+         id="text37">下一个自动键:</text>
+      <text
+         x="110"
+         y="41"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="12px"
+         font-weight="bold"
+         fill="#2d6a4f"
+         id="text38">K_Next</text>
+    </g>
+    <!-- waiters: HashMap<T, Arc<TCB>> -->
+    <g
+       transform="translate(200,60)"
+       id="g48">
+      <text
+         x="6"
+         y="15"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="11px"
+         font-weight="bold"
+         fill="#005f73"
+         id="text39">waiters: <tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Cascadia Code PL';-inkscape-font-specification:'Cascadia Code PL Bold'"
+   id="tspan76">HashMap&lt;T, Arc&lt;TCB&gt;&gt;</tspan></text>
+      <rect
+         y="23"
+         width="185"
+         height="147"
+         rx="6"
+         fill="#f0f7f7"
+         stroke="#94d2bd"
+         stroke-width="1"
+         id="rect39"
+         x="0" />
+      <!-- 表头 -->
+      <rect
+         x="8"
+         y="31"
+         width="169"
+         height="20"
+         fill="#0a9396"
+         rx="2"
+         id="rect40" />
+      <text
+         x="35"
+         y="45"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="10px"
+         font-weight="bold"
+         fill="#ffffff"
+         text-anchor="middle"
+         id="text40">Key (T)</text>
+      <text
+         x="123"
+         y="45"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="10px"
+         font-weight="bold"
+         fill="#ffffff"
+         text-anchor="middle"
+         id="text41">Value (Arc&lt;TCB&gt;)</text>
+      <!-- 键值对行 1 -->
+      <g
+         transform="translate(8,56)"
+         id="g43">
+        <rect
+           width="169"
+           height="24"
+           fill="#ffffff"
+           rx="2"
+           stroke="#e0f2f1"
+           id="rect41"
+           x="0"
+           y="0" />
+        <text
+           x="25"
+           y="16"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="11px"
+           font-weight="bold"
+           fill="#2d6a4f"
+           text-anchor="middle"
+           id="text42">K1</text>
+        <line
+           x1="55"
+           y1="0"
+           x2="55"
+           y2="24"
+           stroke="#e0f2f1"
+           id="line42" />
+        <text
+           x="115"
+           y="16"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="10px"
+           fill="#005f73"
+           text-anchor="middle"
+           id="text43">Arc&lt;TCB A&gt;</text>
+      </g>
+      <!-- 键值对行 2 -->
+      <g
+         transform="translate(8,85)"
+         id="g45">
+        <rect
+           width="169"
+           height="24"
+           fill="#ffffff"
+           rx="2"
+           stroke="#e0f2f1"
+           id="rect43"
+           x="0"
+           y="0" />
+        <text
+           x="25"
+           y="16"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="11px"
+           font-weight="bold"
+           fill="#2d6a4f"
+           text-anchor="middle"
+           id="text44">K2</text>
+        <line
+           x1="55"
+           y1="0"
+           x2="55"
+           y2="24"
+           stroke="#e0f2f1"
+           id="line44" />
+        <text
+           x="115"
+           y="16"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="10px"
+           fill="#005f73"
+           text-anchor="middle"
+           id="text45">Arc&lt;TCB B&gt;</text>
+      </g>
+      <!-- 键值对行 3 -->
+      <g
+         transform="translate(8,114)"
+         id="g47">
+        <rect
+           width="169"
+           height="24"
+           fill="#ffffff"
+           rx="2"
+           stroke="#e0f2f1"
+           stroke-dasharray="2, 2"
+           id="rect45"
+           x="0"
+           y="0" />
+        <text
+           x="25"
+           y="16"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="11px"
+           fill="#999999"
+           text-anchor="middle"
+           id="text46">...</text>
+        <line
+           x1="55"
+           y1="0"
+           x2="55"
+           y2="24"
+           stroke="#e0f2f1"
+           id="line46" />
+        <text
+           x="115"
+           y="16"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="10px"
+           fill="#999999"
+           text-anchor="middle"
+           id="text47">...</text>
+      </g>
+    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#006879;stroke-width:1.233;stroke-dasharray:1.233, 1.233;stroke-dashoffset:0;stroke-opacity:0.70068;marker-end:url(#arrow)"
+       d="m 41,115 v 14.64512 h 167"
+       id="path73" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#006879;stroke-width:1.233;stroke-dasharray:1.233, 1.233;stroke-dashoffset:0;stroke-opacity:0.70068;marker-end:url(#arrow)"
+       d="m 79,115 v 41.36248 l 128.07224,-0.21546"
+       id="path74"
+       sodipodi:nodetypes="ccc" />
+  </g>
+  <g
+     transform="translate(0,300)"
+     filter="url(#dropShadow)"
+     id="g59"
+     clip-path="url(#clipPath86)">
+    <rect
+       width="380"
+       height="240"
+       rx="8"
+       fill="#ffffff"
+       stroke="#0a9396"
+       stroke-width="1.5"
+       id="rect49"
+       x="0"
+       y="0" />
+    <!-- 标题栏 -->
+    <rect
+       width="380"
+       height="38"
+       rx="8"
+       fill="url(#subHeaderGrad)"
+       id="rect50"
+       style="fill:url(#subHeaderGrad)"
+       x="0"
+       y="0" />
+    <rect
+       y="30"
+       width="380"
+       height="8"
+       fill="#94d2bd"
+       id="rect51"
+       x="0" />
+    <text
+       x="15"
+       y="24"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="14px"
+       font-weight="bold"
+       fill="#ffffff"
+       id="text51">TaskControlBlock (任务控制块 TCB)</text>
+    <!-- 字段展示 -->
+    <g
+       transform="translate(15,55)"
+       id="g58">
+      <!-- Status -->
+      <text
+         x="5"
+         y="20"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="12px"
+         font-weight="bold"
+         fill="#005f73"
+         id="text52">task_status:</text>
+      <rect
+         x="150"
+         y="4"
+         width="200"
+         height="24"
+         rx="4"
+         fill="#ebf9f6"
+         stroke="#0a9396"
+         id="rect52" />
+      <text
+         x="160"
+         y="20"
+         font-family="Consolas, monospace"
+         font-size="11px"
+         font-weight="bold"
+         fill="#2d6a4f"
+         id="text53">TaskStatus::Interruptible</text>
+      <!-- Wait Reason -->
+      <text
+         x="5"
+         y="55"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="12px"
+         font-weight="bold"
+         fill="#005f73"
+         id="text54">wait_reason:</text>
+      <rect
+         x="150"
+         y="39"
+         width="200"
+         height="24"
+         rx="4"
+         fill="#ebf9f6"
+         stroke="#0a9396"
+         id="rect54" />
+      <text
+         x="160"
+         y="55"
+         font-family="Consolas, monospace"
+         font-size="11px"
+         fill="#2d6a4f"
+         id="text55">Some(WaitReason::..)</text>
+      <!-- Current WQ Handle -->
+      <text
+         x="5"
+         y="100"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="12px"
+         font-weight="bold"
+         fill="#005f73"
+         id="text56">current_wq_handle:</text>
+      <rect
+         x="5"
+         y="115"
+         width="345"
+         height="55"
+         rx="4"
+         fill="#f0f7f7"
+         stroke="#0a9396"
+         stroke-width="1.5"
+         id="rect56" />
+      <text
+         x="15"
+         y="135"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="11px"
+         font-weight="bold"
+         fill="#005f73"
+         id="text57">Option&lt;WaitQueueHandle&gt;</text>
+      <text
+         x="15"
+         y="153"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="10px"
+         fill="#666666"
+         id="text58">指向当前任务正在睡眠的目标等待队列句柄</text>
+    </g>
+  </g>
+  <g
+     transform="translate(420,300)"
+     filter="url(#dropShadow)"
+     id="g69"
+     clip-path="url(#clipPath85)">
+    <rect
+       width="400"
+       height="240"
+       rx="8"
+       fill="#ffffff"
+       stroke="#005f73"
+       stroke-width="1.5"
+       id="rect59"
+       x="0"
+       y="0" />
+    <!-- 标题栏 -->
+    <rect
+       width="400"
+       height="38"
+       rx="8"
+       fill="url(#headerGrad)"
+       id="rect60"
+       style="fill:url(#linearGradient79)"
+       x="0"
+       y="0" />
+    <rect
+       y="30"
+       width="400"
+       height="8"
+       fill="#0a9396"
+       id="rect61"
+       x="0" />
+    <text
+       x="15"
+       y="24"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="14px"
+       font-weight="bold"
+       fill="#ffffff"
+       id="text61">WaitQueueHandle (类型擦除桥接句柄)</text>
+    <!-- 字段细节 -->
+    <g
+       transform="translate(15,55)"
+       id="g68">
+      <!-- ptr -->
+      <rect
+         x="5"
+         y="5"
+         width="370"
+         height="36"
+         rx="4"
+         fill="#f0f7f7"
+         stroke="#94d2bd"
+         id="rect62" />
+      <text
+         x="15"
+         y="27"
+         font-family="Consolas, monospace"
+         font-size="12px"
+         font-weight="bold"
+         fill="#005f73"
+         id="text62">ptr: *const ()</text>
+      <text
+         x="140"
+         y="26"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="11px"
+         fill="#555555"
+         id="text63">指向原始队列的非类型安全指针</text>
+      <!-- wake_fn -->
+      <rect
+         x="5"
+         y="50"
+         width="370"
+         height="36"
+         rx="4"
+         fill="#f0f7f7"
+         stroke="#94d2bd"
+         id="rect63" />
+      <text
+         x="15"
+         y="72"
+         font-family="Consolas, monospace"
+         font-size="12px"
+         font-weight="bold"
+         fill="#005f73"
+         id="text64">wake_fn: fn(*const (), &amp;Arc&lt;TCB&gt;)</text>
+      <text
+         x="270"
+         y="71"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="10px"
+         fill="#666666"
+         id="text65">强类型移除与唤醒</text>
+      <!-- remove_fn -->
+      <rect
+         x="5"
+         y="95"
+         width="370"
+         height="36"
+         rx="4"
+         fill="#f0f7f7"
+         stroke="#94d2bd"
+         id="rect65" />
+      <text
+         x="15"
+         y="117"
+         font-family="Consolas, monospace"
+         font-size="12px"
+         font-weight="bold"
+         fill="#005f73"
+         id="text66">remove_fn: fn(*const (), &amp;Arc&lt;TCB&gt;)</text>
+      <text
+         x="285"
+         y="116"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="10px"
+         fill="#666666"
+         id="text67">移除但不唤醒</text>
+      <!-- 说明文字 -->
+      <rect
+         x="5"
+         y="142"
+         width="370"
+         height="34"
+         rx="4"
+         fill="#ebf9f6"
+         id="rect67" />
+      <text
+         x="12"
+         y="162"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="10.5px"
+         fill="#2d6a4f"
+         font-weight="bold"
+         id="text68">解耦设计：允许信号分发机制直接唤醒任务，无需知晓具体队列类型。</text>
+    </g>
+  </g>
+  <path
+     d="m 395,525 h 55"
+     fill="none"
+     stroke="#005f73"
+     stroke-width="2"
+     stroke-dasharray="4, 2"
+     marker-end="url(#arrow)"
+     id="path69"
+     clip-path="url(#clipPath84)"
+     transform="translate(-40,-80)" />
+  <text
+     x="422"
+     y="515"
+     font-family="'Microsoft YaHei', sans-serif"
+     font-size="10px"
+     fill="#005f73"
+     text-anchor="middle"
+     font-weight="bold"
+     id="text69"
+     clip-path="url(#clipPath83)"
+     transform="translate(-40,-80)">持有</text>
+  <path
+     d="M 625,375 V 350"
+     fill="none"
+     stroke="#0a9396"
+     stroke-width="2"
+     id="path70"
+     clip-path="url(#clipPath82)"
+     transform="translate(-40,-80)" />
+  <path
+     d="M 625,350 H 240 v -24"
+     fill="none"
+     stroke="#0a9396"
+     stroke-width="2"
+     stroke-dasharray="3, 3"
+     marker-end="url(#arrow-dashed)"
+     id="path71"
+     clip-path="url(#clipPath81)"
+     transform="translate(-40,-80)" />
+  <path
+     d="m 625,350 h 35 v -24"
+     fill="none"
+     stroke="#0a9396"
+     stroke-width="2"
+     stroke-dasharray="3, 3"
+     marker-end="url(#arrow-dashed)"
+     id="path72"
+     clip-path="url(#clipPath80)"
+     transform="translate(-40,-80)" />
+  <text
+     x="445"
+     y="343"
+     font-family="'Microsoft YaHei', sans-serif"
+     font-size="11px"
+     fill="#005f73"
+     font-weight="bold"
+     id="text72"
+     clip-path="url(#clipPath79)"
+     transform="translate(-40,-80)">ptr 擦除类型回指</text>
+</svg>

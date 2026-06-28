@@ -1,0 +1,1266 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 940.90906 692.74957"
+   width="940.90906"
+   height="692.74957"
+   version="1.1"
+   id="svg82"
+   sodipodi:docname="poll_bitmap.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview82"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showguides="true"
+     inkscape:zoom="1.4305314"
+     inkscape:cx="546.30048"
+     inkscape:cy="385.17155"
+     inkscape:window-width="3200"
+     inkscape:window-height="1876"
+     inkscape:window-x="-12"
+     inkscape:window-y="-12"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg82">
+    <sodipodi:guide
+       position="402.53836,404.06416"
+       orientation="0,-1"
+       id="guide83"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="479.8531,276.12876"
+       orientation="1,0"
+       id="guide84"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <defs
+     id="defs7">
+    <!-- 渐变色彩定义 -->
+    <linearGradient
+       id="headerGrad"
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="1">
+      <stop
+         offset="0%"
+         stop-color="#005F73"
+         id="stop1" />
+      <stop
+         offset="100%"
+         stop-color="#0A9396"
+         id="stop2" />
+    </linearGradient>
+    <linearGradient
+       id="panelGrad"
+       x1="0"
+       y1="0"
+       x2="0"
+       y2="1">
+      <stop
+         offset="0%"
+         stop-color="#FAFCFC"
+         id="stop3" />
+      <stop
+         offset="100%"
+         stop-color="#F0F5F5"
+         id="stop4" />
+    </linearGradient>
+    <!-- 阴影滤镜 -->
+    <filter
+       id="shadow"
+       x="-50"
+       y="-39"
+       width="1100"
+       height="858"
+       filterUnits="userSpaceOnUse">
+      <feOffset
+         dx="2"
+         dy="2"
+         id="feOffset4" />
+      <feComponentTransfer
+         id="feComponentTransfer4">
+        <feFuncA
+           type="linear"
+           slope="0.08"
+           id="feFuncA4" />
+        <feFuncR
+           id="feFuncR82"
+           type="identity" />
+        <feFuncG
+           id="feFuncG82"
+           type="identity" />
+        <feFuncB
+           id="feFuncB82"
+           type="identity" />
+      </feComponentTransfer>
+      <feMerge
+         id="feMerge5">
+        <feMergeNode
+           id="feMergeNode4" />
+        <feMergeNode
+           in="SourceGraphic"
+           id="feMergeNode5" />
+      </feMerge>
+    </filter>
+    <!-- 箭头 -->
+    <marker
+       id="arrow-teal"
+       viewBox="0 0 10 10"
+       refX="6"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,1.5 8,5 0,8.5 Z"
+         fill="#0a9396"
+         id="path5" />
+    </marker>
+    <marker
+       id="arrow-dark"
+       viewBox="0 0 10 10"
+       refX="6"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,1.5 8,5 0,8.5 Z"
+         fill="#005f73"
+         id="path6" />
+    </marker>
+    <marker
+       id="arrow-orange"
+       viewBox="0 0 10 10"
+       refX="6"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,1.5 8,5 0,8.5 Z"
+         fill="#ca6702"
+         id="path7" />
+    </marker>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#panelGrad"
+       id="linearGradient82"
+       x1="-0.43514723"
+       y1="25.853319"
+       x2="-0.43514723"
+       y2="348.73254"
+       gradientTransform="scale(1.1490364,0.87029443)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#panelGrad"
+       id="linearGradient83"
+       x1="-0.43514723"
+       y1="25.853319"
+       x2="-0.43514723"
+       y2="348.73254"
+       gradientTransform="scale(1.1490364,0.87029443)"
+       gradientUnits="userSpaceOnUse" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath84">
+      <rect
+         style="fill:#000000;fill-rule:evenodd;stroke-width:1.233;stroke-dasharray:1.233, 1.233"
+         id="rect85"
+         width="940.90906"
+         height="692.74957"
+         x="27.961637"
+         y="58.020397" />
+    </clipPath>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#headerGrad"
+       id="linearGradient85"
+       x1="0"
+       y1="0"
+       x2="186.97593"
+       y2="186.97593"
+       gradientTransform="scale(4.9204193,0.20323471)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#headerGrad"
+       id="linearGradient86"
+       x1="0"
+       y1="0"
+       x2="105.35654"
+       y2="105.35654"
+       gradientTransform="scale(3.5118846,0.2847474)"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <!-- 全局灰色偏绿背景 -->
+  <!-- 页面标题 -->
+  <!-- ==================== 上半部分：POLL_REGISTRY (数据存储结构) ==================== -->
+  <!-- ==================== 下半部分：POLL行为交互机制 ==================== -->
+  <!-- 1. 注册入口 (左下) -->
+  <!-- 2. 唤醒触发源 (中下) -->
+  <!-- 3. POLL_WAIT_QUEUE 睡眠队列 (右下) -->
+  <!-- 中下到右下的连接线：唤醒操作最终走向 WaitQueueKeyed -->
+  <g
+     id="g84"
+     clip-path="url(#clipPath84)"
+     transform="translate(-27.961637,-58.020397)">
+    <rect
+       width="100%"
+       height="100%"
+       fill="#f3f7f7"
+       id="rect7"
+       x="0"
+       y="0" />
+    <g
+       transform="translate(40,75)"
+       filter="url(#shadow)"
+       id="g48">
+      <!-- 外壳 -->
+      <rect
+         width="920"
+         height="385"
+         rx="8"
+         fill="#ffffff"
+         stroke="#005f73"
+         stroke-width="1.5"
+         id="rect9"
+         x="0"
+         y="0" />
+      <!-- 标题 -->
+      <rect
+         width="920"
+         height="38"
+         rx="8"
+         fill="url(#headerGrad)"
+         id="rect10"
+         x="0"
+         y="0"
+         style="fill:url(#linearGradient85)" />
+      <rect
+         y="30"
+         width="920"
+         height="8"
+         fill="#0a9396"
+         id="rect11"
+         x="0" />
+      <text
+         x="15"
+         y="24"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="14px"
+         font-weight="bold"
+         fill="#ffffff"
+         id="text11">POLL_REGISTRY : SpinNoIrqLock&lt;PollRegistry&gt;</text>
+      <!-- 1. KernelFdSlot 数组 (左侧行) -->
+      <g
+         transform="matrix(1,0,0,0.9847799,20,60.075536)"
+         id="g26">
+        <text
+           x="0"
+           y="15"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="12px"
+           font-weight="bold"
+           fill="#005f73"
+           id="text12">kernel_slots: [KernelFdSlot; 128] (内核内核FD行，最大128)</text>
+        <rect
+           y="23"
+           width="370"
+           height="280"
+           rx="6"
+           fill="url(#panelGrad)"
+           stroke="#94d2bd"
+           stroke-width="1"
+           id="rect12"
+           style="fill:url(#linearGradient82)"
+           x="0" />
+        <!-- Slot Row 0 -->
+        <g
+           transform="translate(10,33)"
+           id="g18">
+          <rect
+             width="350"
+             height="70"
+             rx="4"
+             fill="#ffffff"
+             stroke="#0a9396"
+             stroke-width="1.5"
+             id="rect13"
+             x="0"
+             y="0" />
+          <rect
+             width="60"
+             height="18"
+             rx="2"
+             fill="#e0f2f1"
+             x="5"
+             y="5"
+             id="rect14" />
+          <text
+             x="35"
+             y="18"
+             font-family="'Microsoft YaHei', sans-serif"
+             font-size="10px"
+             font-weight="bold"
+             fill="#005f73"
+             text-anchor="middle"
+             id="text14">Slot [0]</text>
+          <text
+             x="75"
+             y="18"
+             font-family="'Microsoft YaHei', sans-serif"
+             font-size="11px"
+             fill="#444444"
+             id="text15">PID: 100 | FD: 3 | Src: 12</text>
+          <!-- Bitmaps -->
+          <g
+             transform="translate(8,32)"
+             id="g17">
+            <!-- key_bits -->
+            <rect
+               x="0"
+               y="0"
+               width="334"
+               height="16"
+               rx="2"
+               fill="#f4f8f8"
+               stroke="#e0f2f1"
+               id="rect15" />
+            <text
+               x="6"
+               y="12"
+               font-family="Consolas, monospace"
+               font-size="9px"
+               fill="#005f73"
+               id="text16">key_bits: [ 1 0 0 ... 0 ] (Bit 0 置位)</text>
+            <!-- key_bits_in / out -->
+            <rect
+               x="0"
+               y="18"
+               width="334"
+               height="14"
+               rx="2"
+               fill="#f4f8f8"
+               stroke="#e0f2f1"
+               id="rect16" />
+            <text
+               x="6"
+               y="29"
+               font-family="Consolas, monospace"
+               font-size="9px"
+               fill="#005f73"
+               id="text17">key_bits_in: [ 1 0 0 ... 0 ] | key_bits_out: [ 0 ... ]</text>
+          </g>
+        </g>
+        <!-- Slot Row 1 -->
+        <g
+           transform="translate(10,113)"
+           id="g23">
+          <rect
+             width="350"
+             height="70"
+             rx="4"
+             fill="#ffffff"
+             stroke="#0a9396"
+             stroke-width="1"
+             id="rect18"
+             x="0"
+             y="0" />
+          <rect
+             width="60"
+             height="18"
+             rx="2"
+             fill="#e0f2f1"
+             x="5"
+             y="5"
+             id="rect19" />
+          <text
+             x="35"
+             y="18"
+             font-family="'Microsoft YaHei', sans-serif"
+             font-size="10px"
+             font-weight="bold"
+             fill="#005f73"
+             text-anchor="middle"
+             id="text19">Slot [1]</text>
+          <text
+             x="75"
+             y="18"
+             font-family="'Microsoft YaHei', sans-serif"
+             font-size="11px"
+             fill="#444444"
+             id="text20">PID: 100 | FD: 4 | Src: 12</text>
+          <!-- Bitmaps -->
+          <g
+             transform="translate(8,32)"
+             id="g22">
+            <rect
+               x="0"
+               y="0"
+               width="334"
+               height="16"
+               rx="2"
+               fill="#f4f8f8"
+               stroke="#e0f2f1"
+               id="rect20" />
+            <text
+               x="6"
+               y="12"
+               font-family="Consolas, monospace"
+               font-size="9px"
+               fill="#005f73"
+               id="text21">key_bits: [ 1 1 0 ... 0 ] (Bit 0, 1 置位)</text>
+            <rect
+               x="0"
+               y="18"
+               width="334"
+               height="14"
+               rx="2"
+               fill="#f4f8f8"
+               stroke="#e0f2f1"
+               id="rect21" />
+            <text
+               x="6"
+               y="29"
+               font-family="Consolas, monospace"
+               font-size="9px"
+               fill="#005f73"
+               id="text22">key_bits_in: [ 1 0 ... ] | key_bits_out: [ 0 1 ... ]</text>
+          </g>
+        </g>
+        <!-- 省略行 -->
+        <text
+           x="185"
+           y="198"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="16px"
+           font-weight="bold"
+           fill="#0a9396"
+           text-anchor="middle"
+           id="text23">...</text>
+        <!-- Slot Row 127 -->
+        <g
+           transform="translate(10,210)"
+           id="g25">
+          <rect
+             width="350"
+             height="60"
+             rx="4"
+             fill="#ffffff"
+             stroke="#cccccc"
+             stroke-dasharray="3, 3"
+             id="rect23"
+             x="0"
+             y="0" />
+          <rect
+             width="60"
+             height="18"
+             rx="2"
+             fill="#f0f0f0"
+             x="5"
+             y="5"
+             id="rect24" />
+          <text
+             x="35"
+             y="17"
+             font-family="'Microsoft YaHei', sans-serif"
+             font-size="10px"
+             font-weight="bold"
+             fill="#999999"
+             text-anchor="middle"
+             id="text24">Slot [127]</text>
+          <text
+             x="75"
+             y="17"
+             font-family="'Microsoft YaHei', sans-serif"
+             font-size="11px"
+             fill="#999999"
+             id="text25">Empty / Inactive</text>
+        </g>
+      </g>
+      <!-- 2. 中间：128-bit 双向关联示意 -->
+      <g
+         transform="translate(400,120)"
+         id="g28">
+        <rect
+           width="120"
+           height="180"
+           rx="6"
+           fill="#ebf5f5"
+           stroke="#94d2bd"
+           stroke-dasharray="2, 2"
+           id="rect26"
+           x="0"
+           y="0" />
+        <text
+           x="60"
+           y="25"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="11px"
+           font-weight="bold"
+           fill="#005f73"
+           text-anchor="middle"
+           id="text26">128-Bit 交叉映射</text>
+        <!-- 交叉关联箭头 -->
+        <path
+           d="m 5,50 c 55,0 55,45 110,45"
+           fill="none"
+           stroke="#0a9396"
+           stroke-width="1.5"
+           marker-end="url(#arrow-teal)"
+           id="path26" />
+        <path
+           d="M 115,115 C 60,115 60,160 5,160"
+           fill="none"
+           stroke="#2d6a4f"
+           stroke-width="1.5"
+           marker-end="url(#arrow-teal)"
+           id="path27" />
+        <text
+           x="60"
+           y="80"
+           font-family="Consolas, monospace"
+           font-size="9px"
+           fill="#005f73"
+           text-anchor="middle"
+           bgcolor="#FFFFFF"
+           id="text27">key_bits</text>
+        <text
+           x="60"
+           y="150"
+           font-family="Consolas, monospace"
+           font-size="9px"
+           fill="#2d6a4f"
+           text-anchor="middle"
+           id="text28">rows_mask</text>
+      </g>
+      <!-- 3. PollKeySlot 数组 (右侧列) -->
+      <g
+         transform="matrix(1.0000112,0,0,0.98477023,529.99792,60.076405)"
+         id="g45">
+        <text
+           x="0"
+           y="15"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="12px"
+           font-weight="bold"
+           fill="#005f73"
+           id="text29">key_slots: [PollKeySlot; 128] (等待Key列，最大128)</text>
+        <rect
+           y="23"
+           width="370"
+           height="280"
+           rx="6"
+           fill="url(#panelGrad)"
+           stroke="#94d2bd"
+           stroke-width="1"
+           id="rect29"
+           style="fill:url(#linearGradient83)"
+           x="0" />
+        <!-- Key Slot 0 -->
+        <g
+           transform="translate(10,33)"
+           id="g36">
+          <rect
+             width="350"
+             height="70"
+             rx="4"
+             fill="#ffffff"
+             stroke="#005f73"
+             stroke-width="1.5"
+             id="rect30"
+             x="0"
+             y="0" />
+          <rect
+             width="60"
+             height="18"
+             rx="2"
+             fill="#ebf9f6"
+             x="5"
+             y="5"
+             stroke="#94d2bd"
+             stroke-width="0.5"
+             id="rect31" />
+          <text
+             x="35"
+             y="18"
+             font-family="'Microsoft YaHei', sans-serif"
+             font-size="10px"
+             font-weight="bold"
+             fill="#005f73"
+             text-anchor="middle"
+             id="text31">Key [0]</text>
+          <text
+             x="75"
+             y="18"
+             font-family="'Microsoft YaHei', sans-serif"
+             font-size="11px"
+             fill="#444444"
+             id="text32">Gen: 3 | PID: 100 | TCB_Ptr: 0x8032</text>
+          <!-- Status & Mask -->
+          <g
+             transform="translate(8,30)"
+             id="g35">
+            <!-- State Badge -->
+            <rect
+               x="0"
+               y="3"
+               width="70"
+               height="16"
+               rx="2"
+               fill="#0a9396"
+               id="rect32" />
+            <text
+               x="35"
+               y="15"
+               font-family="'Microsoft YaHei', sans-serif"
+               font-size="10px"
+               font-weight="bold"
+               fill="#ffffff"
+               text-anchor="middle"
+               id="text33">Active</text>
+            <!-- Mask -->
+            <rect
+               x="80"
+               y="3"
+               width="254"
+               height="30"
+               rx="2"
+               fill="#f4f8f8"
+               stroke="#e0f2f1"
+               id="rect33" />
+            <text
+               x="86"
+               y="15"
+               font-family="Consolas, monospace"
+               font-size="9px"
+               fill="#005f73"
+               id="text34">rows_mask: [ 1 1 0 ... 0 ]</text>
+            <text
+               x="86"
+               y="26"
+               font-family="'Microsoft YaHei', sans-serif"
+               font-size="9px"
+               fill="#666666"
+               id="text35">关联第 0 和 1 号 FD 槽行</text>
+          </g>
+        </g>
+        <!-- Key Slot 1 -->
+        <g
+           transform="translate(10,113)"
+           id="g42">
+          <rect
+             width="350"
+             height="70"
+             rx="4"
+             fill="#ffffff"
+             stroke="#0a9396"
+             stroke-width="1"
+             id="rect36"
+             x="0"
+             y="0" />
+          <rect
+             width="60"
+             height="18"
+             rx="2"
+             fill="#ebf9f6"
+             x="5"
+             y="5"
+             id="rect37" />
+          <text
+             x="35"
+             y="18"
+             font-family="'Microsoft YaHei', sans-serif"
+             font-size="10px"
+             font-weight="bold"
+             fill="#005f73"
+             text-anchor="middle"
+             id="text37">Key [1]</text>
+          <text
+             x="75"
+             y="18"
+             font-family="'Microsoft YaHei', sans-serif"
+             font-size="11px"
+             fill="#444444"
+             id="text38">Gen: 12 | PID: 100 | TCB_Ptr: 0x904F</text>
+          <g
+             transform="translate(8,30)"
+             id="g41">
+            <rect
+               x="0"
+               y="3"
+               width="70"
+               height="16"
+               rx="2"
+               fill="#e29578"
+               id="rect38" />
+            <text
+               x="35"
+               y="15"
+               font-family="'Microsoft YaHei', sans-serif"
+               font-size="10px"
+               font-weight="bold"
+               fill="#ffffff"
+               text-anchor="middle"
+               id="text39">Ready</text>
+            <rect
+               x="80"
+               y="3"
+               width="254"
+               height="30"
+               rx="2"
+               fill="#f4f8f8"
+               stroke="#e0f2f1"
+               id="rect39" />
+            <text
+               x="86"
+               y="15"
+               font-family="Consolas, monospace"
+               font-size="9px"
+               fill="#005f73"
+               id="text40">rows_mask: [ 0 1 0 ... 0 ]</text>
+            <text
+               x="86"
+               y="26"
+               font-family="'Microsoft YaHei', sans-serif"
+               font-size="9px"
+               fill="#666666"
+               id="text41">关联第 1 号 FD 槽行</text>
+          </g>
+        </g>
+        <!-- 省略行 -->
+        <text
+           x="185"
+           y="198"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="16px"
+           font-weight="bold"
+           fill="#0a9396"
+           text-anchor="middle"
+           id="text42">...</text>
+        <!-- Key Slot 127 -->
+        <g
+           transform="translate(10,210)"
+           id="g44">
+          <rect
+             width="350"
+             height="60"
+             rx="4"
+             fill="#ffffff"
+             stroke="#cccccc"
+             stroke-dasharray="3, 3"
+             id="rect42"
+             x="0"
+             y="0" />
+          <rect
+             width="60"
+             height="18"
+             rx="2"
+             fill="#f0f0f0"
+             x="5"
+             y="5"
+             id="rect43" />
+          <text
+             x="35"
+             y="17"
+             font-family="'Microsoft YaHei', sans-serif"
+             font-size="10px"
+             font-weight="bold"
+             fill="#999999"
+             text-anchor="middle"
+             id="text43">Key [127]</text>
+          <text
+             x="75"
+             y="17"
+             font-family="'Microsoft YaHei', sans-serif"
+             font-size="11px"
+             fill="#999999"
+             id="text44">Free (Unused)</text>
+        </g>
+      </g>
+      <!-- 4. 辅助状态字段 -->
+      <g
+         transform="translate(32.110266,338.63118)"
+         id="g47">
+        <text
+           x="0"
+           y="9"
+           font-family="Consolas, monospace"
+           font-size="11px"
+           fill="#005f73"
+           font-weight="bold"
+           id="text45">next_kernel_fd: 2</text>
+        <text
+           x="520.14215"
+           y="9"
+           font-family="Consolas, monospace"
+           font-size="11px"
+           fill="#005f73"
+           font-weight="bold"
+           id="text46">next_key: 2</text>
+        <text
+           x="343.41806"
+           y="38.058762"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="11px"
+           fill="#555555"
+           font-weight="bold"
+           id="text47">（分配时通过循环扫描实现槽位复用）</text>
+      </g>
+    </g>
+    <g
+       transform="translate(40,490)"
+       filter="url(#shadow)"
+       id="g59">
+      <rect
+         width="210"
+         height="235"
+         rx="8"
+         fill="#ffffff"
+         stroke="#005f73"
+         stroke-width="1.2"
+         id="rect48"
+         x="0"
+         y="0" />
+      <rect
+         width="210"
+         height="30"
+         rx="8"
+         fill="#005f73"
+         id="rect49"
+         x="0"
+         y="0" />
+      <rect
+         y="22"
+         width="210"
+         height="8"
+         fill="#005f73"
+         id="rect50"
+         x="0" />
+      <text
+         x="15"
+         y="19"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="11px"
+         font-weight="bold"
+         fill="#ffffff"
+         id="text50">1. 注册登记 (Register)</text>
+      <text
+         x="10"
+         y="48"
+         font-family="Consolas, monospace"
+         font-size="10px"
+         font-weight="bold"
+         fill="#0a9396"
+         id="text51">register_poll_wait()</text>
+      <text
+         x="10"
+         y="65"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="10px"
+         fill="#555555"
+         id="text52">传入待 Poll 核心 FDs 与事件:</text>
+      <!-- 模拟入参 -->
+      <rect
+         x="10.019776"
+         y="75.019783"
+         width="189.96043"
+         height="64.853729"
+         rx="3.9991674"
+         fill="#f0f5f5"
+         stroke="#94d2bd"
+         id="rect52"
+         style="stroke-width:1.03956" />
+      <text
+         x="18"
+         y="92"
+         font-family="Consolas, monospace"
+         font-size="9px"
+         fill="#005f73"
+         id="text53">interests: [</text>
+      <text
+         x="28"
+         y="107"
+         font-family="Consolas, monospace"
+         font-size="9px"
+         fill="#005f73"
+         id="text54">(fd: 3, src: 12, POLLIN),</text>
+      <text
+         x="28"
+         y="122"
+         font-family="Consolas, monospace"
+         font-size="9px"
+         fill="#005f73"
+         id="text55">(fd: 4, src: 12, POLLOUT)</text>
+      <text
+         x="18"
+         y="130"
+         font-family="Consolas, monospace"
+         font-size="9px"
+         fill="#005f73"
+         id="text56">]</text>
+      <!-- 返回的 Handle -->
+      <rect
+         x="10"
+         y="153"
+         width="190"
+         height="42"
+         rx="4"
+         fill="#ebf9f6"
+         stroke="#0a9396"
+         stroke-width="1.2"
+         id="rect56" />
+      <text
+         x="15"
+         y="168"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="10px"
+         font-weight="bold"
+         fill="#005f73"
+         id="text57">分配得到句柄 (Handle)</text>
+      <text
+         x="15"
+         y="184"
+         font-family="Consolas, monospace"
+         font-size="10px"
+         font-weight="bold"
+         fill="#2d6a4f"
+         id="text58">key_idx: 0, gen: 3</text>
+      <!-- 连线指向 Registry -->
+      <path
+         d="M 210.60037,125.45563 C 238.2683,125.45563 207.2024,18.340054 253,0 301.58334,-19.45563 389.33422,-30 416.00088,-30"
+         fill="none"
+         stroke="#005f73"
+         stroke-width="1.5"
+         stroke-dasharray="3, 3"
+         marker-end="url(#arrow-dark)"
+         id="path58"
+         sodipodi:nodetypes="csc" />
+      <text
+         x="218.03798"
+         y="-13.515294"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="10px"
+         fill="#005f73"
+         transform="rotate(-0.17963262)"
+         id="text59">绑定槽行与位图</text>
+    </g>
+    <g
+       transform="translate(293,490)"
+       filter="url(#shadow)"
+       id="g71">
+      <rect
+         width="232.81474"
+         height="235"
+         rx="8"
+         fill="#ffffff"
+         stroke="#0a9396"
+         stroke-width="1.2"
+         id="rect59"
+         x="0"
+         y="0" />
+      <rect
+         width="233.02817"
+         height="30"
+         rx="8"
+         fill="#0a9396"
+         id="rect60"
+         x="0"
+         y="0" />
+      <rect
+         y="22"
+         width="233.02817"
+         height="8"
+         fill="#0a9396"
+         id="rect61"
+         x="0" />
+      <text
+         x="15"
+         y="19"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="11px"
+         font-weight="bold"
+         fill="#ffffff"
+         id="text61">2. 唤醒触发源 (Wakeup Drivers)</text>
+      <!-- 路径A：I/O就绪 -->
+      <g
+         transform="translate(10,42)"
+         id="g64">
+        <rect
+           width="213.17596"
+           height="52"
+           rx="4"
+           fill="#ebf9f6"
+           stroke="#94d2bd"
+           id="rect62"
+           x="0"
+           y="0" />
+        <text
+           x="8"
+           y="18"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="11px"
+           font-weight="bold"
+           fill="#005f73"
+           id="text62">【A】I/O就绪事件触发</text>
+        <text
+           x="8"
+           y="33"
+           font-family="Consolas, monospace"
+           font-size="10px"
+           fill="#0a9396"
+           id="text63">notify_poll_source(src_id, mask)</text>
+        <text
+           x="8"
+           y="46"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="9.5px"
+           fill="#666666"
+           id="text64">匹配 source_id，依据 key_bits 筛选 Key 唤醒</text>
+      </g>
+      <!-- 路径B：定时器超时 -->
+      <g
+         transform="translate(10,102)"
+         id="g67">
+        <rect
+           width="212.68166"
+           height="52"
+           rx="4"
+           fill="#fff5eb"
+           stroke="#e29578"
+           id="rect64"
+           x="0"
+           y="0" />
+        <text
+           x="8"
+           y="18"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="11px"
+           font-weight="bold"
+           fill="#ca6702"
+           id="text65">【B】定时器超时回调</text>
+        <text
+           x="8"
+           y="33"
+           font-family="Consolas, monospace"
+           font-size="10px"
+           fill="#ca6702"
+           id="text66">handle_poll_timeout(tag, TCB)</text>
+        <text
+           x="8"
+           y="46"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="9.5px"
+           fill="#777777"
+           id="text67">标记 Key 状态为 TimedOut</text>
+      </g>
+      <!-- 路径C：进程信号 -->
+      <g
+         transform="translate(10,162)"
+         id="g70">
+        <rect
+           width="212.04372"
+           height="52"
+           rx="4"
+           fill="#f4f8f8"
+           stroke="#005f73"
+           id="rect67"
+           x="0"
+           y="0" />
+        <text
+           x="8"
+           y="18"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="11px"
+           font-weight="bold"
+           fill="#005f73"
+           id="text68">【C】信号传递强制就绪</text>
+        <text
+           x="8"
+           y="33"
+           font-family="Consolas, monospace"
+           font-size="10px"
+           fill="#0a9396"
+           id="text69">notify_poll_signal_pid(pid)</text>
+        <text
+           x="8"
+           y="46"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="9.5px"
+           fill="#666666"
+           id="text70">强制将该 PID 的活动 Key 设为 Ready 并唤醒</text>
+      </g>
+    </g>
+    <g
+       transform="translate(590,490)"
+       filter="url(#shadow)"
+       id="g82">
+      <rect
+         width="370"
+         height="235"
+         rx="8"
+         fill="#ffffff"
+         stroke="#005f73"
+         stroke-width="1.5"
+         id="rect71"
+         x="0"
+         y="0" />
+      <rect
+         width="370"
+         height="30"
+         rx="8"
+         fill="url(#headerGrad)"
+         id="rect72"
+         x="0"
+         y="0"
+         style="fill:url(#linearGradient86)" />
+      <rect
+         y="22"
+         width="370"
+         height="8"
+         fill="#0a9396"
+         id="rect73"
+         x="0" />
+      <text
+         x="15"
+         y="19"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="11px"
+         font-weight="bold"
+         fill="#ffffff"
+         id="text73">3. 集中排队唤醒处 (POLL_WAIT_QUEUE)</text>
+      <!-- 说明 -->
+      <text
+         x="15"
+         y="52"
+         font-family="Consolas, monospace"
+         font-size="11px"
+         font-weight="bold"
+         fill="#005f73"
+         id="text74">POLL_WAIT_QUEUE: WaitQueueKeyed&lt;u16&gt;</text>
+      <!-- 队列内部框 -->
+      <rect
+         x="15"
+         y="65"
+         width="340"
+         height="155"
+         rx="6"
+         fill="#f4f8f8"
+         stroke="#94d2bd"
+         id="rect74" />
+      <!-- 等待项 1 -->
+      <g
+         transform="translate(25,80)"
+         id="g80">
+        <rect
+           width="320"
+           height="52"
+           rx="4"
+           fill="#ffffff"
+           stroke="#0a9396"
+           stroke-width="1.2"
+           id="rect75"
+           x="0"
+           y="0" />
+        <rect
+           width="320"
+           height="16"
+           rx="4"
+           fill="#e0f2f1"
+           id="rect76"
+           x="0"
+           y="0" />
+        <rect
+           y="12"
+           width="320"
+           height="4"
+           fill="#e0f2f1"
+           id="rect77"
+           x="0" />
+        <!-- Key 编码机制: gen << 8 | key_idx -->
+        <!-- 0x0300 代表 key_idx=0, gen=3 -->
+        <text
+           x="10"
+           y="12"
+           font-family="Consolas, monospace"
+           font-size="10px"
+           font-weight="bold"
+           fill="#005f73"
+           id="text77">WaitKey (u16): 0x0300 (Gen:3 | Idx:0)</text>
+        <text
+           x="10"
+           y="32"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="10.5px"
+           fill="#444444"
+           id="text78">绑定等待任务:</text>
+        <text
+           x="85"
+           y="32"
+           font-family="Consolas, monospace"
+           font-size="10.5px"
+           font-weight="bold"
+           fill="#2d6a4f"
+           id="text79">Arc&lt;TaskControlBlock (PID 100)&gt;</text>
+        <text
+           x="10"
+           y="45"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="9px"
+           fill="#888888"
+           id="text80">当该键被 notify_poll_source 或超时触发时，调用 wake_selected(0x0300)</text>
+      </g>
+      <!-- 等待项 2 (虚线表示其他) -->
+      <g
+         transform="translate(25,142)"
+         id="g81">
+        <rect
+           width="320"
+           height="40"
+           rx="4"
+           fill="#ffffff"
+           stroke="#cccccc"
+           stroke-dasharray="2, 2"
+           id="rect80"
+           x="0"
+           y="0" />
+        <text
+           x="10"
+           y="24"
+           font-family="Consolas, monospace"
+           font-size="10px"
+           fill="#999999"
+           id="text81">WaitKey (u16): 0x0C01 (Gen:12 | Idx:1)</text>
+      </g>
+    </g>
+    <path
+       d="M 530.51331,607 H 585"
+       fill="none"
+       stroke="#ca6702"
+       stroke-width="2"
+       marker-end="url(#arrow-orange)"
+       id="path82"
+       sodipodi:nodetypes="cc" />
+    <text
+       x="558.56134"
+       y="597.10077"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="10.5px"
+       font-weight="bold"
+       fill="#ca6702"
+       text-anchor="middle"
+       id="text82">wake_selected(key)</text>
+  </g>
+</svg>

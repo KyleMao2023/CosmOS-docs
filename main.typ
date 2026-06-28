@@ -51,7 +51,7 @@
 #show heading.where(level: 2):set block(above: 1.4em, below: 1.1em)
 // #show heading.where(level: 2): set text(15pt, font: ("Source Han Sans VF"), fill: rgb("#0a5ba4"), weight: 500, lang: "zh", region: "cn")
 #show heading.where(level: 2): set text(14pt, font: ("Source Han Serif", "SimSun"), fill: rgb("#0a5ba4"), weight: 700, lang: "zh", region: "cn")
-#show heading.where(level: 3): set text(13.5pt, font: ("Source Han Sans", "SimSun"), fill: rgb("#0a5ba4"), weight: 500, lang: "zh", region: "cn")
+#show heading.where(level: 3): set text(12.6pt, font: ("Source Han Serif", "SimSun"), weight: 650, lang: "zh", region: "cn")
 #show heading.where(level: 3): set block(above: 1.5em, below: 1.1em)
 #show heading.where(level: 4): set text(12.1pt, font: ("Source Han Sans", "SimSun"), fill: rgb("#0a5ba4"), weight: 500, lang: "zh", region: "cn")
 #set table(stroke: 0.5pt, fill: (x, y) =>
@@ -99,7 +99,7 @@ if y == 0 {
 #set page(background: none)
 
 #show outline.entry.where(level: 1): strong
-#outline(title: [目~~录])
+#outline(title: [目~~录], depth: 2)
 
 #set page(background: none, numbering: "1")
 #counter(page).update(1)
