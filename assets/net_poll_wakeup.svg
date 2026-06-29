@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 714.86694 771.16602"
+   width="714.86694"
+   height="771.16602"
+   version="1.1"
+   id="svg40"
+   sodipodi:docname="net_poll_wakeup.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview40"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.8348837"
+     inkscape:cx="383.40304"
+     inkscape:cy="332.99113"
+     inkscape:window-width="3200"
+     inkscape:window-height="1876"
+     inkscape:window-x="-12"
+     inkscape:window-y="-12"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg40" />
+  <defs
+     id="defs11">
+    <!-- 渐变色定义 (上绿下蓝) -->
+    <linearGradient
+       id="grad-l1"
+       x1="0"
+       y1="0"
+       x2="0"
+       y2="154.91933"
+       gradientTransform="scale(2.5819889,0.38729833)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#52B788"
+         id="stop1" />
+      <stop
+         offset="100%"
+         stop-color="#3EA89B"
+         id="stop2" />
+    </linearGradient>
+    <linearGradient
+       id="grad-l2"
+       x1="0"
+       y1="0"
+       x2="0"
+       y2="236.64319"
+       gradientTransform="scale(1.6903085,0.59160798)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#3EA89B"
+         id="stop3" />
+      <stop
+         offset="100%"
+         stop-color="#1A759F"
+         id="stop4" />
+    </linearGradient>
+    <linearGradient
+       id="grad-l3"
+       x1="0"
+       y1="0"
+       x2="0"
+       y2="173.20508"
+       gradientTransform="scale(2.3094011,0.4330127)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#1A759F"
+         id="stop5" />
+      <stop
+         offset="100%"
+         stop-color="#1E6091"
+         id="stop6" />
+    </linearGradient>
+    <linearGradient
+       id="grad-l4"
+       x1="0"
+       y1="0"
+       x2="0"
+       y2="480.83261"
+       gradientTransform="scale(1.4142136,0.70710678)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#1E6091"
+         id="stop7" />
+      <stop
+         offset="100%"
+         stop-color="#102A43"
+         id="stop8" />
+    </linearGradient>
+    <!-- 阴影 -->
+    <filter
+       id="shadow"
+       x="0"
+       y="0"
+       width="1.0025"
+       height="1.0333333">
+      <feOffset
+         dx="1"
+         dy="2"
+         id="feOffset8" />
+      <feComponentTransfer
+         id="feComponentTransfer8">
+        <feFuncA
+           type="linear"
+           slope="0.08"
+           id="feFuncA8" />
+      </feComponentTransfer>
+      <feMerge
+         id="feMerge9">
+        <feMergeNode
+           id="feMergeNode8" />
+        <feMergeNode
+           in="SourceGraphic"
+           id="feMergeNode9" />
+      </feMerge>
+    </filter>
+    <!-- 箭头 -->
+    <marker
+       id="arrow"
+       viewBox="0 0 10 10"
+       refX="6"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,1.5 8,5 0,8.5 Z"
+         fill="#1a759f"
+         id="path9" />
+    </marker>
+    <marker
+       id="arrow-green"
+       viewBox="0 0 10 10"
+       refX="6"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,1.5 8,5 0,8.5 Z"
+         fill="#3ea89b"
+         id="path10" />
+    </marker>
+    <marker
+       id="arrow-accent"
+       viewBox="0 0 10 10"
+       refX="6"
+       refY="5"
+       markerWidth="5"
+       markerHeight="5"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,1.5 8,5 0,8.5 Z"
+         fill="#e29578"
+         id="path11" />
+    </marker>
+  </defs>
+  <!-- 背景 -->
+  <rect
+     width="714.86694"
+     height="771.16602"
+     fill="#f4f8f8"
+     id="rect11"
+     x="0"
+     y="0" />
+  <!-- 页面主标题 -->
+  <g
+     transform="translate(-43.384033,0.85551453)"
+     id="g12" />
+  <!-- ==================== 第一步：硬中断输入 ==================== -->
+  <g
+     transform="translate(156.61597,15.855515)"
+     filter="url(#shadow)"
+     id="g14">
+    <rect
+       width="400"
+       height="60"
+       rx="6"
+       fill="url(#grad-l1)"
+       id="rect13"
+       x="0"
+       y="0"
+       style="fill:url(#grad-l1)" />
+    <text
+       x="20"
+       y="26"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="13px"
+       font-weight="bold"
+       fill="#ffffff"
+       id="text13">NIC 收到帧 ➔ 触发外部硬件中断 (IRQ)</text>
+    <text
+       x="20"
+       y="44"
+       font-family="Consolas, monospace"
+       font-size="10.5px"
+       fill="#e8f8f5"
+       id="text14">Hardware Rx Frame ➔ PLIC / APIC Interrupt</text>
+  </g>
+  <!-- 连线 1 -> 2 -->
+  <path
+     d="M 356.61597,75.855515 V 110.85551"
+     fill="none"
+     stroke="#3ea89b"
+     stroke-width="2"
+     marker-end="url(#arrow-green)"
+     id="path14" />
+  <text
+     x="366.61597"
+     y="97.855515"
+     font-family="'Microsoft YaHei', sans-serif"
+     font-size="10px"
+     fill="#3ea89b"
+     font-weight="bold"
+     id="text15">进入中断异常向量表 (Trap Entry)</text>
+  <!-- ==================== 第二步：外部中断响应 ==================== -->
+  <g
+     transform="translate(156.61597,115.85551)"
+     filter="url(#shadow)"
+     id="g21">
+    <rect
+       width="400"
+       height="140"
+       rx="6"
+       fill="url(#grad-l2)"
+       id="rect15"
+       x="0"
+       y="0"
+       style="fill:url(#grad-l2)" />
+    <text
+       x="20"
+       y="24"
+       font-family="Consolas, monospace"
+       font-size="13px"
+       font-weight="bold"
+       fill="#ffffff"
+       id="text16">handle_external_irq()</text>
+    <text
+       x="180"
+       y="24"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="11px"
+       fill="#cae9e0"
+       id="text17">（持 HardIrqGuard）</text>
+    <!-- 核心技术亮点：EOI 提早应答 -->
+    <g
+       transform="translate(20,38)"
+       id="g18"
+       style="fill:#dd9223;fill-opacity:0.179409">
+      <rect
+         width="360"
+         height="24"
+         rx="3"
+         fill="#FFF2F2"
+         stroke="#e29578"
+         stroke-width="0.8"
+         id="rect17"
+         style="fill:#dd9223;fill-opacity:0.179409"
+         x="0"
+         y="0" />
+      <text
+         x="10"
+         y="16"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="10px"
+         font-weight="bold"
+         fill="#AE2012"
+         id="text18"
+         style="fill:#ffd9a1;fill-opacity:1">💡 关键设计：EOI (中断结束应答) 先于处理发出，避免丢失后续中断</text>
+    </g>
+    <text
+       x="20"
+       y="82"
+       font-family="Consolas, monospace"
+       font-size="10.5px"
+       fill="#e2f1f7"
+       id="text19">drivers::net::handle_irq(irq)</text>
+    <text
+       x="35"
+       y="100"
+       font-family="Consolas, monospace"
+       font-size="10px"
+       fill="#94d2bd"
+       id="text20">└─ dev.handle_irq() // 应答底层网卡 + 回收已完成 TX</text>
+    <text
+       x="35"
+       y="118"
+       font-family="Consolas, monospace"
+       font-size="10px"
+       fill="#94d2bd"
+       id="text21">└─ net::notify_irq() // 设置 NEED_POLL = true, deadline = 0</text>
+  </g>
+  <!-- 连线 2 -> 3 -->
+  <path
+     d="m 356.61597,255.85551 v 45"
+     fill="none"
+     stroke="#1a759f"
+     stroke-width="2"
+     marker-end="url(#arrow)"
+     id="path21" />
+  <!-- ==================== 第三步：网卡轮询激活 ==================== -->
+  <g
+     transform="translate(156.61597,300.85551)"
+     filter="url(#shadow)"
+     id="g24">
+    <rect
+       width="400"
+       height="75"
+       rx="6"
+       fill="url(#grad-l3)"
+       id="rect21"
+       x="0"
+       y="0"
+       style="fill:url(#grad-l3)" />
+    <text
+       x="20"
+       y="26"
+       font-family="Consolas, monospace"
+       font-size="13px"
+       font-weight="bold"
+       fill="#ffffff"
+       id="text22">net::poll()</text>
+    <text
+       x="20"
+       y="48"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="11px"
+       fill="#e2f1f7"
+       id="text23">检查到 NEED_POLL，启动全局网络栈轮询：</text>
+    <text
+       x="20"
+       y="62"
+       font-family="Consolas, monospace"
+       font-size="10.5px"
+       fill="#94d2bd"
+       id="text24">NET_STACK.lock() // 获取全局网络协议栈互斥锁</text>
+  </g>
+  <!-- 连线 3 -> 4 -->
+  <path
+     d="m 356.61597,375.85551 v 45"
+     fill="none"
+     stroke="#1a759f"
+     stroke-width="2"
+     marker-end="url(#arrow)"
+     id="path24" />
+  <!-- ==================== 第四步：带有 Budget 的轮询核心 ==================== -->
+  <g
+     transform="translate(16.615967,420.85551)"
+     filter="url(#shadow)"
+     id="g40">
+    <rect
+       width="680"
+       height="340"
+       rx="8"
+       fill="url(#grad-l4)"
+       id="rect24"
+       x="0"
+       y="0"
+       style="fill:url(#grad-l4)" />
+    <text
+       x="20"
+       y="26"
+       font-family="Consolas, monospace"
+       font-size="13px"
+       font-weight="bold"
+       fill="#ffffff"
+       id="text25">poll_with_budget(N)</text>
+    <text
+       x="180"
+       y="26"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="11px"
+       fill="#cae9e0"
+       id="text26">控制单次中断的处理配额，防止饥饿</text>
+    <!-- poll_once 子框 -->
+    <g
+       transform="translate(20,45)"
+       id="g39"
+       style="fill:#000000;fill-opacity:1">
+      <rect
+         width="640.03735"
+         height="258.14252"
+         rx="6.00035"
+         fill="rgba(255, 255, 255, 0.08)"
+         stroke="#1a759f"
+         stroke-width="1.2"
+         id="rect26"
+         style="fill:#000000;fill-opacity:0.0968399"
+         x="-0.018663831"
+         y="-0.018663831" />
+      <text
+         x="15"
+         y="22"
+         font-family="Consolas, monospace"
+         font-size="11px"
+         font-weight="bold"
+         fill="#94D2BD"
+         id="text27"
+         style="fill:#ffffff;fill-opacity:1">poll_once() <tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'微软雅黑';-inkscape-font-specification:'微软雅黑'"
+   id="tspan41">循环最多执行 N 次</tspan></text>
+      <!-- 1. iface.poll -->
+      <g
+         transform="translate(15,35)"
+         id="g30"
+         style="fill:#000000;fill-opacity:1">
+        <rect
+           width="280"
+           height="60"
+           rx="4"
+           fill="rgba(255,255,255,0.08)"
+           stroke="#94d2bd"
+           stroke-width="0.8"
+           id="rect27"
+           style="fill:#000000;fill-opacity:0.1"
+           x="0"
+           y="0" />
+        <text
+           x="10"
+           y="18"
+           font-family="Consolas, monospace"
+           font-size="10.5px"
+           fill="#FFFFFF"
+           id="text28"
+           style="fill:#ffffff;fill-opacity:1">iface.poll(device, sockets)</text>
+        <text
+           x="10"
+           y="36"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="10px"
+           fill="#E2F1F7"
+           id="text29"
+           style="fill:#ffffff;fill-opacity:1">通过 smoltcp 驱动收发网络帧</text>
+        <text
+           x="10"
+           y="50"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="10px"
+           fill="#94D2BD"
+           id="text30"
+           style="fill:#ffffff;fill-opacity:1">并向前推进行、TCP和邻居等内部状态机</text>
+      </g>
+      <!-- 2. States 遍历 -->
+      <g
+         transform="translate(15,110)"
+         id="g33"
+         style="fill:#000000;fill-opacity:1">
+        <rect
+           width="280.18436"
+           height="50.304764"
+           rx="4.0026336"
+           fill="rgba(255,255,255,0.08)"
+           stroke="#94d2bd"
+           stroke-width="0.8"
+           id="rect30"
+           style="fill:#000000;fill-opacity:0.1"
+           x="-0.092179164"
+           y="-0.092179164" />
+        <text
+           x="10"
+           y="18"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="11px"
+           font-weight="bold"
+           fill="#FFFFFF"
+           id="text31"
+           style="fill:#ffffff;fill-opacity:1">遍历所有 udp_states / tcp_states</text>
+        <text
+           x="10"
+           y="36"
+           font-family="Consolas, monospace"
+           font-size="10px"
+           fill="#E2F1F7"
+           id="text32"
+           style="fill:#ffffff;fill-opacity:1">检测 can_recv() / can_send() 状态</text>
+        <!-- 分流唤醒机制线 -->
+        <path
+           d="M 290,26 325,6"
+           fill="none"
+           stroke="#e29578"
+           stroke-width="1.5"
+           stroke-dasharray="3, 1"
+           marker-end="url(#arrow-accent)"
+           id="path32"
+           style="fill:#000000;fill-opacity:1" />
+        <path
+           d="m 290,26 35,25"
+           fill="none"
+           stroke="#e29578"
+           stroke-width="1.5"
+           stroke-dasharray="3, 1"
+           marker-end="url(#arrow-accent)"
+           id="path33"
+           style="fill:#000000;fill-opacity:1" />
+      </g>
+      <!-- 唤醒目标 A: 阻塞任务 -->
+      <g
+         transform="translate(355,90)"
+         id="g34"
+         style="fill:#000000;fill-opacity:1">
+        <rect
+           width="270"
+           height="40"
+           rx="4"
+           fill="#E8F8F5"
+           stroke="#3ea89b"
+           stroke-width="1.2"
+           id="rect33"
+           style="fill:#000000;fill-opacity:0.104995"
+           x="0"
+           y="0" />
+        <text
+           x="10"
+           y="16"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="10px"
+           font-weight="bold"
+           fill="#005F73"
+           id="text33"
+           style="fill:#ffffff;fill-opacity:1">路径 1: 唤醒 read_wait / write_wait</text>
+        <text
+           x="10"
+           y="30"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="9px"
+           fill="#555"
+           id="text34"
+           style="fill:#ffffff;fill-opacity:1">直接将阻塞在 Socket 的 TCB 加入运行队列进行唤醒</text>
+      </g>
+      <!-- 唤醒目标 B: 多路复用 ppoll -->
+      <g
+         transform="translate(355,140)"
+         id="g36"
+         style="fill:#000000;fill-opacity:1">
+        <rect
+           width="270"
+           height="45"
+           rx="4"
+           fill="#FFF8E7"
+           stroke="#ee9b00"
+           stroke-width="1.2"
+           id="rect34"
+           style="fill:#000000;fill-opacity:0.104995"
+           x="0"
+           y="0" />
+        <text
+           x="10"
+           y="16"
+           font-family="Consolas, monospace"
+           font-size="10px"
+           font-weight="bold"
+           fill="#AE2012"
+           id="text35"
+           style="fill:#ffffff;fill-opacity:1"><tspan
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'微软雅黑';-inkscape-font-specification:'微软雅黑'"
+             id="tspan40">路径 2: notify_poll_source(source_id)</tspan></text>
+        <text
+           x="10"
+           y="32"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="9.5px"
+           fill="#555"
+           id="text36"
+           style="fill:#ffffff;fill-opacity:1">通过设置就绪位图，唤醒 ppoll 键值等待队列</text>
+      </g>
+      <!-- 3. refresh_poll_deadline -->
+      <g
+         transform="translate(15,210)"
+         id="g38"
+         style="fill:#000000;fill-opacity:1">
+        <rect
+           width="610"
+           height="45"
+           rx="4"
+           fill="rgba(255,255,255,0.08)"
+           stroke="#94d2bd"
+           stroke-width="0.8"
+           id="rect36"
+           style="fill:#000000;fill-opacity:0.104995"
+           x="0"
+           y="-12" />
+        <text
+           x="15"
+           y="6"
+           font-family="Consolas, monospace"
+           font-size="11px"
+           font-weight="bold"
+           fill="#FFFFFF"
+           id="text37"
+           style="fill:#ffffff;fill-opacity:1">refresh_poll_deadline()</text>
+        <text
+           x="15"
+           y="22"
+           font-family="'Microsoft YaHei', sans-serif"
+           font-size="10px"
+           fill="#E2F1F7"
+           id="text38"
+           style="fill:#ffffff;fill-opacity:1">重新计算下一次软超时时间点 (poll_at) ➔ 更新到内核软件定时器堆</text>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -80,6 +80,13 @@ if y == 0 {
 )
 #show image: set align(center)
 
+#set page(width: 210mm, height: 297mm, margin: 25mm, header: context 
+{
+  set par(leading: 5pt, spacing: 5pt)
+  text(10pt)[#hydra(2, skip-starting: false)]
+  line(stroke: 0.7pt + rgb("#707070"), length: 100%)
+})
+
 /* ------ 封面 ------ */
 
 #set page(background: image("cover.svg"))

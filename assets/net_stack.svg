@@ -1,0 +1,830 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 808.21387 684.52203"
+   width="808.21387"
+   height="684.52203"
+   version="1.1"
+   id="svg50"
+   sodipodi:docname="net_stack.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview50"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showguides="true"
+     inkscape:zoom="0.89661661"
+     inkscape:cx="73.052406"
+     inkscape:cy="354.66664"
+     inkscape:window-width="3200"
+     inkscape:window-height="1876"
+     inkscape:window-x="-12"
+     inkscape:window-y="-12"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg50">
+    <sodipodi:guide
+       position="591.14187,1278.8441"
+       orientation="1,0"
+       id="guide51"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="340.73376,951.72746"
+       orientation="1,0"
+       id="guide52"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <defs
+     id="defs14">
+    <marker
+       style="overflow:visible"
+       id="Triangle"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="1"
+       markerHeight="1.001"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path135" />
+    </marker>
+    <!-- 渐变色：从上至下平滑过渡 (绿色 -> 蓝绿色 -> 蓝色) -->
+    <linearGradient
+       id="grad-l1"
+       x1="0"
+       y1="0"
+       x2="187.61662"
+       y2="187.61662"
+       gradientTransform="scale(2.6245441,0.29315098)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#52B788"
+         id="stop1" />
+      <stop
+         offset="100%"
+         stop-color="#34A0A4"
+         id="stop2" />
+    </linearGradient>
+    <linearGradient
+       id="grad-l2"
+       x1="0"
+       y1="0"
+       x2="211.6601"
+       y2="211.6601"
+       gradientTransform="scale(2.3264097,0.33071891)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#34A0A4"
+         id="stop3" />
+      <stop
+         offset="100%"
+         stop-color="#168AAD"
+         id="stop4" />
+    </linearGradient>
+    <linearGradient
+       id="grad-l3"
+       x1="0"
+       y1="0"
+       x2="203.96078"
+       y2="203.96078"
+       gradientTransform="scale(2.4142294,0.31868872)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#168AAD"
+         id="stop5" />
+      <stop
+         offset="100%"
+         stop-color="#1A759F"
+         id="stop6" />
+    </linearGradient>
+    <linearGradient
+       id="grad-l4"
+       x1="0"
+       y1="0"
+       x2="293.93878"
+       y2="293.93878"
+       gradientTransform="scale(1.6752064,0.45927933)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#1A759F"
+         id="stop7" />
+      <stop
+         offset="100%"
+         stop-color="#1E6091"
+         id="stop8" />
+    </linearGradient>
+    <linearGradient
+       id="grad-l5"
+       x1="0"
+       y1="0"
+       x2="203.96078"
+       y2="203.96078"
+       gradientTransform="scale(2.4142294,0.31868872)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#1E6091"
+         id="stop9" />
+      <stop
+         offset="100%"
+         stop-color="#184E77"
+         id="stop10" />
+    </linearGradient>
+    <linearGradient
+       id="grad-l6"
+       x1="0"
+       y1="0"
+       x2="187.61662"
+       y2="187.61662"
+       gradientTransform="scale(2.6245441,0.29315098)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#184E77"
+         id="stop11" />
+      <stop
+         offset="100%"
+         stop-color="#102A43"
+         id="stop12" />
+    </linearGradient>
+    <!-- 阴影滤镜 -->
+    <filter
+       id="shadow"
+       x="-46"
+       y="-41"
+       width="1012"
+       height="902"
+       filterUnits="userSpaceOnUse">
+      <feComponentTransfer
+         id="feComponentTransfer12">
+        <feFuncA
+           type="linear"
+           slope="0.08"
+           id="feFuncA12" />
+        <feFuncR
+           id="feFuncR50"
+           type="identity" />
+        <feFuncG
+           id="feFuncG50"
+           type="identity" />
+        <feFuncB
+           id="feFuncB50"
+           type="identity" />
+      </feComponentTransfer>
+      <feMerge
+         id="feMerge13">
+        <feMergeNode
+           id="feMergeNode12" />
+        <feMergeNode
+           in="SourceGraphic"
+           id="feMergeNode13" />
+      </feMerge>
+    </filter>
+    <!-- 箭头 -->
+    <marker
+       id="arrow-down"
+       viewBox="0 0 10 10"
+       refX="6"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,1.5 8,5 0,8.5 Z"
+         fill="#1a759f"
+         id="path13" />
+    </marker>
+    <marker
+       id="arrow-branch"
+       viewBox="0 0 10 10"
+       refX="6"
+       refY="5"
+       markerWidth="5"
+       markerHeight="5"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,1.5 8,5 0,8.5 Z"
+         fill="#ffffff"
+         id="path14" />
+    </marker>
+  </defs>
+  <!-- 全局灰色背景 -->
+  <rect
+     width="808.21387"
+     height="684.52203"
+     fill="#f4f8f8"
+     id="rect14"
+     x="0"
+     y="0" />
+  <!-- 页面主标题 -->
+  <g
+     transform="translate(-1.266243,-0.72745895)"
+     id="g15" />
+  <!-- ==================== 右侧：边界隔离辅助线 ==================== -->
+  <g
+     stroke="#94d2bd"
+     stroke-width="1"
+     stroke-dasharray="4, 4"
+     id="g16"
+     transform="translate(-41.266243,-45.727459)">
+    <!-- 用户态与内核态边界 -->
+    <line
+       x1="40"
+       y1="129.92664"
+       x2="756.75891"
+       y2="129.92664"
+       id="line15"
+       style="stroke-width:0.923734" />
+    <!-- 软件与硬件虚拟化边界 -->
+    <line
+       x1="40"
+       y1="675"
+       x2="830.92664"
+       y2="675"
+       id="line16"
+       style="stroke-width:0.97035" />
+  </g>
+  <text
+     x="705.92749"
+     y="74.272537"
+     font-family="'Microsoft YaHei', sans-serif"
+     font-size="11px"
+     fill="#168aad"
+     font-weight="bold"
+     text-anchor="end"
+     id="text16">User Space (用户态)</text>
+  <text
+     x="705.92749"
+     y="99.272537"
+     font-family="'Microsoft YaHei', sans-serif"
+     font-size="11px"
+     fill="#1a759f"
+     font-weight="bold"
+     text-anchor="end"
+     id="text17">Kernel Space (内核态)</text>
+  <text
+     x="786.73376"
+     y="619.27252"
+     font-family="'Microsoft YaHei', sans-serif"
+     font-size="11px"
+     fill="#184e77"
+     font-weight="bold"
+     text-anchor="end"
+     id="text18">OS Driver Layer</text>
+  <text
+     x="786.73376"
+     y="646.27252"
+     font-family="'Microsoft YaHei', sans-serif"
+     font-size="11px"
+     fill="#102a43"
+     font-weight="bold"
+     text-anchor="end"
+     id="text19">Hardware Emulation (虚拟化物理层)</text>
+  <!-- ==================== 第一层：用户态进程 ==================== -->
+  <g
+     transform="translate(98.733757,14.272541)"
+     filter="url(#shadow)"
+     id="g22">
+    <rect
+       width="492.40811"
+       height="55"
+       rx="4.6163259"
+       fill="url(#grad-l1)"
+       id="rect19"
+       style="fill:url(#grad-l1);stroke-width:0.877147"
+       x="0"
+       y="0" />
+    <text
+       x="20"
+       y="24"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="13px"
+       font-weight="bold"
+       fill="#ffffff"
+       id="text20">用户态进程</text>
+    <text
+       x="20"
+       y="42"
+       font-family="Consolas, monospace"
+       font-size="11px"
+       fill="#e8f8f5"
+       id="text21">socket() / connect() / sendto() / recvfrom() / ppoll() ...</text>
+    <!-- 层数角标 -->
+    <rect
+       x="447.40811"
+       y="0"
+       width="45"
+       height="18"
+       rx="4"
+       fill="rgba(255,255,255,0.2)"
+       id="rect21"
+       style="fill:#4b4b4b;fill-opacity:0.7" />
+    <text
+       x="469.90811"
+       y="12"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="9px"
+       font-weight="bold"
+       fill="#ffffff"
+       text-anchor="middle"
+       id="text22">L1</text>
+  </g>
+  <!-- 连接线 1 -> 2 -->
+  <path
+     d="M 340.93782,69.272541 V 109.27254"
+     fill="none"
+     stroke="#1a759f"
+     stroke-width="2"
+     marker-end="url(#arrow-down)"
+     id="path22" />
+  <text
+     x="350.93781"
+     y="94.272537"
+     font-family="'Microsoft YaHei', sans-serif"
+     font-size="10.5px"
+     font-weight="bold"
+     fill="#1a759f"
+     id="text23">系统调用 (Syscall)</text>
+  <!-- ==================== 第二层：套接字层 ==================== -->
+  <g
+     transform="translate(98.733757,109.27254)"
+     filter="url(#shadow)"
+     id="g27">
+    <rect
+       width="492.40811"
+       height="70"
+       rx="4.6163259"
+       fill="url(#grad-l2)"
+       id="rect23"
+       style="fill:url(#grad-l2);stroke-width:0.877147"
+       x="0"
+       y="0" />
+    <text
+       x="20"
+       y="24"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="13px"
+       font-weight="bold"
+       fill="#ffffff"
+       id="text24">套接字层 (Socket Layer)</text>
+    <text
+       x="20"
+       y="44"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="11px"
+       fill="#e2f1f7"
+       id="text25">TCP / UDP / AF_UNIX / Raw IPv6 / 兼容套接字</text>
+    <text
+       x="20"
+       y="58"
+       font-family="Consolas, monospace"
+       font-size="9.5px"
+       fill="#94d2bd"
+       font-weight="bold"
+       id="text26">implements File trait</text>
+    <!-- 层数角标 -->
+    <rect
+       x="447.40811"
+       y="0"
+       width="45"
+       height="18"
+       rx="4"
+       fill="rgba(255,255,255,0.2)"
+       id="rect26"
+       style="fill:#4b4b4b;fill-opacity:0.7" />
+    <text
+       x="469.90811"
+       y="12"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="9px"
+       font-weight="bold"
+       fill="#ffffff"
+       text-anchor="middle"
+       id="text27">L2</text>
+  </g>
+  <!-- 连接线 2 -> 3 -->
+  <path
+     d="m 340.73376,179.27254 v 40"
+     fill="none"
+     stroke="#1a759f"
+     stroke-width="2"
+     marker-end="url(#arrow-down)"
+     id="path27" />
+  <text
+     x="350.73376"
+     y="204.27254"
+     font-family="Consolas, monospace"
+     font-size="10.5px"
+     font-weight="bold"
+     fill="#1a759f"
+     id="text28">read_wait / write_wait / source_id</text>
+  <!-- ==================== 第三层：smoltcp 协议栈 ==================== -->
+  <g
+     transform="translate(98.733757,219.27254)"
+     filter="url(#shadow)"
+     id="g31">
+    <rect
+       width="492.40811"
+       height="65"
+       rx="4.6163259"
+       fill="url(#grad-l3)"
+       id="rect28"
+       style="fill:url(#grad-l3);stroke-width:0.877147"
+       x="0"
+       y="0" />
+    <text
+       x="20"
+       y="24"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="13px"
+       font-weight="bold"
+       fill="#ffffff"
+       id="text29">smoltcp 协议栈</text>
+    <text
+       x="20"
+       y="45"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="11px"
+       fill="#e2f1f7"
+       id="text30">Interface · SocketSet (TCP/UDP/ICMP/ARP/IPv4/IPv6)</text>
+    <!-- 层数角标 -->
+    <rect
+       x="447.40811"
+       y="0"
+       width="45"
+       height="18"
+       rx="4"
+       fill="rgba(255,255,255,0.2)"
+       id="rect30"
+       style="fill:#4b4b4b;fill-opacity:0.7" />
+    <text
+       x="469.90811"
+       y="12"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="9px"
+       font-weight="bold"
+       fill="#ffffff"
+       text-anchor="middle"
+       id="text31">L3</text>
+  </g>
+  <!-- 连接线 3 -> 4 -->
+  <path
+     d="m 340.73376,284.27254 v 45"
+     fill="none"
+     stroke="#1a759f"
+     stroke-width="2"
+     marker-end="url(#arrow-down)"
+     id="path31" />
+  <text
+     x="350.73376"
+     y="312.27255"
+     font-family="Consolas, monospace"
+     font-size="10px"
+     font-weight="bold"
+     fill="#1a759f"
+     id="text32">iface.poll(ts, &amp;mut device, &amp;mut sockets)</text>
+  <!-- ==================== 第四层：MultiDevice 路由与分发 ==================== -->
+  <g
+     transform="translate(98.733757,329.27254)"
+     filter="url(#shadow)"
+     id="g41">
+    <rect
+       width="492.40811"
+       height="135"
+       rx="4.6163259"
+       fill="url(#grad-l4)"
+       id="rect32"
+       style="fill:url(#grad-l4);stroke-width:0.877147"
+       x="0"
+       y="0" />
+    <text
+       x="20"
+       y="22"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="13px"
+       font-weight="bold"
+       fill="#ffffff"
+       id="text33">MultiDevice (多设备管理)</text>
+    <!-- 层数角标 -->
+    <rect
+       x="447.40811"
+       y="0"
+       width="45"
+       height="18"
+       rx="4"
+       fill="rgba(255,255,255,0.2)"
+       id="rect33"
+       style="fill:#4b4b4b;fill-opacity:0.7" />
+    <text
+       x="469.90811"
+       y="12"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="9px"
+       font-weight="bold"
+       fill="#ffffff"
+       text-anchor="middle"
+       id="text34">L4</text>
+    <!-- 内部组件容器 -->
+    <!-- 1. MultiDevice 发送源 -->
+    <g
+       transform="translate(20,42)"
+       id="g35">
+      <rect
+         width="130"
+         height="75"
+         rx="4"
+         fill="rgba(255, 255, 255, 0.15)"
+         stroke="#94d2bd"
+         stroke-width="1"
+         id="rect34"
+         style="fill:#000000;fill-opacity:0.2"
+         x="0"
+         y="0" />
+      <text
+         x="65"
+         y="42"
+         font-family="Consolas, monospace"
+         font-size="12px"
+         font-weight="bold"
+         fill="#ffffff"
+         text-anchor="middle"
+         id="text35">MultiDevice</text>
+    </g>
+    <!-- 2. 分流路由连线线段 -->
+    <g
+       fill="none"
+       stroke="#ffffff"
+       stroke-width="1.5"
+       id="g37">
+      <!-- 横向主干 -->
+      <path
+         d="m 150,80 h 70"
+         id="path35" />
+      <!-- 分流至 Loopback -->
+      <path
+         d="M 220,80 V 60 h 60"
+         marker-end="url(#arrow-branch)"
+         id="path36" />
+      <!-- 分流至 Virtio-net -->
+      <path
+         d="m 220,80 v 20 h 60"
+         marker-end="url(#arrow-branch)"
+         id="path37" />
+    </g>
+    <text
+       x="184.90918"
+       y="75.330322"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="9.5px"
+       fill="#e2f1f7"
+       text-anchor="middle"
+       id="text37">按目的地址路由</text>
+    <!-- 3. Loopback 队列 -->
+    <g
+       transform="translate(290,42)"
+       id="g38">
+      <rect
+         width="183.26067"
+         height="32.201954"
+         rx="2.2213414"
+         fill="rgba(255, 255, 255, 0.1)"
+         stroke="#94d2bd"
+         stroke-width="0.8"
+         id="rect37"
+         style="fill:#000000;fill-opacity:0.2"
+         x="-0.10097756"
+         y="-0.10097756" />
+      <text
+         x="15"
+         y="20"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="10.5px"
+         font-weight="bold"
+         fill="#ffffff"
+         id="text38">Loopback 队列 (127.0.0.1 / ::1)</text>
+    </g>
+    <!-- 4. VirtIO-net 适配器 -->
+    <g
+       transform="translate(290,82)"
+       id="g40">
+      <rect
+         width="183.17159"
+         height="35.252293"
+         rx="2.2202618"
+         fill="rgba(255, 255, 255, 0.2)"
+         stroke="#ffffff"
+         stroke-width="1"
+         id="rect38"
+         style="fill:#000000;fill-opacity:0.2"
+         x="-0.12614624"
+         y="-0.12614624" />
+      <text
+         x="15"
+         y="21"
+         font-family="'Microsoft YaHei', sans-serif"
+         font-size="10.5px"
+         font-weight="bold"
+         fill="#ffffff"
+         id="text39">VirtIO-net 适配器</text>
+      <text
+         x="118.81818"
+         y="18.992199"
+         font-family="Consolas, monospace"
+         font-size="9.35441px"
+         fill="#94d2bd"
+         id="text40"
+         transform="scale(0.93544101,1.0690145)"
+         style="stroke-width:0.935441">(Rx/TxToken)</text>
+    </g>
+  </g>
+  <!-- 连接线 4 -> 5 (由 VirtIO-net 适配器发出至物理驱动) -->
+  <path
+     d="m 494.73376,464.27254 v 40"
+     fill="none"
+     stroke="#1a759f"
+     stroke-width="2"
+     marker-end="url(#arrow-down)"
+     id="path41" />
+  <text
+     x="504.73376"
+     y="489.27255"
+     font-family="Consolas, monospace"
+     font-size="11px"
+     font-weight="bold"
+     fill="#1a759f"
+     id="text41">try_recv / try_send</text>
+  <!-- ==================== 第五层：VirtIO-net 驱动 ==================== -->
+  <g
+     transform="translate(98.733757,504.27254)"
+     filter="url(#shadow)"
+     id="g44">
+    <rect
+       width="492.40811"
+       height="65"
+       rx="4.6163259"
+       fill="url(#grad-l5)"
+       id="rect41"
+       style="fill:url(#grad-l5);stroke-width:0.877147"
+       x="0"
+       y="0" />
+    <text
+       x="20"
+       y="24"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="13px"
+       font-weight="bold"
+       fill="#ffffff"
+       id="text42">VirtIO-net 驱动 (Driver)</text>
+    <text
+       x="20"
+       y="45"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="11px"
+       fill="#e2f1f7"
+       id="text43">描述符环 (Descriptor Ring) : RX 预投递 16 / TX 令牌化完成</text>
+    <!-- 层数角标 -->
+    <rect
+       x="447.79999"
+       y="0"
+       width="45"
+       height="18"
+       rx="4"
+       fill="rgba(255,255,255,0.2)"
+       id="rect43"
+       style="fill:#4b4b4b;fill-opacity:0.7" />
+    <text
+       x="470.29999"
+       y="12"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="9px"
+       font-weight="bold"
+       fill="#ffffff"
+       text-anchor="middle"
+       id="text44">L5</text>
+  </g>
+  <!-- 连接线 5 -> 6 -->
+  <path
+     d="m 340.73376,569.27254 v 45"
+     fill="none"
+     stroke="#1a759f"
+     stroke-width="2"
+     marker-end="url(#arrow-down)"
+     id="path44" />
+  <text
+     x="350.73376"
+     y="597.27252"
+     font-family="'Microsoft YaHei', sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     fill="#1a759f"
+     id="text45">MMIO 寄存器映射 + 中断通知</text>
+  <!-- ==================== 第六层：QEMU virtio-net PCI 设备 ==================== -->
+  <g
+     transform="translate(98.733757,614.27254)"
+     filter="url(#shadow)"
+     id="g48">
+    <rect
+       width="492.40811"
+       height="55"
+       rx="4.6163259"
+       fill="url(#grad-l6)"
+       id="rect45"
+       style="fill:url(#grad-l6);stroke-width:0.877147"
+       x="0"
+       y="0" />
+    <text
+       x="20"
+       y="24"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="13px"
+       font-weight="bold"
+       fill="#ffffff"
+       id="text46">QEMU virtio-net PCI 设备</text>
+    <text
+       x="20"
+       y="42"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="10.5px"
+       fill="#94d2bd"
+       id="text47">宿主机虚拟化物理网卡设备层 (PCI Bus Mode)</text>
+    <!-- 层数角标 -->
+    <rect
+       x="447.40811"
+       y="0"
+       width="45"
+       height="18"
+       rx="4"
+       fill="rgba(255,255,255,0.2)"
+       id="rect47"
+       style="fill:#4b4b4b;fill-opacity:0.7" />
+    <text
+       x="469.90811"
+       y="12"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="9px"
+       font-weight="bold"
+       fill="#ffffff"
+       text-anchor="middle"
+       id="text48">L6</text>
+  </g>
+  <!-- 数据流向侧边大箭头 (TX 发送 / RX 接收) -->
+  <g
+     transform="translate(8.733757,154.27254)"
+     id="g50">
+    <!-- 向上接收箭头 -->
+    <path
+       d="M 20,250 V 20"
+       fill="none"
+       stroke="#52b788"
+       stroke-width="4"
+       stroke-linecap="round"
+       marker-end="url(#arrow-down)"
+       id="path48"
+       style="marker-end:url(#Triangle)" />
+    <text
+       x="12"
+       y="140"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="11px"
+       font-weight="bold"
+       fill="#52b788"
+       transform="rotate(-90,12,140)"
+       id="text49">RX 接收数据流</text>
+    <!-- 向下发送箭头 -->
+    <path
+       d="M 50,20 V 250"
+       fill="none"
+       stroke="#1a759f"
+       stroke-width="4"
+       stroke-linecap="round"
+       marker-end="url(#arrow-down)"
+       id="path49" />
+    <text
+       x="58"
+       y="140"
+       font-family="'Microsoft YaHei', sans-serif"
+       font-size="11px"
+       font-weight="bold"
+       fill="#1a759f"
+       transform="rotate(90,58,140)"
+       id="text50">TX 发送数据流</text>
+  </g>
+</svg>
