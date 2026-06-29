@@ -1,0 +1,159 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.0.7 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="26.0.7">
+  <diagram id="mm-user-layout" name="mm_user_layout">
+    <mxGraphModel dx="1312" dy="847" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="720" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="addr_panel" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;arcSize=10;" parent="1" vertex="1">
+          <mxGeometry x="40" y="95" width="320" height="615" as="geometry" />
+        </mxCell>
+        <mxCell id="addr_title" value="用户虚拟地址空间" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=18;fontStyle=1;fontColor=#0F172A;" parent="1" vertex="1">
+          <mxGeometry x="80" y="105" width="230" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="high_label" value="高地址" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=12;fontColor=#475569;" parent="1" vertex="1">
+          <mxGeometry x="50" y="135" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="low_label" value="低地址" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=12;fontColor=#475569;" parent="1" vertex="1">
+          <mxGeometry x="50" y="650" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="addr_axis" value="" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#64748B;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="70" y="637.5" as="sourcePoint" />
+            <mxPoint x="70" y="167.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="trampoline" value="&lt;b&gt;Trampoline&lt;/b&gt;&lt;br&gt;最高跳板页&lt;br&gt;trap 入口 / 返回代码&lt;br&gt;用户态与内核态切换共享" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE68A;strokeColor=#D97706;fontSize=12;spacing=6;arcSize=8;" parent="1" vertex="1">
+          <mxGeometry x="105" y="150" width="210" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="trap_ctx" value="&lt;b&gt;TrapContext pages&lt;/b&gt;&lt;br&gt;按线程编号向低地址分配；&lt;div&gt;每线程一页&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontSize=12;spacing=6;arcSize=8;" parent="1" vertex="1">
+          <mxGeometry x="105" y="215" width="210" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="stacks" value="&lt;b&gt;User stacks&lt;/b&gt;&lt;br&gt;USER_STACK_BASE地址起&lt;br&gt;每线程 USER_STACK_SIZE&lt;br&gt;相邻线程栈之间保留页间隔" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=12;spacing=6;arcSize=8;" parent="1" vertex="1">
+          <mxGeometry x="105" y="292" width="210" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="mmap_area" value="&lt;b&gt;mmap area&lt;/b&gt;&lt;br&gt;USER_MMAP_BASE 附近自动选址&lt;br&gt;匿名 mmap / file-backed mmap&lt;br&gt;共享匿名映射 / 动态装载器映射" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=12;spacing=6;arcSize=8;" parent="1" vertex="1">
+          <mxGeometry x="105" y="374" width="210" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vdso" value="&lt;b&gt;vDSO / rt_sigreturn page&lt;/b&gt;&lt;br&gt;USER_MMAP_BASE后一页&lt;div&gt;用户可读可执行&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CCFBF1;strokeColor=#0D9488;fontSize=12;spacing=6;arcSize=8;" parent="1" vertex="1">
+          <mxGeometry x="105" y="462" width="210" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="heap" value="&lt;b&gt;Heap / brk&lt;/b&gt;&lt;br&gt;紧接 ELF 最高装载地址&lt;br&gt;start_brk 由 ELF 最大结束地址决定&lt;br&gt;brk / sbrk 扩展或收缩" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;spacing=6;arcSize=8;" parent="1" vertex="1">
+          <mxGeometry x="105" y="531" width="210" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="elf" value="&lt;b&gt;ELF load segments&lt;/b&gt;&lt;br&gt;text / rodata / data / bss&lt;br&gt;由 ELF program header 装载&lt;br&gt;权限来自 ELF 段 flags" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FECACA;strokeColor=#DC2626;fontSize=12;spacing=6;arcSize=8;" parent="1" vertex="1">
+          <mxGeometry x="105" y="613" width="210" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="memory_set" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=2;fontSize=18;fontStyle=1;spacing=8;arcSize=10;" parent="1" vertex="1">
+          <mxGeometry x="460" y="95" width="350" height="390" as="geometry" />
+        </mxCell>
+        <mxCell id="vma_tree" value="&lt;b&gt;VMA tree&lt;/b&gt;&lt;br&gt;按虚拟区间组织&lt;br&gt;保存映射语义：range / perm / map_type / offset / file&lt;br&gt;用于 mmap / brk / page fault / unmap / fork" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BFDBFE;strokeColor=#1D4ED8;fontSize=14;spacing=8;arcSize=8;" parent="1" vertex="1">
+          <mxGeometry x="500" y="160" width="270" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="pagetable" value="&lt;b&gt;PageTable&lt;/b&gt;&lt;br&gt;硬件页表状态&lt;br&gt;VPN → PPN + flags&lt;br&gt;真正决定 CPU 访存翻译与权限检查" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontSize=14;spacing=8;arcSize=8;" parent="1" vertex="1">
+          <mxGeometry x="500" y="325" width="270" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="semantics_note" value="&lt;b&gt;核心关系&lt;/b&gt;&lt;br&gt;VMA 是“应该怎么映射”的语义元数据；PageTable 是“当前已经怎么映射”的硬件状态。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;fontSize=12;spacing=6;arcSize=8;" parent="1" vertex="1">
+          <mxGeometry x="485" y="545" width="300" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="page_objects_panel" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;arcSize=10;" parent="1" vertex="1">
+          <mxGeometry x="920" y="95" width="330" height="555" as="geometry" />
+        </mxCell>
+        <mxCell id="page_objects_title" value="页对象 / 物理页来源" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=18;fontStyle=1;fontColor=#0F172A;" parent="1" vertex="1">
+          <mxGeometry x="965" y="110" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="data_frames" value="&lt;b&gt;data_frames&lt;/b&gt;&lt;br&gt;匿名页 / 私有页集合" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#9333EA;fontSize=14;spacing=8;arcSize=8;" parent="1" vertex="1">
+          <mxGeometry x="955" y="165" width="260" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="private_page" value="&lt;b&gt;PrivatePage&lt;/b&gt;&lt;br&gt;进程私有物理页&lt;br&gt;常见来源：匿名 mmap、heap、stack、COW 后私有副本" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5D0FE;strokeColor=#A21CAF;fontSize=13;spacing=8;arcSize=8;" parent="1" vertex="1">
+          <mxGeometry x="975" y="270" width="220" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="direct_cache_pages" value="&lt;b&gt;direct_cache_pages&lt;/b&gt;&lt;br&gt;直接关联页缓存页" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FED7AA;strokeColor=#EA580C;fontSize=14;spacing=8;arcSize=8;" parent="1" vertex="1">
+          <mxGeometry x="955" y="395.5" width="260" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="cache_page" value="&lt;b&gt;CachePage&lt;/b&gt;&lt;br&gt;文件共享页 / page cache&lt;br&gt;适合 file-backed mmap 与共享映射" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDBA74;strokeColor=#C2410C;fontSize=13;spacing=8;arcSize=8;" parent="1" vertex="1">
+          <mxGeometry x="975" y="508.5" width="220" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_addr_vma" value="" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#1D4ED8;fontSize=12;labelBackgroundColor=none;entryX=0;entryY=0.25;entryDx=0;entryDy=0;exitX=0.998;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;" parent="1" source="addr_panel" target="vma_tree" edge="1">
+          <mxGeometry x="-0.2788" y="-8" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="320" y="410" as="sourcePoint" />
+            <mxPoint x="500" y="275" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_regions_vma" value="ELF / heap / stack / vDSO / trap 等&lt;div&gt;均为 VMA组成部分&lt;/div&gt;" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#64748B;fontSize=11;labelBackgroundColor=none;dashed=1;entryX=0.005;entryY=0.603;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" target="vma_tree" edge="1">
+          <mxGeometry x="0.0016" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="340" as="sourcePoint" />
+            <mxPoint x="500" y="245" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="410" y="340" />
+              <mxPoint x="410" y="240" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_vma_pt" value="map / fault / unmap 时更新" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#0284C7;fontSize=12;labelBackgroundColor=#DBEAFE;" parent="1" source="vma_tree" target="pagetable" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_pt_addr" value="CPU 依据 PageTable&amp;nbsp;&lt;div&gt;做地址翻译与权限检查&lt;/div&gt;&lt;div&gt;访问虚拟空间对应内容&lt;/div&gt;" style="endArrow=block;startArrow=none;html=1;rounded=0;strokeWidth=1.5;strokeColor=#0E7490;fontSize=11;labelBackgroundColor=none;dashed=1;entryX=0.997;entryY=0.779;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="pagetable" target="addr_panel" edge="1">
+          <mxGeometry x="0.2521" width="50" height="50" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="430" y="380" />
+              <mxPoint x="430" y="575" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_vma_private" value="匿名 / 私有页" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#9333EA;fontSize=12;labelBackgroundColor=none;exitX=1;exitY=0.25;exitDx=0;exitDy=0;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;" parent="1" source="vma_tree" edge="1">
+          <mxGeometry x="0.0697" y="2" width="50" height="50" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="957" y="191" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_vma_cache" value="文件共享页" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#EA580C;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="vma_tree" target="direct_cache_pages" edge="1">
+          <mxGeometry x="-0.6228" y="8" width="50" height="50" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="880" y="258" />
+              <mxPoint x="880" y="444" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_data_private" value="持有" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#9333EA;fontSize=11;labelBackgroundColor=#FFFFFF;" parent="1" source="data_frames" target="private_page" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_cache_cachepage" value="引用" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#EA580C;fontSize=11;labelBackgroundColor=#FFFFFF;" parent="1" source="direct_cache_pages" target="cache_page" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_pt_private" value="PTE 指向私有物理页" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#7E22CE;fontSize=11;labelBackgroundColor=none;dashed=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" parent="1" source="pagetable" target="private_page" edge="1">
+          <mxGeometry x="-0.5853" y="14" width="50" height="50" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="850" y="354" />
+              <mxPoint x="850" y="320" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_pt_cache" value="PTE 也可指向 page cache 页" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#C2410C;fontSize=11;labelBackgroundColor=none;dashed=1;exitX=0.994;exitY=0.703;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="pagetable" target="cache_page" edge="1">
+          <mxGeometry x="0.0565" y="-30" width="50" height="50" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="860" y="406" />
+              <mxPoint x="860" y="550" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="callout" value="&lt;b&gt;页故障处理路径&lt;/b&gt;&lt;br&gt;1. 查 VMA 判断访问是否合法&lt;br&gt;2. 根据 VMA 类型选择 PrivatePage 或 CachePage&lt;br&gt;3. 将 PPN 与权限写入 PageTable" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFCCB;strokeColor=#65A30D;fontSize=13;spacing=8;arcSize=8;" parent="1" vertex="1">
+          <mxGeometry x="410" y="630" width="450" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="YS0O2olbcCHW67Tc65MF-3" value="地址区间&lt;div&gt;由 VMA 描述&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="370" y="143" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="YS0O2olbcCHW67Tc65MF-6" value="&lt;b style=&quot;font-size: 18px;&quot;&gt;MemorySet&lt;/b&gt;&lt;div style=&quot;text-wrap: nowrap;&quot;&gt;&lt;span style=&quot;text-wrap: wrap; font-size: 18px; font-weight: 700;&quot;&gt;进程地址空间的统一管理对象&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="467.5" y="90" width="335" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

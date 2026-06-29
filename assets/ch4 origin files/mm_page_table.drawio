@@ -1,0 +1,99 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.0.7 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="26.0.7">
+  <diagram id="mm-page-table-hal" name="mm_page_table">
+    <mxGraphModel dx="1406" dy="907" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="720" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="lane_mm" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF4FF;strokeColor=#8BBBE8;strokeWidth=2;arcSize=10;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="50" y="75" width="1200" height="185" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_hal" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF3;strokeColor=#7CCB95;strokeWidth=2;arcSize=10;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="50" y="292" width="1200" height="228" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_arch" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E6;strokeColor=#E5A85A;strokeWidth=2;arcSize=10;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="50" y="550" width="1200" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="label_mm" value="&lt;b&gt;上层：mm 通用层&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:12px&quot;&gt;只表达页表语义，&lt;/span&gt;&lt;span style=&quot;font-size: 12px; text-align: center;&quot;&gt;不关心 satp/CSR，不直接拼 PTE bit，&lt;/span&gt;&lt;span style=&quot;font-size:12px&quot;&gt;不写死某个 ISA 的 PTE/token/TLB 细节&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;align=left;fontSize=15;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="75" y="88" width="520" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="label_hal" value="&lt;b&gt;中层：HAL PagingArch trait&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:12px&quot;&gt;统一抽象架构相关参数与编码规则&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 12px; text-align: center;&quot;&gt;HAL：隔离 token 激活方式、PTE 编码和 TLB 刷新差异&lt;/span&gt;&lt;span style=&quot;font-size:12px&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;align=left;fontSize=15;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="75" y="306" width="520" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="label_arch" value="&lt;b&gt;下层：架构实现&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:12px&quot;&gt;把差异封装为对应 ISA 的 HAL 实现&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;align=left;fontSize=15;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="75" y="562" width="520" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="top_pagetable" value="&lt;b&gt;PageTable&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:12px&quot;&gt;map / unmap / translate&lt;br&gt;复用同一套页表遍历与映射语义&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4F8BC9;strokeWidth=2;shadow=0;arcSize=12;fontSize=14;spacing=10;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="95" y="145" width="315" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="top_pte" value="&lt;span&gt;&lt;b style=&quot;&quot;&gt;PageTableEntry&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;抽象 ppn / flags / valid&lt;br&gt;不直接依赖具体 PTE 位布局&lt;/span&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4F8BC9;strokeWidth=2;shadow=0;arcSize=12;fontSize=14;spacing=10;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="495" y="145" width="315" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="top_va" value="&lt;b&gt;VirtAddr / VirtPageNum&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:12px&quot;&gt;虚拟地址规范化与索引计算&lt;br&gt;由架构参数决定边界与 canonical 规则&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4F8BC9;strokeWidth=2;shadow=0;arcSize=12;fontSize=14;spacing=10;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="890" y="145" width="315" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="hal_main" value="&lt;b&gt;PagingArch trait&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:12px&quot;&gt;通用 mm 代码只调用这些接口；具体实现由架构层提供&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#35A35C;strokeWidth=2;shadow=0;arcSize=10;fontSize=13;spacing=8;fontSize=16;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="406" y="307.5" width="488" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="api_addr" value="&lt;b&gt;1. 地址参数&lt;/b&gt;&lt;br&gt;&lt;code&gt;VA_BITS&lt;/code&gt;&lt;br&gt;&lt;code&gt;LEVELS&lt;/code&gt;&lt;br&gt;&lt;code&gt;INDEX_BITS&lt;/code&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#35A35C;strokeWidth=2;shadow=0;arcSize=10;fontSize=13;spacing=8;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="95" y="410" width="260" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="api_token" value="&lt;b&gt;2. 地址空间 token&lt;/b&gt;&lt;br&gt;&lt;code&gt;make_token&lt;/code&gt;&lt;br&gt;&lt;code&gt;activate_token&lt;/code&gt;&lt;br&gt;&lt;code&gt;flush_tlb&lt;/code&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#35A35C;strokeWidth=2;shadow=0;arcSize=10;fontSize=13;spacing=8;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="385" y="410" width="260" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="api_pte" value="&lt;b&gt;3. PTE 编解码&lt;/b&gt;&lt;br&gt;&lt;code&gt;make_pte&lt;/code&gt; / &lt;code&gt;make_dir_entry&lt;/code&gt;&lt;br&gt;&lt;code&gt;pte_ppn&lt;/code&gt; / &lt;code&gt;pte_flags&lt;/code&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#35A35C;strokeWidth=2;shadow=0;arcSize=10;fontSize=13;spacing=8;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="675" y="410" width="260" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="api_walk" value="&lt;b&gt;4. 页表遍历&lt;/b&gt;&lt;br&gt;&lt;code&gt;vpn_index&lt;/code&gt;&lt;br&gt;&lt;code&gt;normalize_virt_addr_input&lt;/code&gt;&lt;br&gt;&lt;code&gt;canonicalize_vaddr&lt;/code&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#35A35C;strokeWidth=2;shadow=0;arcSize=10;fontSize=13;spacing=8;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="965" y="410" width="220" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="arch_riscv" value="&lt;b&gt;RISC-V Sv39&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:12px&quot;&gt;• token/激活：按 Sv39 satp 语义切换&lt;br&gt;• PTE：Sv39 PPN + R/W/X/U/G/A/D 等标志&lt;br&gt;• 目录项与叶子项编码较统一&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#C57B18;strokeWidth=2;shadow=0;arcSize=12;fontSize=14;spacing=10;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="130" y="610" width="475" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="arch_loong" value="&lt;b&gt;LoongArch64&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:12px&quot;&gt;• token/激活：按 LoongArch CSR/TLB 语义切换&lt;br&gt;• PTE：位布局与 RISC-V 不同&lt;br&gt;• 需要单独的 &lt;code&gt;make_dir_entry&lt;/code&gt; 编码目录项&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#C57B18;strokeWidth=2;shadow=0;arcSize=12;fontSize=14;spacing=10;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="695" y="610" width="475" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="note_reuse" value="上层代码复用；架构差异下沉到 HAL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;strokeWidth=1.5;arcSize=8;fontSize=14;align=center;verticalAlign=middle;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="460" y="520" width="410" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_top_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;strokeColor=#2563EB;fontSize=12;labelBackgroundColor=none;labelPosition=right;verticalLabelPosition=middle;align=left;verticalAlign=middle;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="lane_mm" target="hal_main" edge="1">
+          <mxGeometry x="0.7096" relative="1" as="geometry">
+            <mxPoint x="650" y="290" as="targetPoint" />
+            <mxPoint y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_hal_api_0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;endArrow=block;endFill=1;strokeColor=#22C55E;labelBackgroundColor=none;" parent="1" target="api_addr" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="650" y="350" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="650" y="380" />
+              <mxPoint x="225" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_hal_api_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;endArrow=block;endFill=1;strokeColor=#22C55E;labelBackgroundColor=none;" parent="1" source="hal_main" target="api_token" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_hal_api_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;endArrow=block;endFill=1;strokeColor=#22C55E;labelBackgroundColor=none;" parent="1" source="hal_main" target="api_pte" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_hal_api_3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;endArrow=block;endFill=1;strokeColor=#22C55E;exitX=0.5;exitY=1;exitDx=0;exitDy=0;labelBackgroundColor=none;" parent="1" source="hal_main" target="api_walk" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_hal_rv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;strokeColor=#16A34A;fontSize=12;labelBackgroundColor=none;" parent="1" target="arch_riscv" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="515" y="520" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_hal_la" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=block;endFill=1;strokeColor=#16A34A;fontSize=12;labelBackgroundColor=none;" parent="1" target="arch_loong" edge="1">
+          <mxGeometry x="0.001" relative="1" as="geometry">
+            <mxPoint x="804" y="520" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vEcj8vkLKjE5h5HkHxt0-4" value="调用HAL" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="650" y="260" width="70" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
