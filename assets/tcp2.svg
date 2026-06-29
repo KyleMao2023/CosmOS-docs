@@ -1,0 +1,846 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 1142 832"
+   style="font-family:'Segoe UI', system-ui, sans-serif"
+   version="1.1"
+   id="svg63"
+   sodipodi:docname="tcp2.svg"
+   width="1142"
+   height="832"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview63"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.1745416"
+     inkscape:cx="476.35606"
+     inkscape:cy="456.34825"
+     inkscape:window-width="3200"
+     inkscape:window-height="1876"
+     inkscape:window-x="-12"
+     inkscape:window-y="-12"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg63" />
+  <defs
+     id="defs4">
+    <!-- Arrow heads -->
+    <marker
+       id="arrow"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#343a40"
+         id="path1" />
+    </marker>
+    <marker
+       id="arrow-blue"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#0d6efd"
+         id="path2" />
+    </marker>
+    <marker
+       id="arrow-green"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#198754"
+         id="path3" />
+    </marker>
+    <marker
+       id="arrow-orange"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#fd7e14"
+         id="path4" />
+    </marker>
+    <!-- Drop shadows -->
+  </defs>
+  <!-- Title -->
+  <!-- ==================== PART 1: DATA STRUCTURES ==================== -->
+  <rect
+     x="1"
+     y="1"
+     width="1140"
+     height="380"
+     rx="10"
+     fill="#ffffff"
+     filter="url(#shadow)"
+     stroke="#dee2e6"
+     stroke-width="2"
+     id="rect5" />
+  <text
+     x="21"
+     y="36"
+     font-size="18px"
+     font-weight="bold"
+     fill="#495057"
+     id="text6">1. Core Data Structures (VFS to Network Stack)</text>
+  <!-- TcpSocketFile -->
+  <rect
+     x="31"
+     y="61"
+     width="280"
+     height="180"
+     rx="8"
+     fill="#e7f1ff"
+     stroke="#0d6efd"
+     stroke-width="2"
+     id="rect6" />
+  <path
+     d="M 31,101 H 311"
+     stroke="#0d6efd"
+     stroke-width="1"
+     id="path6" />
+  <text
+     x="171"
+     y="86"
+     text-anchor="middle"
+     font-size="16px"
+     font-weight="bold"
+     fill="#0a58ca"
+     id="text7">TcpSocketFile</text>
+  <text
+     x="46"
+     y="126"
+     font-size="13px"
+     fill="#212529"
+     id="text8"><tspan
+   font-family="monospace"
+   font-weight="bold"
+   id="tspan7">st:</tspan> SpinNoIrqLock&lt;Arc&lt;TcpSocketState&gt;&gt;</text>
+  <text
+     x="46"
+     y="151"
+     font-size="13px"
+     fill="#212529"
+     id="text9"><tspan
+   font-family="monospace"
+   font-weight="bold"
+   id="tspan8">bound_port:</tspan> SpinNoIrqLock&lt;Option&lt;u16&gt;&gt;</text>
+  <text
+     x="46"
+     y="176"
+     font-size="13px"
+     fill="#212529"
+     id="text10"><tspan
+   font-family="monospace"
+   font-weight="bold"
+   id="tspan9">listening:</tspan> AtomicBool</text>
+  <text
+     x="46"
+     y="201"
+     font-size="13px"
+     fill="#212529"
+     id="text11"><tspan
+   font-family="monospace"
+   font-weight="bold"
+   id="tspan10">listener:</tspan> SpinNoIrqLock&lt;Option&lt;Arc&gt;&gt;</text>
+  <text
+     x="171"
+     y="226"
+     text-anchor="middle"
+     font-size="12px"
+     font-style="italic"
+     fill="#6c757d"
+     id="text12">Implements VFS File Trait</text>
+  <!-- TcpListenerShared -->
+  <rect
+     x="771"
+     y="61"
+     width="340"
+     height="230"
+     rx="8"
+     fill="#d1e7dd"
+     stroke="#198754"
+     stroke-width="2"
+     id="rect12" />
+  <path
+     d="m 771,101 h 340"
+     stroke="#198754"
+     stroke-width="1"
+     id="path12" />
+  <text
+     x="941"
+     y="86"
+     text-anchor="middle"
+     font-size="16px"
+     font-weight="bold"
+     fill="#146c43"
+     id="text13">TcpListenerShared</text>
+  <text
+     x="786"
+     y="126"
+     font-size="13px"
+     fill="#212529"
+     id="text14"><tspan
+   font-family="monospace"
+   font-weight="bold"
+   id="tspan13">port, backlog:</tspan> AtomicUsize</text>
+  <text
+     x="786"
+     y="151"
+     font-size="13px"
+     fill="#212529"
+     id="text15"><tspan
+   font-family="monospace"
+   font-weight="bold"
+   id="tspan14">pending:</tspan> SpinNoIrqLock&lt;VecDeque&lt;Arc&gt;&gt;</text>
+  <text
+     x="786"
+     y="176"
+     font-size="13px"
+     fill="#212529"
+     id="text16"><tspan
+   font-family="monospace"
+   font-weight="bold"
+   id="tspan15">passive:</tspan> SpinNoIrqLock&lt;Vec&lt;Arc&gt;&gt;</text>
+  <text
+     x="786"
+     y="201"
+     font-size="13px"
+     fill="#212529"
+     id="text17"><tspan
+   font-family="monospace"
+   font-weight="bold"
+   id="tspan16">accept_wait:</tspan> WaitQueue</text>
+  <rect
+     x="801"
+     y="221"
+     width="120"
+     height="50"
+     rx="4"
+     fill="#a3cfbb"
+     stroke="#198754"
+     stroke-dasharray="4"
+     id="rect17" />
+  <text
+     x="861"
+     y="241"
+     text-anchor="middle"
+     font-size="11px"
+     id="text18">passive</text>
+  <text
+     x="861"
+     y="256"
+     text-anchor="middle"
+     font-size="10px"
+     id="text19">(waiting for SYN)</text>
+  <rect
+     x="951"
+     y="221"
+     width="120"
+     height="50"
+     rx="4"
+     fill="#a3cfbb"
+     stroke="#198754"
+     id="rect19" />
+  <text
+     x="1011"
+     y="241"
+     text-anchor="middle"
+     font-size="11px"
+     id="text20">pending</text>
+  <text
+     x="1011"
+     y="256"
+     text-anchor="middle"
+     font-size="10px"
+     id="text21">(ready to accept)</text>
+  <!-- TcpSocketState -->
+  <rect
+     x="391"
+     y="111"
+     width="300"
+     height="230"
+     rx="8"
+     fill="#fff3cd"
+     stroke="#ffc107"
+     stroke-width="2"
+     id="rect21" />
+  <path
+     d="M 391,151 H 691"
+     stroke="#ffc107"
+     stroke-width="1"
+     id="path21" />
+  <text
+     x="541"
+     y="136"
+     text-anchor="middle"
+     font-size="16px"
+     font-weight="bold"
+     fill="#997404"
+     id="text22">TcpSocketState</text>
+  <text
+     x="406"
+     y="176"
+     font-size="13px"
+     fill="#212529"
+     id="text23"><tspan
+   font-family="monospace"
+   font-weight="bold"
+   id="tspan22">handle:</tspan> smoltcp::SocketHandle</text>
+  <text
+     x="406"
+     y="201"
+     font-size="13px"
+     fill="#212529"
+     id="text24"><tspan
+   font-family="monospace"
+   font-weight="bold"
+   id="tspan23">read_wait:</tspan> WaitQueue</text>
+  <text
+     x="406"
+     y="226"
+     font-size="13px"
+     fill="#212529"
+     id="text25"><tspan
+   font-family="monospace"
+   font-weight="bold"
+   id="tspan24">write_wait:</tspan> WaitQueue</text>
+  <text
+     x="406"
+     y="251"
+     font-size="13px"
+     fill="#212529"
+     id="text26"><tspan
+   font-family="monospace"
+   font-weight="bold"
+   id="tspan25">listener:</tspan> SpinNoIrqLock&lt;Option&lt;Weak&gt;&gt;</text>
+  <text
+     x="406"
+     y="276"
+     font-size="13px"
+     fill="#212529"
+     id="text27"><tspan
+   font-family="monospace"
+   font-weight="bold"
+   id="tspan26">orphaned, queued_for_acc:</tspan> AtomicBool</text>
+  <text
+     x="541"
+     y="321"
+     text-anchor="middle"
+     font-size="12px"
+     font-style="italic"
+     fill="#6c757d"
+     id="text28">Binds Kernel WaitQueues to smoltcp state</text>
+  <!-- Relationship Arrows -->
+  <!-- File -> State -->
+  <path
+     d="m 311,151 h 70"
+     stroke="#0d6efd"
+     stroke-width="2"
+     marker-end="url(#arrow-blue)"
+     id="path28" />
+  <text
+     x="346"
+     y="146"
+     text-anchor="middle"
+     font-size="12px"
+     fill="#0d6efd"
+     id="text29">st</text>
+  <!-- File -> Listener -->
+  <path
+     d="M 251,61 C 251,21 821,21 821,51"
+     stroke="#198754"
+     stroke-width="2"
+     marker-end="url(#arrow-green)"
+     fill="none"
+     stroke-dasharray="5"
+     id="path29" />
+  <text
+     x="541"
+     y="36"
+     text-anchor="middle"
+     font-size="12px"
+     fill="#198754"
+     id="text30">listener (if listening)</text>
+  <!-- Listener -> State -->
+  <path
+     d="M 801,246 H 701"
+     stroke="#ffc107"
+     stroke-width="2"
+     marker-end="url(#arrow-orange)"
+     id="path30" />
+  <text
+     x="751"
+     y="241"
+     text-anchor="middle"
+     font-size="12px"
+     fill="#997404"
+     id="text31">passive / pending</text>
+  <!-- State -> Listener (Weak) -->
+  <path
+     d="m 691,191 h 70"
+     stroke="#6c757d"
+     stroke-width="2"
+     marker-end="url(#arrow)"
+     stroke-dasharray="4"
+     id="path31" />
+  <text
+     x="726"
+     y="186"
+     text-anchor="middle"
+     font-size="12px"
+     fill="#6c757d"
+     id="text32">weak ref</text>
+  <!-- ==================== PART 2: STATE MACHINE & FLOWS ==================== -->
+  <rect
+     x="1"
+     y="411"
+     width="1140"
+     height="420"
+     rx="10"
+     fill="#ffffff"
+     filter="url(#shadow)"
+     stroke="#dee2e6"
+     stroke-width="2"
+     id="rect32" />
+  <text
+     x="21"
+     y="446"
+     font-size="18px"
+     font-weight="bold"
+     fill="#495057"
+     id="text33">2. Listen, Accept &amp; Connect State Transitions</text>
+  <!-- Background split -->
+  <line
+     x1="551"
+     y1="451"
+     x2="551"
+     y2="811"
+     stroke="#dee2e6"
+     stroke-width="2"
+     stroke-dasharray="8"
+     id="line33" />
+  <text
+     x="261"
+     y="476"
+     text-anchor="middle"
+     font-size="16px"
+     font-weight="bold"
+     fill="#0dcaf0"
+     id="text34">A. Passive Open (Listen &amp; Accept Flow)</text>
+  <text
+     x="841"
+     y="476"
+     text-anchor="middle"
+     font-size="16px"
+     font-weight="bold"
+     fill="#fd7e14"
+     id="text35">B. Active Open (Connect Flow)</text>
+  <!-- === Flow A: Listen & Accept === -->
+  <!-- Listen Call -->
+  <rect
+     x="31"
+     y="501"
+     width="140"
+     height="40"
+     rx="20"
+     fill="#0dcaf0"
+     fill-opacity="0.2"
+     stroke="#0dcaf0"
+     stroke-width="2"
+     id="rect35" />
+  <text
+     x="101"
+     y="526"
+     text-anchor="middle"
+     font-size="14px"
+     font-weight="bold"
+     id="text36">listen(backlog)</text>
+  <path
+     d="m 101,541 v 40"
+     stroke="#343a40"
+     stroke-width="2"
+     marker-end="url(#arrow)"
+     id="path36" />
+  <text
+     x="106"
+     y="566"
+     font-size="11px"
+     fill="#6c757d"
+     id="text37">refill_listener_slots()</text>
+  <!-- Passive Pool -->
+  <rect
+     x="31"
+     y="591"
+     width="140"
+     height="60"
+     rx="8"
+     fill="#d1e7dd"
+     stroke="#198754"
+     stroke-dasharray="4"
+     stroke-width="2"
+     id="rect37" />
+  <text
+     x="101"
+     y="616"
+     text-anchor="middle"
+     font-size="14px"
+     font-weight="bold"
+     id="text38">Passive Queue</text>
+  <text
+     x="101"
+     y="636"
+     text-anchor="middle"
+     font-size="11px"
+     id="text39">smoltcp::State::Listen</text>
+  <!-- Net Poll triggers transition -->
+  <path
+     d="m 171,621 c 60,0 60,90 110,90"
+     stroke="#dc3545"
+     stroke-width="2"
+     marker-end="url(#arrow)"
+     fill="none"
+     id="path39" />
+  <rect
+     x="176"
+     y="641"
+     width="100"
+     height="40"
+     rx="4"
+     fill="#f8d7da"
+     stroke="#dc3545"
+     id="rect39" />
+  <text
+     x="226"
+     y="656"
+     text-anchor="middle"
+     font-size="11px"
+     fill="#842029"
+     id="text40">NET_STACK poll</text>
+  <text
+     x="226"
+     y="671"
+     text-anchor="middle"
+     font-size="10px"
+     fill="#842029"
+     id="text41">Handshake Done</text>
+  <!-- Pending Pool -->
+  <rect
+     x="291"
+     y="681"
+     width="160"
+     height="60"
+     rx="8"
+     fill="#d1e7dd"
+     stroke="#198754"
+     stroke-width="2"
+     id="rect41" />
+  <text
+     x="371"
+     y="706"
+     text-anchor="middle"
+     font-size="14px"
+     font-weight="bold"
+     id="text42">Pending Queue</text>
+  <text
+     x="371"
+     y="726"
+     text-anchor="middle"
+     font-size="11px"
+     id="text43">smoltcp::State::Established</text>
+  <!-- Explanation box for queue transition -->
+  <rect
+     x="31"
+     y="771"
+     width="450"
+     height="40"
+     rx="4"
+     fill="#f8f9fa"
+     stroke="#adb5bd"
+     stroke-dasharray="2"
+     id="rect43" />
+  <text
+     x="256"
+     y="786"
+     text-anchor="middle"
+     font-size="11px"
+     font-weight="bold"
+     id="text44">queue_listener_connection_if_ready()</text>
+  <text
+     x="256"
+     y="801"
+     text-anchor="middle"
+     font-size="11px"
+     id="text45">Moves state from Passive to Pending, calls accept_wait.wake_one()</text>
+  <!-- Accept Call -->
+  <rect
+     x="391"
+     y="501"
+     width="120"
+     height="40"
+     rx="20"
+     fill="#0dcaf0"
+     fill-opacity="0.2"
+     stroke="#0dcaf0"
+     stroke-width="2"
+     id="rect45" />
+  <text
+     x="451"
+     y="526"
+     text-anchor="middle"
+     font-size="14px"
+     font-weight="bold"
+     id="text46">accept()</text>
+  <path
+     d="m 431,681 c 0,-70 20,-120 20,-130"
+     stroke="#343a40"
+     stroke-width="2"
+     marker-start="url(#arrow)"
+     fill="none"
+     id="path46" />
+  <text
+     x="461"
+     y="611"
+     font-size="11px"
+     fill="#6c757d"
+     id="text47">Pops from Pending</text>
+  <path
+     d="m 421,541 c -50,0 -90,20 -90,50"
+     stroke="#343a40"
+     stroke-width="2"
+     marker-end="url(#arrow)"
+     fill="none"
+     stroke-dasharray="3"
+     id="path47" />
+  <text
+     x="381"
+     y="561"
+     font-size="11px"
+     fill="#6c757d"
+     id="text48">If empty:</text>
+  <text
+     x="381"
+     y="576"
+     font-size="11px"
+     fill="#6c757d"
+     id="text49">accept_wait.wait()</text>
+  <!-- Return new Socket -->
+  <rect
+     x="331"
+     y="591"
+     width="150"
+     height="40"
+     rx="4"
+     fill="#e7f1ff"
+     stroke="#0d6efd"
+     id="rect49" />
+  <text
+     x="406"
+     y="616"
+     text-anchor="middle"
+     font-size="12px"
+     font-weight="bold"
+     id="text50">Returns New</text>
+  <text
+     x="406"
+     y="636"
+     text-anchor="middle"
+     font-size="10px"
+     id="text51">TcpSocketFile (Arc)</text>
+  <!-- === Flow B: Connect === -->
+  <!-- Connect Call -->
+  <rect
+     x="601"
+     y="501"
+     width="140"
+     height="40"
+     rx="20"
+     fill="#fd7e14"
+     fill-opacity="0.2"
+     stroke="#fd7e14"
+     stroke-width="2"
+     id="rect51" />
+  <text
+     x="671"
+     y="526"
+     text-anchor="middle"
+     font-size="14px"
+     font-weight="bold"
+     id="text52">connect(ep)</text>
+  <path
+     d="m 671,541 v 50"
+     stroke="#343a40"
+     stroke-width="2"
+     marker-end="url(#arrow)"
+     id="path52" />
+  <rect
+     x="601"
+     y="591"
+     width="140"
+     height="50"
+     rx="8"
+     fill="#fff3cd"
+     stroke="#ffc107"
+     stroke-width="2"
+     id="rect52" />
+  <text
+     x="671"
+     y="616"
+     text-anchor="middle"
+     font-size="12px"
+     font-weight="bold"
+     id="text53">smoltcp connect()</text>
+  <text
+     x="671"
+     y="631"
+     text-anchor="middle"
+     font-size="11px"
+     id="text54">State: SynSent</text>
+  <path
+     d="m 671,641 v 50"
+     stroke="#343a40"
+     stroke-width="2"
+     marker-end="url(#arrow)"
+     id="path54" />
+  <text
+     x="681"
+     y="671"
+     font-size="11px"
+     fill="#6c757d"
+     id="text55">read_wait.wait()</text>
+  <rect
+     x="601"
+     y="691"
+     width="140"
+     height="50"
+     rx="8"
+     fill="#fff3cd"
+     stroke="#ffc107"
+     stroke-width="2"
+     id="rect55" />
+  <text
+     x="671"
+     y="716"
+     text-anchor="middle"
+     font-size="12px"
+     font-weight="bold"
+     id="text56">Wait Loop</text>
+  <text
+     x="671"
+     y="731"
+     text-anchor="middle"
+     font-size="10px"
+     id="text57">Checks Connect Done</text>
+  <!-- Conditions -->
+  <path
+     d="m 741,716 80,-80"
+     stroke="#198754"
+     stroke-width="2"
+     marker-end="url(#arrow-green)"
+     id="path57" />
+  <rect
+     x="831"
+     y="606"
+     width="120"
+     height="40"
+     rx="4"
+     fill="#d1e7dd"
+     stroke="#198754"
+     id="rect57" />
+  <text
+     x="891"
+     y="626"
+     text-anchor="middle"
+     font-size="11px"
+     font-weight="bold"
+     id="text58">Ok(())</text>
+  <text
+     x="891"
+     y="641"
+     text-anchor="middle"
+     font-size="10px"
+     id="text59">Established / CloseWait</text>
+  <path
+     d="m 741,716 80,60"
+     stroke="#dc3545"
+     stroke-width="2"
+     marker-end="url(#arrow)"
+     id="path59" />
+  <rect
+     x="831"
+     y="766"
+     width="120"
+     height="40"
+     rx="4"
+     fill="#f8d7da"
+     stroke="#dc3545"
+     id="rect59" />
+  <text
+     x="891"
+     y="786"
+     text-anchor="middle"
+     font-size="11px"
+     font-weight="bold"
+     id="text60">Err(ECONNREFUSED)</text>
+  <text
+     x="891"
+     y="801"
+     text-anchor="middle"
+     font-size="10px"
+     id="text61">Closed / TimeWait</text>
+  <!-- Network Poll wakes up read_wait -->
+  <path
+     d="m 1001,681 c 0,20 -80,30 -250,30"
+     stroke="#dc3545"
+     stroke-width="2"
+     marker-end="url(#arrow)"
+     stroke-dasharray="4"
+     fill="none"
+     id="path61" />
+  <rect
+     x="971"
+     y="651"
+     width="100"
+     height="30"
+     rx="4"
+     fill="#f8d7da"
+     stroke="#dc3545"
+     id="rect61" />
+  <text
+     x="1021"
+     y="671"
+     text-anchor="middle"
+     font-size="11px"
+     fill="#842029"
+     id="text62">Net Stack Poll</text>
+  <text
+     x="901"
+     y="706"
+     font-size="10px"
+     fill="#842029"
+     id="text63">Wakes read_wait</text>
+</svg>
