@@ -1,0 +1,61 @@
+<mxfile host="app.diagrams.net" agent="ChatGPT">
+  <diagram id="read-mapping-flow" name="read_mapping 缺页读取链路">
+    <mxGraphModel dx="1753" dy="1124" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" background="#F5FBFC" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="N5Owo3CINSvbTdhQ-4Ki-6" edge="1" parent="1" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=5;rounded=0;strokeColor=#BCBCBC;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1257" y="380" as="sourcePoint" />
+            <mxPoint x="1257" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=18;strokeWidth=2;strokeColor=#16A6A1;fillColor=#DDF8F4;gradientColor=#BCEBE8;gradientDirection=east;fontFamily=Noto Sans CJK SC;fontColor=#073D46;align=center;verticalAlign=middle;shadow=1;" value="&lt;div style=&quot;font-size:22px;font-weight:700;&quot;&gt;read_mapping&lt;/div&gt;&lt;div style=&quot;margin-top:7px;font-size:16px;&quot;&gt;Page Cache 缺页&lt;/div&gt;" vertex="1">
+          <mxGeometry height="92" width="180" x="458" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="n2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=18;strokeWidth=2;strokeColor=#1595A5;fillColor=#E1F5F6;gradientColor=#C5E9EC;gradientDirection=east;fontFamily=Noto Sans CJK SC;fontColor=#083B4C;align=center;verticalAlign=middle;shadow=1;" value="&lt;div style=&quot;font-size:21px;font-weight:700;&quot;&gt;ensure_page_uptodate&lt;/div&gt;&lt;div style=&quot;margin-top:7px;font-size:15px;color:#31616A;&quot;&gt;检查页面是否已加载；缺页则触发回填&lt;/div&gt;" vertex="1">
+          <mxGeometry height="92" width="270" x="700" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="n3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=18;strokeWidth=2;strokeColor=#0F849C;fillColor=#DDEFF4;gradientColor=#BBDDE7;gradientDirection=east;fontFamily=Noto Sans CJK SC;fontColor=#083B4C;align=center;verticalAlign=middle;shadow=1;" value="&lt;div style=&quot;font-size:20px;font-weight:700;&quot;&gt;inode.read_at(page_off, &amp;mut page[..])&lt;/div&gt;&lt;div style=&quot;margin-top:7px;font-size:15px;color:#315F70;&quot;&gt;进入 fs 库，按页偏移读取数据&lt;/div&gt;" vertex="1">
+          <mxGeometry height="102" width="410" x="1040" y="125" as="geometry" />
+        </mxCell>
+        <mxCell id="n4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=18;strokeWidth=2;strokeColor=#0A718F;fillColor=#DCEBF4;gradientColor=#B9D5E5;gradientDirection=east;fontFamily=Noto Sans CJK SC;fontColor=#083B4C;align=center;verticalAlign=middle;shadow=1;" value="&lt;div style=&quot;font-size:22px;font-weight:700;&quot;&gt;DiskInode::read_data&lt;/div&gt;&lt;div style=&quot;margin-top:7px;font-size:15px;color:#315F70;&quot;&gt;解析文件块映射并定位磁盘数据块&lt;/div&gt;" vertex="1">
+          <mxGeometry height="92" width="270" x="1500" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="n5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=18;strokeWidth=2;strokeColor=#075B78;fillColor=#D8E8F1;gradientColor=#ABCADB;gradientDirection=east;fontFamily=Noto Sans CJK SC;fontColor=#06394A;align=center;verticalAlign=middle;shadow=1;" value="&lt;div style=&quot;font-size:20px;font-weight:700;&quot;&gt;get_block_cache / read_block_cache_range&lt;/div&gt;&lt;div style=&quot;margin-top:7px;font-size:15px;color:#274E60;&quot;&gt;将 8 × 512 B 磁盘块读入 Block Cache&lt;/div&gt;" vertex="1">
+          <mxGeometry height="92" width="280" x="1830" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="pageNote" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;strokeWidth=2;strokeColor=#1FA69F;fillColor=#E4F8F4;gradientColor=#C8EEE8;gradientDirection=east;fontFamily=Noto Sans CJK SC;fontColor=#12514F;align=center;verticalAlign=middle;" value="&lt;div style=&quot;font-size:18px;font-weight:700;&quot;&gt;Page Cache&lt;/div&gt;&lt;div style=&quot;margin-top:6px;font-size:15px;&quot;&gt;1 页 = 4 KB&lt;/div&gt;" vertex="1">
+          <mxGeometry height="78" width="250" x="423" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="blockNote" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;strokeWidth=2;strokeColor=#14728C;fillColor=#E7F2F7;gradientColor=#C9DFEA;gradientDirection=east;fontFamily=Noto Sans CJK SC;fontColor=#16495A;align=center;verticalAlign=middle;" value="&lt;div style=&quot;font-size:18px;font-weight:700;&quot;&gt;Block Cache&lt;/div&gt;&lt;div style=&quot;margin-top:6px;font-size:15px;&quot;&gt;8 × 512 B = 4 KB&lt;/div&gt;" vertex="1">
+          <mxGeometry height="78" width="250" x="1845" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="n1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=3;strokeColor=#159C9B;endArrow=block;endFill=1;" target="n2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=3;strokeColor=#168FA0;endArrow=block;endFill=1;" target="n3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="n3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=3;strokeColor=#137E98;endArrow=block;endFill=1;" target="n4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="n4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=3;strokeColor=#0A627F;endArrow=block;endFill=1;" target="n5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s1" edge="1" parent="1" source="pageNote" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;dashPattern=6 5;strokeWidth=2;strokeColor=#1FA69F;endArrow=none;" target="n1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" edge="1" parent="1" source="blockNote" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;dashPattern=6 5;strokeWidth=2;strokeColor=#14728C;endArrow=none;" target="n5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="N5Owo3CINSvbTdhQ-4Ki-3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontColor=#666666;" value="&lt;font style=&quot;font-size: 32px;&quot;&gt;&lt;b style=&quot;&quot;&gt;os&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 27px;&quot;&gt;crate&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="80" x="1164" y="312" as="geometry" />
+        </mxCell>
+        <mxCell id="N5Owo3CINSvbTdhQ-4Ki-5" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontColor=#666666;" value="&lt;font style=&quot;font-size: 32px;&quot;&gt;&lt;b style=&quot;&quot;&gt;fs&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 27px;&quot;&gt;crate&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="80" x="1270" y="312" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

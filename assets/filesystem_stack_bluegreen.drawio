@@ -1,0 +1,88 @@
+<mxfile host="app.diagrams.net" agent="ChatGPT">
+  <diagram id="fs-stack" name="文件系统分层架构">
+    <mxGraphModel dx="1461" dy="937" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" background="#F5FBFC" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Noto Sans CJK SC;fontSize=30;fontStyle=1;fontColor=#083B4C;" value="文件系统 I/O 分层路径" vertex="1">
+          <mxGeometry height="48" width="880" x="360" y="25" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Noto Sans CJK SC;fontSize=15;fontColor=#4C7380;" value="从用户态系统调用到 virtio-blk 块设备" vertex="1">
+          <mxGeometry height="28" width="660" x="470" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="user" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=18;strokeWidth=2;strokeColor=#16A6A1;fillColor=#DDF8F4;gradientColor=#BCEBE8;gradientDirection=east;fontFamily=Noto Sans CJK SC;fontColor=#073D46;align=center;verticalAlign=middle;shadow=1;" value="&lt;div style=&quot;font-size:22px;font-weight:700;&quot;&gt;用户态&lt;/div&gt;&lt;div style=&quot;margin-top:8px;font-size:17px;&quot;&gt;read / write / open / stat / find …&lt;/div&gt;" vertex="1">
+          <mxGeometry height="92" width="740" x="430" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="fd" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;strokeWidth=2;strokeColor=#2A9FB1;fillColor=#E8F7FA;gradientColor=#C7ECF1;gradientDirection=east;fontFamily=Noto Sans CJK SC;fontSize=17;fontStyle=1;fontColor=#0A4B59;align=center;verticalAlign=middle;" value="fd 表  ──  File trait" vertex="1">
+          <mxGeometry height="54" width="460" x="570" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="kernel" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=18;strokeWidth=2;strokeColor=#138FA4;fillColor=#DDF4F6;gradientColor=#B8E4EA;gradientDirection=east;fontFamily=Noto Sans CJK SC;fontColor=#083B4C;align=center;verticalAlign=middle;shadow=1;" value="&lt;div style=&quot;font-size:22px;font-weight:700;&quot;&gt;内核 FS 层&lt;/div&gt;&lt;div style=&quot;margin-top:5px;font-size:16px;color:#31616A;&quot;&gt;os/src/fs&lt;/div&gt;" vertex="1">
+          <mxGeometry height="92" width="740" x="430" y="315" as="geometry" />
+        </mxCell>
+        <mxCell id="vfs" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=18;strokeWidth=2;strokeColor=#0B7896;fillColor=#DCEFF5;gradientColor=#B8DDE9;gradientDirection=east;fontFamily=Noto Sans CJK SC;fontColor=#083B4C;align=center;verticalAlign=middle;shadow=1;" value="&lt;div style=&quot;font-size:22px;font-weight:700;&quot;&gt;VFS 层&lt;/div&gt;&lt;div style=&quot;margin-top:5px;font-size:16px;color:#31616A;&quot;&gt;fs/vfs.rs&lt;/div&gt;" vertex="1">
+          <mxGeometry height="92" width="740" x="430" y="485" as="geometry" />
+        </mxCell>
+        <mxCell id="diskfs" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=18;strokeWidth=2;strokeColor=#0A6A8A;fillColor=#DDEBF5;gradientColor=#BBD7E9;gradientDirection=east;fontFamily=Noto Sans CJK SC;fontColor=#083B4C;align=center;verticalAlign=middle;shadow=1;" value="&lt;div style=&quot;font-size:22px;font-weight:700;&quot;&gt;磁盘 FS 层&lt;/div&gt;&lt;div style=&quot;margin-top:5px;font-size:16px;color:#315F70;&quot;&gt;fs/easyfs  |  ext4  |  fat32&lt;/div&gt;" vertex="1">
+          <mxGeometry height="92" width="740" x="430" y="655" as="geometry" />
+        </mxCell>
+        <mxCell id="blockdev" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=18;strokeWidth=2;strokeColor=#075B78;fillColor=#D8E8F1;gradientColor=#ABCADB;gradientDirection=east;fontFamily=Noto Sans CJK SC;fontColor=#06394A;align=center;verticalAlign=middle;shadow=1;" value="&lt;div style=&quot;font-size:22px;font-weight:700;&quot;&gt;块设备&lt;/div&gt;&lt;div style=&quot;margin-top:6px;font-size:17px;&quot;&gt;virtio-blk&lt;/div&gt;" vertex="1">
+          <mxGeometry height="72" width="520" x="540" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="special" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;dashed=1;dashPattern=7 5;strokeWidth=2;strokeColor=#29A69C;fillColor=#F0FBF8;gradientColor=#DCF5EF;gradientDirection=south;fontFamily=Noto Sans CJK SC;fontColor=#145A58;align=left;spacingLeft=18;verticalAlign=middle;" value="&lt;div style=&quot;text-align: center; font-size: 18px; font-weight: 700; margin-bottom: 8px;&quot;&gt;特殊文件系统&lt;/div&gt;&lt;div style=&quot;font-size:15px;line-height:1.55;&quot;&gt;&lt;div style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(20, 90, 88), rgb(126, 186, 185));&quot;&gt;devfs · procfs · sysfs&lt;/span&gt;&lt;/div&gt;tmpfs · cgroupfs&lt;br&gt;pipe · tty&lt;/div&gt;" vertex="1">
+          <mxGeometry height="115" width="185" x="1215" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="pagecache" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;strokeWidth=2;strokeColor=#1FA69F;fillColor=#E4F8F4;gradientColor=#C8EEE8;gradientDirection=east;fontFamily=Noto Sans CJK SC;fontColor=#12514F;align=center;verticalAlign=middle;" value="&lt;div style=&quot;font-size:18px;font-weight:700;&quot;&gt;Page Cache&lt;/div&gt;&lt;div style=&quot;margin-top:6px;font-size:15px;&quot;&gt;文件数据页（4 KB）&lt;/div&gt;" vertex="1">
+          <mxGeometry height="74" width="275" x="85" y="365" as="geometry" />
+        </mxCell>
+        <mxCell id="inodecache" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;dashed=1;dashPattern=7 5;strokeWidth=2;strokeColor=#2589A2;fillColor=#ECF7FA;gradientColor=#D7EEF3;gradientDirection=south;fontFamily=Noto Sans CJK SC;fontColor=#165164;align=center;verticalAlign=middle;" value="&lt;div style=&quot;font-size:18px;font-weight:700;margin-bottom:7px;&quot;&gt;Inode 包装与元数据缓存&lt;/div&gt;&lt;div style=&quot;font-size:15px;line-height:1.45;&quot;&gt;inode cache · dentry cache&lt;br&gt;stat cache&lt;/div&gt;" vertex="1">
+          <mxGeometry height="102" width="300" x="1215" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="diskmeta" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;dashed=1;dashPattern=7 5;strokeWidth=2;strokeColor=#197793;fillColor=#EDF5FA;gradientColor=#D5E8F1;gradientDirection=south;fontFamily=Noto Sans CJK SC;fontColor=#174C5D;align=center;verticalAlign=middle;" value="&lt;div style=&quot;font-size:18px;font-weight:700;margin-bottom:7px;&quot;&gt;磁盘组织结构&lt;/div&gt;&lt;div style=&quot;font-size:15px;line-height:1.45;&quot;&gt;DiskInode · 位图&lt;br&gt;间接索引 · 数据块&lt;/div&gt;" vertex="1">
+          <mxGeometry height="104" width="300" x="1215" y="646" as="geometry" />
+        </mxCell>
+        <mxCell id="blockcache" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;strokeWidth=2;strokeColor=#14728C;fillColor=#E7F2F7;gradientColor=#C9DFEA;gradientDirection=east;fontFamily=Noto Sans CJK SC;fontColor=#16495A;align=center;verticalAlign=middle;" value="&lt;div style=&quot;font-size:18px;font-weight:700;&quot;&gt;Block Cache&lt;/div&gt;&lt;div style=&quot;margin-top:6px;font-size:15px;&quot;&gt;磁盘块（512 B）&lt;/div&gt;" vertex="1">
+          <mxGeometry height="74" width="275" x="85" y="705" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#159C9B;endArrow=block;endFill=1;" target="fd">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="fd" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#168FA0;endArrow=block;endFill=1;" target="kernel">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="kernel" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#137E98;endArrow=block;endFill=1;" target="vfs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="vfs" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#0E708D;endArrow=block;endFill=1;" target="diskfs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="diskfs" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#0A627F;endArrow=block;endFill=1;" target="blockdev">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="es1" edge="1" parent="1" source="kernel" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;dashPattern=6 5;strokeWidth=2;strokeColor=#29A69C;endArrow=none;" target="special">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="es2" edge="1" parent="1" source="kernel" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;dashPattern=6 5;strokeWidth=2;strokeColor=#1FA69F;endArrow=none;" target="pagecache">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="es3" edge="1" parent="1" source="vfs" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;dashPattern=6 5;strokeWidth=2;strokeColor=#2589A2;endArrow=none;" target="inodecache">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="es4" edge="1" parent="1" source="diskfs" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;dashPattern=6 5;strokeWidth=2;strokeColor=#197793;endArrow=none;" target="diskmeta">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="es5" edge="1" parent="1" source="diskfs" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;dashPattern=6 5;strokeWidth=2;strokeColor=#14728C;endArrow=none;" target="blockcache">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label1" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Noto Sans CJK SC;fontSize=15;fontColor=#4B7C84;" value="系统调用 / 文件描述符" vertex="1">
+          <mxGeometry height="26" width="180" x="1040" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="label2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Noto Sans CJK SC;fontSize=15;fontColor=#4B7480;" value="统一文件抽象" vertex="1">
+          <mxGeometry height="26" width="150" x="810" y="437" as="geometry" />
+        </mxCell>
+        <mxCell id="label3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Noto Sans CJK SC;fontSize=15;fontColor=#456B78;" value="持久化块 I/O" vertex="1">
+          <mxGeometry height="26" width="150" x="810" y="760" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
