@@ -144,6 +144,10 @@ if y == 0 {
 
 #include "ch8-hal.typ"
 
+= 敏捷开发与性能观测
+
+#include "ch9-agile.typ"
+
 = 总结与展望
 
 #include "ch9-conclusion.typ"

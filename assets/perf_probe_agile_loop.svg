@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="470" viewBox="0 0 1180 470">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#1f6f78"/>
+    </marker>
+    <filter id="shadow" x="-8%" y="-12%" width="116%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f3035" flood-opacity="0.16"/>
+    </filter>
+    <style>
+      .title { font: 700 30px "Source Han Sans", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif; fill: #17363a; }
+      .label { font: 700 21px "Source Han Sans", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif; fill: #17363a; }
+      .desc { font: 400 16px "Source Han Sans", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif; fill: #456064; }
+      .code { font: 400 15px "Cascadia Mono", "Menlo", monospace; fill: #27565c; }
+      .box { fill: #f8fbfb; stroke: #70aeb4; stroke-width: 2; rx: 10; filter: url(#shadow); }
+      .box2 { fill: #eef7f8; stroke: #70aeb4; stroke-width: 2; rx: 10; filter: url(#shadow); }
+      .arrow { stroke: #1f6f78; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .loop { stroke: #d18a2f; stroke-width: 3; fill: none; stroke-dasharray: 8 7; marker-end: url(#arrow); }
+      .note { fill: #fff7e8; stroke: #e0a045; stroke-width: 1.6; rx: 8; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1180" height="470" fill="#ffffff"/>
+  <text x="590" y="48" text-anchor="middle" class="title">敏捷性能开发中的 perf_probe 闭环</text>
+
+  <rect x="55" y="105" width="170" height="105" class="box"/>
+  <text x="140" y="138" text-anchor="middle" class="label">提出假设</text>
+  <text x="140" y="166" text-anchor="middle" class="desc">从 benchmark 现象</text>
+  <text x="140" y="190" text-anchor="middle" class="desc">锁定可疑热点</text>
+
+  <rect x="270" y="105" width="170" height="105" class="box2"/>
+  <text x="355" y="138" text-anchor="middle" class="label">插入探针</text>
+  <text x="355" y="166" text-anchor="middle" class="code">crate::probe!</text>
+  <text x="355" y="190" text-anchor="middle" class="desc">命名一个边界</text>
+
+  <rect x="485" y="105" width="170" height="105" class="box"/>
+  <text x="570" y="138" text-anchor="middle" class="label">探针构建</text>
+  <text x="570" y="166" text-anchor="middle" class="code">PERF_PROBE=1</text>
+  <text x="570" y="190" text-anchor="middle" class="desc">与正式构建隔离</text>
+
+  <rect x="700" y="105" width="170" height="105" class="box2"/>
+  <text x="785" y="138" text-anchor="middle" class="label">运行负载</text>
+  <text x="785" y="166" text-anchor="middle" class="desc">QEMU / LTP</text>
+  <text x="785" y="190" text-anchor="middle" class="desc">iozone / cyclictest</text>
+
+  <rect x="915" y="105" width="170" height="105" class="box"/>
+  <text x="1000" y="138" text-anchor="middle" class="label">读取数据</text>
+  <text x="1000" y="166" text-anchor="middle" class="code">/proc/perf_probe</text>
+  <text x="1000" y="190" text-anchor="middle" class="desc">calls / avg / max</text>
+
+  <path d="M225 157 L270 157" class="arrow"/>
+  <path d="M440 157 L485 157" class="arrow"/>
+  <path d="M655 157 L700 157" class="arrow"/>
+  <path d="M870 157 L915 157" class="arrow"/>
+
+  <rect x="395" y="285" width="390" height="102" class="note"/>
+  <text x="590" y="319" text-anchor="middle" class="label">决策与下一轮迭代</text>
+  <text x="590" y="348" text-anchor="middle" class="desc">保留优化、拒绝实验、细化探针或回退假设</text>
+  <text x="590" y="373" text-anchor="middle" class="desc">探针数据只用于定位，正式对比使用无探针构建</text>
+
+  <path d="M1000 210 C1000 310 875 336 790 336" class="arrow"/>
+  <path d="M390 336 C235 336 140 285 140 215" class="loop"/>
+
+  <text x="590" y="438" text-anchor="middle" class="desc">核心原则：小步插桩、快速验证、数据决策、清理临时探针</text>
+</svg>
