@@ -1,4 +1,5 @@
 // 第三章：进程管理 —— 由 main.typ 在 `= 进程管理` 之后 #include。
+#import "@preview/lovelace:0.3.1": pseudocode-list
 
 本章讨论 CosmOS 的进程管理子系统。若说上一章的任务调度回答的是“哪个执行流获得 CPU”，那么进程管理回答的则是“这个执行流拥有哪些资源，以及这些资源在 fork、clone、exec、exit 和 wait 中如何转移”。在 CosmOS 中，任务是调度实体，进程是资源容器：一个进程拥有地址空间、文件描述符表、当前工作目录、凭据、信号处置、子进程集合、资源限制、定时器和若干线程；调度器只运行任务，而用户态观察到的进程语义主要由 `ProcessControlBlock` 维护。
 
@@ -12,34 +13,7 @@
 
 整个进程生命周期可以概括为：
 
-```text
-init:
-    装载 /sbin/init ELF
-    创建 PID、PCB、主线程、初始用户栈
-    发布到 PID2PCB 与调度器
-
-clone / fork:
-    复制或共享地址空间
-    继承文件表、cwd、凭据、信号处置等上下文
-    创建子 PCB 与主线程，设置子返回值为 0
-    发布到 PID2PCB 与调度器
-
-exec:
-    解析 ELF 或 shebang
-    替换当前进程地址空间
-    重建主线程用户栈与 trap context
-    保留 PID、父子关系和未关闭的 fd
-
-exit:
-    标记任务或进程为 zombie
-    清理等待队列、futex、timer、fd、地址空间等资源
-    唤醒父进程 wait 队列
-
-wait:
-    在父进程 children 中查找 zombie
-    编码退出状态
-    从 PID2PCB 移除并最终释放 PCB
-```
+#figure(image("assets/process.drawio.pdf"), caption: [进程生命周期概览图])
 
 这一章沿着这几条路径展开，而不是单独罗列系统调用。原因在于，进程管理的正确性主要来自生命周期阶段之间的顺序：什么时候可以发布给调度器，什么时候还不能释放内核栈，什么时候必须先把 fd 表项移出锁外再 drop，什么时候 zombie 还要保留在父进程的 children 中。
 
@@ -108,7 +82,7 @@ pub struct TaskUserRes {
 
 init 进程的文件描述符表由 `new_stdio_files()` 构造，默认 cwd 为 `/root`，root 为 `/`，环境变量包含 `HOME`、`PATH`、`SHELL`、`PWD` 等最小用户态环境。随后内核创建主线程，在用户栈上按 Linux ELF ABI 写入 `argc`、`argv`、`envp` 和 auxv，初始化 trap context，并在 PCB 完全构造后执行两个发布动作：
 
-```text
+```rust
 insert_into_pid2process(init.pid, init)
 add_task(init_main_thread)
 ```
@@ -125,15 +99,17 @@ Linux 把 `fork`、`vfork`、线程创建和部分命名空间创建都压进了
 
 系统调用层识别两条主要路径：
 
-```text
-CLONE_THREAD && !CLONE_VFORK:
-    在线程组内创建新 TaskControlBlock
-    共享当前 ProcessControlBlock
 
-否则:
-    创建新的 ProcessControlBlock
-    复制或按标志共享部分资源
-```
+#block(stroke: 1pt+gray, inset: (left: 10pt, ), width: 100%, radius: 5pt)[
+#pseudocode-list(indentation: 2em)[
+    + *if* `CLONE_TRHEAD && !CLONE_VORK`
+        + 在线程组内创建新 `TaskControlBlock`
+        + 共享当前 `ProcessControlBlock`
+    + *else*
+        + 创建新的 `ProcessControlBlock`
+        + 复制或按标志共享部分资源
+]
+]
 
 === 进程分支：fork-like 创建
 
@@ -147,7 +123,7 @@ CLONE_THREAD && !CLONE_VFORK:
 
 创建子 PCB 后，内核还要创建子主线程。这里不能立即发布给调度器，而要先修补继承来的 trap context：子进程系统调用返回值设为 0，父进程返回子 pid；若用户传入 `child_stack`，则子进程从指定用户栈继续；若指定 `CLONE_SETTLS`，则设置 TLS 寄存器。完成这些修补、写入 parent/child tid 指针、登记文件映射后，才执行：
 
-```text
+```rust
 insert_into_pid2process(child_pid, child)
 add_task(child_main_thread)
 ```
@@ -168,7 +144,7 @@ add_task(child_main_thread)
 
 执行目标可能是 ELF，也可能是带 shebang 的脚本。解析器先读取文件前缀判断 ELF 魔数；若遇到 `#!`，则提取解释器绝对路径和一个可选参数，按 Linux 规则重写 argv：
 
-```text
+```bash
 interpreter [optional-arg] script-path original-argv[1..]
 ```
 
@@ -190,16 +166,7 @@ interpreter [optional-arg] script-path original-argv[1..]
 
 如果退出的是主线程，或调用的是 `exit_group`，整个进程进入 zombie 状态。内核会把 `ProcessControlBlockInner.is_zombie` 置真，记录 `exit_reason`，然后处理几类资源：
 
-```text
-1. 将所有线程标记为 Zombie，移除等待队列句柄和 TID2TASK 表项
-2. 对仍在其他 hart 上运行的线程发送 reschedule IPI，并等待 on_cpu 清除
-3. 回收每个线程的 TaskUserRes，包括用户栈和 trap context
-4. 取走全部 fd 表项，清空 tasks 表
-5. deferred reclaim 用户地址空间
-6. 释放 keyring、detach SysV 共享内存、写进程 accounting
-7. 把子进程 reparent 到 init
-8. 唤醒父进程 wait 队列，必要时 autoreap
-```
+#figure(image("assets/process_exit_reclaim_inkscape.svg"), caption: [进程退出时的资源回收路径])
 
 reparent 是 Unix 进程模型中的重要语义。一个进程退出时，它还没被 wait 的子进程不能失去父进程；CosmOS 把这些子进程的 parent 改成 `INITPROC`，并加入 init 的 children。若其中已经有 zombie，init 会收到退出通知；若父进程对 `SIGCHLD` 设置了忽略或 `SA_NOCLDWAIT`，则内核可以自动回收该 zombie。
 

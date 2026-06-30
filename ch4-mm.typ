@@ -6,7 +6,7 @@
 
 == 设计总览
 
-#figure(image("assets/mm_overview.svg", width: 96%), caption: [内存管理总体架构示意图])
+#figure(image("assets/mm_overview.pdf", width: 96%), caption: [内存管理总体架构示意图])
 
 // 图片生成说明：assets/mm_overview.svg
 // 目标：画成三层总览图，与正文一致，突出“基础资源层 -> 地址空间层 -> 运行期机制层”的递进关系。
@@ -108,7 +108,7 @@ fn find_pte_create(
 
 这段代码是整个页表层跨架构复用的关键。循环次数来自 `page_table_levels`，每一级索引来自 `vpn_index`，目录项编码来自 `make_dir_entry`，叶子项编码来自 `make_pte`。也就是说，`PageTable` 不知道自己正在服务 Sv39 还是 LoongArch64；它只知道“沿着页号索引向下走，缺哪一级就分配一个页表页”。当前两个架构都使用 39 位虚拟地址、三级页表、每级 9 位索引，但这个事实被封装成 HAL 常量，而不是散落成魔数。若以后扩展到不同层级或不同地址宽度，`MemorySet`、`mmap`、COW、page cache fault 这些上层逻辑无需重写。
 
-#figure(image("assets/mm_page_table.svg", width: 92%), caption: [地址与页表的 HAL 分层示意图])
+#figure(image("assets/mm_page_table.pdf", width: 92%), caption: [地址与页表的 HAL 分层示意图])
 
 // 图片生成说明：assets/mm_page_table.svg
 // 目标：画一张三层分层图，说明页表通用逻辑如何通过 HAL 适配不同架构。
@@ -253,7 +253,7 @@ pub struct Vma {
 
 这套模型的优势在于：页表只是当前硬件状态，VMA 才是可恢复的语义状态。`mprotect` 可以拆分 VMA 并只改权限；`munmap` 可以裁剪或删除 VMA 并把已经 present 的页放入延迟释放批次；file-backed 缺页可以在没有 PTE 的情况下从 VMA 找到 inode、文件页号和共享属性；`fork` 可以根据 VMA 类型决定是共享匿名页、降权私有页，还是继承 direct cache page。换言之，VMA 让“未映射但合法”“已映射私有页”“已映射 page cache 页”这三种状态能够在同一段地址空间中共存。
 
-#figure(image("assets/mm_user_layout.svg", width: 88%), caption: [用户地址空间与 VMA 元数据示意图])
+#figure(image("assets/mm_user_layout.drawio.pdf", width: 92%), caption: [用户地址空间与 VMA 元数据示意图])
 
 // 图片生成说明：assets/mm_user_layout.svg
 // 目标：简要表达 `MemorySet`、VMA、页表和页对象之间的关系。
@@ -312,7 +312,7 @@ pub fn set_cow(&self, cow: bool) {
 
 `MAP_PRIVATE` 文件页还有一个额外优化：读或执行首次缺页时，内核可以直接把 page cache 页以只读方式映射到用户页表，不必立刻复制成私有页。只有第一次写入时，才从 cache page 拷贝出一张新的 `PrivatePage`，并把 VMA 中的 `direct_cache_pages` 条目替换为 `data_frames` 条目。这使得动态链接器加载共享库、读取只读文件段等场景不会因为私有映射而产生不必要的内存复制。
 
-#figure(image("assets/mm_demand_fault_flow.svg", width: 92%), caption: [按需装页、缺页分流与写时复制流程示意图])
+#figure(image("assets/mm_demand_fault_flow.drawio.pdf", width: 95%), caption: [按需装页、缺页分流与写时复制流程示意图])
 
 // 图片生成说明：assets/mm_demand_fault_flow.svg
 // 目标：用一张流程图同时覆盖 `brk/mmap` 的按需装页、page fault 分流、lazy allocation、COW、file-backed mmap 与 MAP_PRIVATE 写入物化。图要强调“系统调用阶段登记 VMA，缺页阶段根据 VMA 语义决定装页策略”。

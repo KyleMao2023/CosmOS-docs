@@ -22,14 +22,14 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="1.3964602"
-     inkscape:cx="399.9398"
-     inkscape:cy="565"
+     inkscape:cx="141.78707"
+     inkscape:cy="491.24207"
      inkscape:window-width="3200"
      inkscape:window-height="1876"
      inkscape:window-x="-12"
      inkscape:window-y="-12"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg75" />
+     inkscape:current-layer="g61" />
   <defs
      id="defs21">
     <pattern
@@ -730,7 +730,8 @@
            stroke="#00e5ff"
            stroke-width="2"
            filter="url(#glow)"
-           id="polygon61" />
+           id="polygon61"
+           style="fill:#1de5fc;fill-opacity:0.2" />
         <line
            x1="400"
            y1="430"

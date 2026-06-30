@@ -83,7 +83,7 @@ VFS 的中心抽象是 `VfsNode` trait，三种磁盘后端（easyfs、ext4、fa
 
    以 `iozone -s 64m -r 4k` 衡量 page cache 对文件数据吞吐的影响。启用 page cache 后，热态的顺序读几乎完全命中内存：
 
-   #figure(image("assets/fs_page_cache_iozone.svg", width: 100%), caption: [Page cache 对 iozone 各项吞吐的影响（64 MB 文件、4 KB 记录，KB/s，对数刻度）。])
+   #figure(image("assets/fs_page_cache_iozone.svg", width: 100%), caption: [Page cache 对 iozone 各项吞吐的影响（64 MB 文件、4 KB 记录，KB/s，对数刻度）])
 
    数字相当悬殊。顺序读从约 4943 KB/s 跃升到约 111371 KB/s（约 *22 倍*），重读、`fread`、`freread` 同量级；顺序写从 2558 跃升到 88171 KB/s（约 *34 倍*），这主要得益于脏页的延迟批量回写——写操作只更新内存页便返回，落盘被推迟与合并。值得注意的是*随机读 / 随机写*的提升只有约 3 倍与 2.2 倍：随机访问击穿了顺序预取与页装填的局部性，page cache 的收益自然回落，这恰恰说明前面的高倍数来自局部性，而非缓存本身有什么魔法。
 
@@ -91,7 +91,7 @@ VFS 的中心抽象是 `VfsNode` trait，三种磁盘后端（easyfs、ext4、fa
 
    Block cache 的价值在元数据密集的负载上最为明显。我们构造一棵 50 层子目录、每层 100 个文件（共 5000 个文件）的目录树，分别测量“创建”与 `tree` 遍历的耗时，并在创建与遍历之间重启以清空缓存：
 
-   #figure(image("assets/fs_block_cache.svg", width: 100%), caption: [Block cache 对目录树创建与遍历的影响（耗时，秒，对数刻度）。])
+   #figure(image("assets/fs_block_cache.svg", width: 100%), caption: [Block cache 对目录树创建与遍历的影响（耗时，秒，对数刻度）])
 
    创建耗时从约 4 分 05 秒（245 s）降到 1 分 20 秒（80 s），约 *3 倍*——这里 block cache 主要省下的是对 inode 表块、位图块、间接索引块的重复读写。`tree` 遍历的对比则更为戏剧性：冷遍历从约 15.8 s 降到 0.358 s，而热态的第二、三遍从约 15.6 s 直降到 *0.021 s*，快了约两个数量级——遍历反复触碰同一批目录块与 inode 块，block cache 使热态遍历几乎变成纯内存操作。这级缓存之所以放在最底层、覆盖元数据与数据两类块，正是因为目录遍历的开销几乎全在对磁盘块的反复读取上。
 
@@ -99,7 +99,7 @@ VFS 的中心抽象是 `VfsNode` trait，三种磁盘后端（easyfs、ext4、fa
 
    用 `du -sh /mnt/musl`（测试镜像中的musl libc目录）连续执行 5 次，对照同时启用 / 关闭 inode cache 与 dentry cache 的表现：
 
-   #figure(image("assets/fs_inode_dentry_cache.svg", width: 92%), caption: [Inode + Dentry cache 对重复目录统计 (`du`) 的影响（连续 5 次，第 1 次为冷启动）。])
+   #figure(image("assets/fs_inode_dentry_cache.svg", width: 92%), caption: [Inode + Dentry cache 对重复目录统计 (`du`) 的影响（连续 5 次，第 1 次为冷启动）])
 
    第 1 次为冷启动（需填充各级缓存），两者耗时接近，启用缓存甚至略慢——这是 cache 填充本身的开销。但从第 2 次起，热态稳定值从约 *1.0 s* 降到约 *0.29 s*（约 *3.4 倍*）：重复遍历同一棵目录树时，绝大多数路径分量都命中 dentry cache、绝大多数 inode 命中 inode cache，省下了海量后端 `find()` 与 inode 重建。
 
@@ -107,7 +107,7 @@ VFS 的中心抽象是 `VfsNode` trait，三种磁盘后端（easyfs、ext4、fa
 
    最后看 stat cache。用 `ls -al` 列一个约 2000 项的目录，连续 5 次：
 
-   #figure(image("assets/fs_stat_cache.svg", width: 92%), caption: [Stat cache 对重复列目录 (`ls -al`) 的影响（连续 5 次，第 1 次为冷启动）。])
+   #figure(image("assets/fs_stat_cache.svg", width: 92%), caption: [Stat cache 对重复列目录 (`ls -al`) 的影响（连续 5 次，第 1 次为冷启动）])
 
    热态稳定值从约 *0.47 s* 降到约 *0.43 s*，提升约 *10%*。这并非 stat cache 设计不佳，而是因为 `ls -al` 的开销早已被上面三级（dentry、inode、block）缓存吸收掉绝大部分，留给 stat 快照去节省的、本需重新读取 inode 元数据的余量已经不多。它的真正价值在于那些“反复 `stat` 同一批文件、却不重新遍历目录”的场景（例如构建系统频繁探测文件时间戳），那里它的相对提升会显著得多。
 
@@ -145,11 +145,11 @@ VFS 的中心抽象是 `VfsNode` trait，三种磁盘后端（easyfs、ext4、fa
     [256 KB · 随机读], [883867], [880991], [1.00],
     [256 KB · 随机写], [918115], [1043283], [1.14],
   ),
-  caption: [入口微优化开关对照（iozone `-s 64m`，KB/s；“关闭”=旁路慢路径，“开启”=优化快路径；加速比 = 开启 / 关闭）。],
+  caption: [入口微优化开关对照（iozone `-s 64m`，KB/s；“关闭”=旁路慢路径，“开启”=优化快路径；加速比 = 开启 / 关闭）],
 )
 ]
 
-#figure(image("assets/fs_fastpath_iozone.svg", width: 100%), caption: [入口微优化对 iozone 各项吞吐的影响（64 MB 文件，KB/s，对数刻度；红色标注为开启相对关闭的加速比）。])
+#figure(image("assets/fs_fastpath_iozone.svg", width: 100%), caption: [入口微优化对 iozone 各项吞吐的影响（64 MB 文件，KB/s，对数刻度；红色标注为开启相对关闭的加速比）])
 
 数字呈现出一条与五级缓存*截然不同*的曲线。在 1 KB / 4 KB 小记录上，顺序读、顺序写普遍提升 20%–30%（4 KB 顺序写约 *1.32 倍*）；最戏剧性的是 4 KB 随机读，从约 24253 跃升到 80547 KB/s，约 *3.3 倍*——随机访问没有任何局部性可供预取与热页缓存摊薄，每一次随机读都付满一次完整 syscall 的固定开销，此时单页零分配缓冲省下的 `Vec` 分配在单次调用成本里占比最大，收益自然最显著。而一旦记录增大到 64 KB / 256 KB，固定开销被大批量数据摊薄（同样 64 MB 的文件，256 KB 记录只需 256 次 syscall，4 KB 记录却要 16384 次），且大缓冲必然跨页、不再命中单页快速路径，三处优化的收益便迅速回落到约 1.0 倍。这条“小记录受益、大记录无感”的曲线，正是入口微优化作用在*每 syscall 固定成本*而非 I/O 总量上的特征签名，与前面五级缓存“命中即省 I/O”的收益曲线相互补充、互不重叠。
 

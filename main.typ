@@ -1,5 +1,6 @@
 #import "@preview/codelst:2.0.2": sourcecode, sourcefile, lineref, code-frame
 #import "@preview/hydra:0.5.2": hydra
+#import "@preview/lovelace:0.3.1": pseudocode-list
 #let code-block = block.with(inset: 0.65em, radius: 4pt)
 #show raw.where(block: true):it => code-block(sourcecode(
   it,
@@ -44,8 +45,8 @@
   // set text(17pt, font: ("Source Han Sans VF"), weight: 500, lang: "zh", region: "cn")
   set text(17pt, font: ("Source Han Serif", "SimSun"), weight: 700, lang: "zh", region: "cn")
   set block(above: 1.6em, below: 1.5em)
-  counter(figure.where(kind: "图")).update(0)
-  counter(figure.where(kind: "表")).update(0)
+  counter(figure.where(kind: image)).update(0)
+  counter(figure.where(kind: table)).update(0)
   it
 }
 #show heading.where(level: 2):set block(above: 1.4em, below: 1.1em)
@@ -63,12 +64,24 @@ if y == 0 {
 #show figure.where(kind: table): set figure.caption(position: top)
 #show figure.where(kind: table): set figure(numbering: it => context{
   text(weight: 550, str(counter(heading).at(here()).at(0)) + "-" + str(it))
-}, kind: "表", supplement: text(weight: 550)[表])
+}, supplement: text(weight: 550)[表])
 #show figure.where(kind: image): set figure.caption(position: bottom)
 #show figure.where(kind: image): set figure(numbering: it => context{
   text(weight: 550, str(counter(heading).at(here()).at(0)) + "-" + str(it))
-}, kind: "图", supplement: text(weight: 550)[图])
+}, supplement: text(weight: 550)[图])
 #show figure.caption: set text(0.9em)
+
+#let figure-outline-entry(kind, supplement) = it => context {
+  let loc = it.element.location()
+  let prefix = text(weight: 550)[
+    #supplement #numbering(
+      "1-1",
+      counter(heading).at(loc).first(),
+      counter(figure.where(kind: kind)).at(loc).first(),
+    )
+  ]
+  link(loc, it.indented(prefix, it.inner()))
+}
 
 #set heading(
   numbering: (..numbers) => {
@@ -101,12 +114,23 @@ if y == 0 {
   #text(30pt, font: "Source Han Sans", weight: 800, fill: rgb("#00363A").lighten(20%))[
     设计文档
   ]
+
+  #v(37em)
+    #text(18pt, font: "Source Han Sans", weight: 500, fill: rgb("#00363A").lighten(20%))[
+    李其泽 ~~毛顿开~~ 吴立文
+    
+    #v(-0.4em)
+    
+    杭州电子科技大学
+  ]
 ]
 
 #set page(background: none)
 
-#show outline.entry.where(level: 1): strong
-#outline(title: [目~~录], depth: 2)
+#{
+  show outline.entry.where(level: 1): strong
+  outline(title: [目~~录], depth: 2)
+}
 
 #set page(background: none, numbering: "1")
 #counter(page).update(1)
@@ -155,3 +179,18 @@ if y == 0 {
 = AI工具使用情况
 
 #include "ch10-ai.typ"
+
+
+#set page(numbering: "I")
+#counter(page).update(1)
+#pagebreak()
+#{
+  show outline.entry: figure-outline-entry(image, [图])
+  outline(target: figure.where(kind: image), title: [图~目~录])
+}
+
+#pagebreak()
+#{
+  show outline.entry: figure-outline-entry(table, [表])
+  outline(target: figure.where(kind: table), title: [表~目~录])
+}

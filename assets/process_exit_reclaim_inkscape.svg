@@ -1,0 +1,759 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="1763.75"
+   height="598.11011"
+   viewBox="0 0 1763.75 598.11011"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="process_exit_reclaim_inkscape.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#f5fbfc"
+     bordercolor="#6a8a94"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     showgrid="false"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showguides="true"
+     inkscape:zoom="1.3333333"
+     inkscape:cx="913.5"
+     inkscape:cy="195"
+     inkscape:window-width="3200"
+     inkscape:window-height="1876"
+     inkscape:window-x="-12"
+     inkscape:window-y="-12"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1">
+    <sodipodi:guide
+       position="265.75,1136.3263"
+       orientation="0,-1"
+       id="guide52"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="1246.75,797.12473"
+       orientation="-1,0"
+       id="guide53"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="590.5,775.65928"
+       orientation="1,0"
+       id="guide54"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="272.25,1068.5763"
+       orientation="1,0"
+       id="guide55"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="1571.25,1205.0763"
+       orientation="1,0"
+       id="guide56"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1">
+    <marker
+       style="overflow:visible"
+       id="Triangle"
+       refX="3"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path135" />
+    </marker>
+    <linearGradient
+       id="gradA"
+       x1="86.392151"
+       y1="481.07379"
+       x2="404.80069"
+       y2="481.07379"
+       gradientTransform="matrix(1.8297335,0,0,0.28908924,141.124,-0.34648181)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#dff8f4"
+         id="stop1" />
+      <stop
+         offset="1"
+         stop-color="#bcebe8"
+         id="stop2" />
+    </linearGradient>
+    <linearGradient
+       id="gradB"
+       x1="86.392151"
+       y1="948.30371"
+       x2="404.80069"
+       y2="948.30371"
+       gradientTransform="matrix(1.8297335,0,0,0.28908924,141.124,-0.34648181)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#e1f5f6"
+         id="stop3" />
+      <stop
+         offset="1"
+         stop-color="#c5e9ec"
+         id="stop4" />
+    </linearGradient>
+    <linearGradient
+       id="gradC"
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="0">
+      <stop
+         offset="0"
+         stop-color="#ddeff4"
+         id="stop5" />
+      <stop
+         offset="1"
+         stop-color="#bbdde7"
+         id="stop6" />
+    </linearGradient>
+    <linearGradient
+       id="gradD"
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="0">
+      <stop
+         offset="0"
+         stop-color="#dcebf4"
+         id="stop7" />
+      <stop
+         offset="1"
+         stop-color="#b9d5e5"
+         id="stop8" />
+    </linearGradient>
+    <linearGradient
+       id="gradE"
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="0">
+      <stop
+         offset="0"
+         stop-color="#d8e8f1"
+         id="stop9" />
+      <stop
+         offset="1"
+         stop-color="#abcadb"
+         id="stop10" />
+    </linearGradient>
+    <marker
+       id="arrow"
+       markerWidth="10"
+       markerHeight="10"
+       refX="10"
+       refY="6"
+       orient="auto"
+       markerUnits="strokeWidth"
+       viewBox="0 0 12 12"
+       preserveAspectRatio="xMidYMid">
+      <path
+         d="M 0,0 12,6 0,12 Z"
+         fill="#137e98"
+         id="path10" />
+    </marker>
+    <style
+       id="style1"><![CDATA[
+      .title {
+        font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+        font-size: 30px;
+        font-weight: 700;
+        fill: #083b4c;
+      }
+      .subtitle {
+        font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+        font-size: 15px;
+        fill: #4c7380;
+      }
+      .step-title {
+        font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+        font-size: 21px;
+        font-weight: 700;
+        fill: #083b4c;
+      }
+      .step-text {
+        font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+        font-size: 15px;
+        fill: #315f70;
+      }
+      .num {
+        font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        fill: #ffffff;
+      }
+      .group-label {
+        font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        fill: #315f70;
+      }
+      .arrow-line {
+        fill: none;
+        stroke: #137e98;
+        stroke-width: 4;
+        marker-end: url(#arrow);
+      }
+    ]]></style>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#gradD"
+       id="linearGradient47"
+       x1="86.392151"
+       y1="2817.2234"
+       x2="404.80069"
+       y2="2817.2234"
+       gradientTransform="matrix(1.8297335,0,0,0.28908924,141.124,-0.34648181)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#gradE"
+       id="linearGradient48"
+       x1="86.392151"
+       y1="3284.4534"
+       x2="404.80069"
+       y2="3284.4534"
+       gradientTransform="matrix(1.8297335,0,0,0.28908924,141.124,-0.34648181)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#gradE"
+       id="linearGradient49"
+       x1="86.392151"
+       y1="3751.6833"
+       x2="404.80069"
+       y2="3751.6833"
+       gradientTransform="matrix(1.8297335,0,0,0.28908924,141.124,-0.34648181)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#gradD"
+       id="linearGradient50"
+       x1="86.392151"
+       y1="2349.9934"
+       x2="404.80069"
+       y2="2349.9934"
+       gradientTransform="matrix(1.8297335,0,0,0.28908924,141.124,-0.34648181)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#gradC"
+       id="linearGradient51"
+       x1="86.392151"
+       y1="1882.7635"
+       x2="404.80069"
+       y2="1882.7635"
+       gradientTransform="matrix(1.8297335,0,0,0.28908924,141.124,-0.34648181)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#gradC"
+       id="linearGradient52"
+       x1="86.392151"
+       y1="1415.5336"
+       x2="404.80069"
+       y2="1415.5336"
+       gradientTransform="matrix(1.8297335,0,0,0.28908924,141.124,-0.34648181)"
+       gradientUnits="userSpaceOnUse" />
+    <marker
+       id="arrow-4"
+       markerWidth="12"
+       markerHeight="12"
+       refX="10"
+       refY="6"
+       orient="auto"
+       markerUnits="strokeWidth"
+       viewBox="0 0 12 12"
+       preserveAspectRatio="xMidYMid">
+      <path
+         d="M 0,0 12,6 0,12 Z"
+         fill="#137e98"
+         id="path10-8" />
+    </marker>
+    <marker
+       id="arrow-4-1"
+       markerWidth="12"
+       markerHeight="12"
+       refX="10"
+       refY="6"
+       orient="auto"
+       markerUnits="strokeWidth"
+       viewBox="0 0 12 12"
+       preserveAspectRatio="xMidYMid">
+      <path
+         d="M 0,0 12,6 0,12 Z"
+         fill="#137e98"
+         id="path10-8-7" />
+    </marker>
+  </defs>
+  <rect
+     id="background"
+     x="0"
+     y="0"
+     width="1763.75"
+     height="598.11011"
+     fill="#f5fbfc"
+     style="stroke-width:0.741239" />
+  <!-- Group labels -->
+  <g
+     id="group-labels"
+     transform="translate(0,-98.076271)">
+    <rect
+       x="81.75"
+       y="137.75"
+       width="190"
+       height="36"
+       rx="18"
+       fill="#e6f8f4"
+       stroke="#79c9c2"
+       stroke-width="1.5"
+       id="rect10" />
+    <text
+       x="176.75"
+       y="161.75"
+       text-anchor="middle"
+       class="group-label"
+       id="text10">线程终止与同步</text>
+    <rect
+       x="82.25"
+       y="408"
+       width="190"
+       height="36"
+       rx="18"
+       fill="#e7f4f7"
+       stroke="#74b4c2"
+       stroke-width="1.5"
+       id="rect11" />
+    <text
+       x="177.25"
+       y="432"
+       text-anchor="middle"
+       class="group-label"
+       id="text11">线程资源回收</text>
+    <rect
+       x="1573"
+       y="135.53906"
+       width="190"
+       height="36"
+       rx="18"
+       fill="#e8f0f5"
+       stroke="#7199b1"
+       stroke-width="1.5"
+       id="rect12" />
+    <text
+       x="1668"
+       y="159.53906"
+       text-anchor="middle"
+       class="group-label"
+       id="text12">进程级资源清理</text>
+    <rect
+       x="1572"
+       y="413"
+       width="190"
+       height="36"
+       rx="18"
+       fill="#e9edf2"
+       stroke="#6d849a"
+       stroke-width="1.5"
+       id="rect13" />
+    <text
+       x="1667"
+       y="437"
+       text-anchor="middle"
+       class="group-label"
+       id="text13">父子关系与回收</text>
+  </g>
+  <!-- Arrows -->
+  <g
+     id="arrows"
+     transform="translate(8.0000001,-22.326271)">
+    <path
+       class="arrow-line"
+       d="m 850,230 v 45"
+       id="path13" />
+    <path
+       class="arrow-line"
+       d="m 850,365 v 45"
+       id="path14" />
+    <path
+       class="arrow-line"
+       d="m 850,500 v 45"
+       id="path15" />
+    <path
+       class="arrow-line"
+       d="m 582.5,424.16699 v 45"
+       id="path16"
+       style="marker-end:url(#Triangle)" />
+    <path
+       class="arrow-line"
+       d="m 582.5,289.09586 v 45"
+       id="path16-4"
+       style="fill:none;stroke:#137e98;stroke-width:4;marker-end:url(#Triangle)" />
+    <path
+       class="arrow-line"
+       d="m 582.5,154.02472 v 45"
+       id="path16-4-5"
+       style="fill:none;stroke:#137e98;stroke-width:4;marker-end:url(#Triangle)" />
+    <path
+       class="arrow-line"
+       d="m 1238.75,155.08301 v 45"
+       id="path17"
+       style="marker-end:url(#Triangle)" />
+    <path
+       class="arrow-line"
+       d="m 1238.75,290.13043 v 45"
+       id="path18"
+       style="marker-end:url(#Triangle)" />
+    <path
+       class="arrow-line"
+       d="m 1238.75,425.20154 v 45"
+       id="path19"
+       style="marker-end:url(#Triangle)" />
+  </g>
+  <!-- Step 1 -->
+  <g
+     id="step1"
+     inkscape:label="Step 1"
+     transform="translate(0,-98.076271)">
+    <rect
+       x="299.72729"
+       y="139.72729"
+       width="581.54541"
+       height="90.047424"
+       rx="9.5161972"
+       fill="url(#gradA)"
+       stroke="#16a6a1"
+       stroke-width="1.45459"
+       filter="url(#shadow)"
+       id="rect19"
+       style="fill:url(#gradA)" />
+    <circle
+       cx="345"
+       cy="185"
+       r="27"
+       fill="#16a6a1"
+       id="circle19" />
+    <text
+       x="345"
+       y="193"
+       text-anchor="middle"
+       class="num"
+       id="text19">1</text>
+    <text
+       x="395"
+       y="176"
+       class="step-title"
+       id="text20">线程进入 Zombie 状态</text>
+    <text
+       x="395"
+       y="205"
+       class="step-text"
+       id="text21">将所有线程标记为 Zombie；移除等待队列句柄与 TID2TASK 表项</text>
+  </g>
+  <!-- Step 2 -->
+  <g
+     id="step2"
+     inkscape:label="Step 2"
+     transform="translate(0,-98.076271)">
+    <rect
+       x="299.72729"
+       y="274.79843"
+       width="581.54541"
+       height="90.047424"
+       rx="9.5161972"
+       fill="url(#gradB)"
+       stroke="#1595a5"
+       stroke-width="1.45459"
+       filter="url(#shadow)"
+       id="rect21"
+       style="fill:url(#gradB)" />
+    <circle
+       cx="345"
+       cy="320"
+       r="27"
+       fill="#1595a5"
+       id="circle21" />
+    <text
+       x="345"
+       y="328"
+       text-anchor="middle"
+       class="num"
+       id="text22">2</text>
+    <text
+       x="395"
+       y="311"
+       class="step-title"
+       id="text23">跨 hart 停止仍在运行的线程</text>
+    <text
+       x="395"
+       y="340"
+       class="step-text"
+       id="text24">发送 reschedule IPI，并等待对应线程的 on_cpu 标志清除</text>
+  </g>
+  <!-- Step 3 -->
+  <g
+     id="step3"
+     inkscape:label="Step 3"
+     transform="translate(0,-98.076271)">
+    <rect
+       x="299.72729"
+       y="409.86957"
+       width="581.54541"
+       height="90.047424"
+       rx="9.5161972"
+       fill="url(#gradC)"
+       stroke="#0f849c"
+       stroke-width="1.45459"
+       filter="url(#shadow)"
+       id="rect24"
+       style="fill:url(#linearGradient52)" />
+    <circle
+       cx="345"
+       cy="455"
+       r="27"
+       fill="#0f849c"
+       id="circle24" />
+    <text
+       x="345"
+       y="463"
+       text-anchor="middle"
+       class="num"
+       id="text25">3</text>
+    <text
+       x="395"
+       y="446"
+       class="step-title"
+       id="text26">回收每个线程的 TaskUserRes</text>
+    <text
+       x="395"
+       y="475"
+       class="step-text"
+       id="text27">释放用户栈、trap context 等线程私有用户态资源</text>
+  </g>
+  <!-- Step 4 -->
+  <g
+     id="step4"
+     inkscape:label="Step 4"
+     transform="translate(0,-98.076271)">
+    <rect
+       x="299.72729"
+       y="544.94073"
+       width="581.54541"
+       height="90.047424"
+       rx="9.5161972"
+       fill="url(#gradC)"
+       stroke="#147b96"
+       stroke-width="1.45459"
+       filter="url(#shadow)"
+       id="rect27"
+       style="fill:url(#linearGradient51)" />
+    <circle
+       cx="345"
+       cy="590"
+       r="27"
+       fill="#147b96"
+       id="circle27" />
+    <text
+       x="345"
+       y="598"
+       text-anchor="middle"
+       class="num"
+       id="text28">4</text>
+    <text
+       x="395"
+       y="581"
+       class="step-title"
+       id="text29">清理文件描述符与线程表</text>
+    <text
+       x="395"
+       y="610"
+       class="step-text"
+       id="text30">取走全部 fd 表项，并清空进程内的 tasks 表</text>
+  </g>
+  <!-- Step 5 -->
+  <g
+     id="step5"
+     inkscape:label="Step 5"
+     transform="translate(656.25,-637.32627)">
+    <rect
+       x="299.72729"
+       y="680.01184"
+       width="581.54541"
+       height="90.047424"
+       rx="9.5161972"
+       fill="url(#gradD)"
+       stroke="#0a718f"
+       stroke-width="1.45459"
+       filter="url(#shadow)"
+       id="rect30"
+       style="fill:url(#linearGradient50)" />
+    <circle
+       cx="345"
+       cy="725"
+       r="27"
+       fill="#0a718f"
+       id="circle30" />
+    <text
+       x="345"
+       y="733"
+       text-anchor="middle"
+       class="num"
+       id="text31">5</text>
+    <text
+       x="395"
+       y="716"
+       class="step-title"
+       id="text32">延迟回收用户地址空间</text>
+    <text
+       x="395"
+       y="745"
+       class="step-text"
+       id="text33">将用户地址空间交由 deferred reclaim，避免在当前退出路径中立即释放</text>
+  </g>
+  <!-- Step 6 -->
+  <g
+     id="step6"
+     inkscape:label="Step 6"
+     transform="translate(656.25,-637.32627)">
+    <rect
+       x="299.72729"
+       y="815.08301"
+       width="581.54541"
+       height="90.047424"
+       rx="9.5161972"
+       fill="url(#gradD)"
+       stroke="#176d8b"
+       stroke-width="1.45459"
+       filter="url(#shadow)"
+       id="rect33"
+       style="fill:url(#linearGradient47)" />
+    <circle
+       cx="345"
+       cy="860"
+       r="27"
+       fill="#176d8b"
+       id="circle33" />
+    <text
+       x="345"
+       y="868"
+       text-anchor="middle"
+       class="num"
+       id="text34">6</text>
+    <text
+       x="395"
+       y="851"
+       class="step-title"
+       id="text35">释放进程级 IPC 与安全资源</text>
+    <text
+       x="395"
+       y="880"
+       class="step-text"
+       id="text36">释放 keyring、detach SysV 共享内存，并写入进程 accounting</text>
+  </g>
+  <!-- Step 7 -->
+  <g
+     id="step7"
+     inkscape:label="Step 7"
+     transform="translate(656.25,-637.32627)">
+    <rect
+       x="299.72729"
+       y="950.15411"
+       width="581.54541"
+       height="90.047424"
+       rx="9.5161972"
+       fill="url(#gradE)"
+       stroke="#386b88"
+       stroke-width="1.45459"
+       filter="url(#shadow)"
+       id="rect36"
+       style="fill:url(#linearGradient48)" />
+    <circle
+       cx="345"
+       cy="995"
+       r="27"
+       fill="#386b88"
+       id="circle36" />
+    <text
+       x="345"
+       y="1003"
+       text-anchor="middle"
+       class="num"
+       id="text37">7</text>
+    <text
+       x="395"
+       y="986"
+       class="step-title"
+       id="text38">重新托管子进程</text>
+    <text
+       x="395"
+       y="1015"
+       class="step-text"
+       id="text39">将全部子进程 reparent 到 init，确保后续退出状态仍可被回收</text>
+  </g>
+  <!-- Step 8 -->
+  <g
+     id="step8"
+     inkscape:label="Step 8"
+     transform="translate(656.25,-637.32627)">
+    <rect
+       x="299.72729"
+       y="1085.2252"
+       width="581.54541"
+       height="90.047424"
+       rx="9.5161972"
+       fill="url(#gradE)"
+       stroke="#075b78"
+       stroke-width="1.45459"
+       filter="url(#shadow)"
+       id="rect39"
+       style="fill:url(#linearGradient49)" />
+    <circle
+       cx="345"
+       cy="1130"
+       r="27"
+       fill="#075b78"
+       id="circle39" />
+    <text
+       x="345"
+       y="1138"
+       text-anchor="middle"
+       class="num"
+       id="text40">8</text>
+    <text
+       x="395"
+       y="1121"
+       class="step-title"
+       id="text41">通知父进程并完成最终回收</text>
+    <text
+       x="395"
+       y="1150"
+       class="step-text"
+       id="text42">唤醒父进程 wait 队列；满足条件时执行 autoreap</text>
+  </g>
+  <path
+     style="fill:none;fill-opacity:0.2;fill-rule:evenodd;stroke:#1c5e90;stroke-width:2.371;marker-end:url(#arrow)"
+     d="m 590.5,536.91189 v 38.51184 H 909 V 11.423729 h 337.75 v 31.26184"
+     id="path57" />
+</svg>

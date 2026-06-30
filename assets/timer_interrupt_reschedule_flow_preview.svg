@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900">
+<defs>
+<linearGradient id="a"><stop stop-color="#DDF8F4"/><stop offset="1" stop-color="#BCEBE8"/></linearGradient>
+<linearGradient id="b"><stop stop-color="#E1F5F6"/><stop offset="1" stop-color="#C5E9EC"/></linearGradient>
+<linearGradient id="c"><stop stop-color="#DCEBF4"/><stop offset="1" stop-color="#B9D5E5"/></linearGradient>
+<linearGradient id="d"><stop stop-color="#D8E8F1"/><stop offset="1" stop-color="#ABCADB"/></linearGradient>
+<marker id="m" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#137E98"/></marker>
+<style>text{font-family:'Microsoft YaHei',sans-serif;fill:#083B4C}</style>
+</defs>
+<rect width="1600" height="900" fill="#F5FBFC"/>
+<text x="800" y="58" text-anchor="middle" font-size="30" font-weight="700">定时器中断到任务切换的调度流程</text>
+<g fill="none" stroke-width="4" marker-end="url(#m)">
+<path d="M800 200V260" stroke="#159C9B"/><path d="M800 350V405" stroke="#168FA0"/>
+<path d="M800 525V585" stroke="#0F849C"/><path d="M800 695V760" stroke="#0A718F"/>
+</g>
+<path d="M990 465H1110" fill="none" stroke="#6B96A8" stroke-width="3" marker-end="url(#m)"/>
+<path d="M1250 500V815H1200" fill="none" stroke="#6B96A8" stroke-width="3" marker-end="url(#m)"/>
+<rect x="450" y="110" width="700" height="90" rx="18" fill="url(#a)" stroke="#16A6A1" stroke-width="2"/>
+<rect x="450" y="260" width="700" height="90" rx="18" fill="url(#b)" stroke="#1595A5" stroke-width="2"/>
+<polygon points="800,405 990,465 800,525 610,465" fill="#DDEFF4" stroke="#0F849C" stroke-width="2"/>
+<rect x="1110" y="430" width="280" height="70" rx="15" fill="#F2F7F9" stroke="#6B96A8" stroke-width="2" stroke-dasharray="8 6"/>
+<rect x="450" y="585" width="700" height="110" rx="18" fill="url(#c)" stroke="#0A718F" stroke-width="2"/>
+<rect x="400" y="760" width="800" height="110" rx="18" fill="url(#d)" stroke="#075B78" stroke-width="2"/>
+<text x="800" y="150" text-anchor="middle" font-size="23" font-weight="700">timer interrupt</text><text x="800" y="180" text-anchor="middle" font-size="15">硬件定时器触发，进入 trap</text>
+<text x="800" y="300" text-anchor="middle" font-size="22" font-weight="700">handle_timer_interrupt()</text><text x="800" y="330" text-anchor="middle" font-size="15">处理本 hart 过期定时器</text>
+<text x="800" y="471" text-anchor="middle" font-size="18" font-weight="700">周期 tick 是否到期？</text>
+<text x="1250" y="458" text-anchor="middle" font-size="16">仅完成定时器处理</text><text x="1250" y="483" text-anchor="middle" font-size="16">返回 trap 尾部</text>
+<text x="800" y="625" text-anchor="middle" font-size="22" font-weight="700">on_timer_tick()</text><text x="800" y="656" text-anchor="middle" font-size="15">更新当前任务运行时间</text><text x="800" y="681" text-anchor="middle" font-size="15">必要时设置 resched_reason</text>
+<text x="800" y="800" text-anchor="middle" font-size="22" font-weight="700">trap 尾部：schedule_if_needed()</text><text x="800" y="832" text-anchor="middle" font-size="15">检查重调度标记</text><text x="800" y="857" text-anchor="middle" font-size="15">切回 idle，并选择下一个任务</text>
+<text x="820" y="558" font-size="14" font-weight="700">是</text><text x="1015" y="450" font-size="14" font-weight="700">否</text>
+</svg>

@@ -91,7 +91,7 @@ PTE 的语义位用架构中立的 `PTEFlags` 表达，由 `make_pte` / `pte_fla
 
 两处差异尤其值得玩味。其一是 LoongArch 的*反相权限语义*：它没有直接的“可读/可执行”位，而是用 `GNR`/`GNX`（全局不可读/不可执行）来表达——要禁止读或执行，就把对应位置 1。`make_pte` 因此写成“若 `!R` 则置 `GNR`，若 `!X` 则置 `GNX`”，与 RISC-V“置位即允许”的直觉完全相反，是一个极易写反的陷阱。其二是目录项：LoongArch 的硬件页表遍历器把非叶子目录项当作“下一级表的物理地址”直接消费，*不得*带上任何叶子式的权限位（否则会被误判为叶子）。为此 trait 提供了一个可覆盖的 `make_dir_entry`，默认实现复用叶子编码，而 LoongArch 重写为裸指针，并在接口注释里明确点名了这条约束。这两处正是 HAL 通过“默认实现 + 按需覆盖”来吸收架构差异的典型范例。
 
-#figure(image("assets/hal_pagingarch.svg"), caption: [`PagingArch` 中RV与LA的差异封装示意图])
+#figure(image("assets/hal_pagingarch.pdf"), caption: [`PagingArch` 中RV与LA的差异封装示意图])
 
 == hart、本地中断与浮点
 

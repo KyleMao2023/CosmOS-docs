@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="1552.3829"
+   height="841.82837"
+   viewBox="0 0 1552.3829 841.82837"
+   version="1.1"
+   id="svg51"
+   sodipodi:docname="task_wait_block_wakeup_flow_preview.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview51"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.1313709"
+     inkscape:cx="613.41513"
+     inkscape:cy="457.85164"
+     inkscape:window-width="3200"
+     inkscape:window-height="1876"
+     inkscape:window-x="-12"
+     inkscape:window-y="-12"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg51" />
+  <defs
+     id="defs10">
+    <rect
+       x="519.72345"
+       y="-22.98097"
+       width="782.23688"
+       height="111.36932"
+       id="rect52" />
+    <marker
+       style="overflow:visible"
+       id="Triangle"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="1.001"
+       markerHeight="1.001"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path135" />
+    </marker>
+    <linearGradient
+       id="g1"
+       gradientTransform="matrix(2.5864368,0,0,0.3866323,-80,-110)"
+       x1="216.12746"
+       y1="307.78598"
+       x2="441.14746"
+       y2="307.78598"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         stop-color="#DDF8F4"
+         id="stop1" />
+      <stop
+         offset="1"
+         stop-color="#BCEBE8"
+         id="stop2" />
+    </linearGradient>
+    <linearGradient
+       id="g2"
+       gradientTransform="matrix(2.3536087,0,0,0.42487947,-80,-110)"
+       x1="182.27329"
+       y1="609.58464"
+       x2="540.02181"
+       y2="609.58464"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         stop-color="#E1F5F6"
+         id="stop3" />
+      <stop
+         offset="1"
+         stop-color="#C5E9EC"
+         id="stop4" />
+    </linearGradient>
+    <linearGradient
+       id="g3"
+       gradientTransform="matrix(2.3536087,0,0,0.42487947,-80,-110)"
+       x1="182.27329"
+       y1="1127.3785"
+       x2="540.02181"
+       y2="1127.3785"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         stop-color="#DCEBF4"
+         id="stop5" />
+      <stop
+         offset="1"
+         stop-color="#B9D5E5"
+         id="stop6" />
+    </linearGradient>
+    <linearGradient
+       id="g4"
+       gradientTransform="matrix(2.7623242,0,0,0.36201399,-80,-110)"
+       x1="180.64498"
+       y1="1889.4297"
+       x2="434.77881"
+       y2="1889.4297"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         stop-color="#E9F0F4"
+         id="stop7" />
+      <stop
+         offset="1"
+         stop-color="#D1DEE6"
+         id="stop8" />
+    </linearGradient>
+    <linearGradient
+       id="g5"
+       gradientTransform="matrix(2.5748633,0,0,0.38837012,-80,-110)"
+       x1="166.61078"
+       y1="2095.9388"
+       x2="493.61843"
+       y2="2095.9388"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         stop-color="#D8E8F1"
+         id="stop9" />
+      <stop
+         offset="1"
+         stop-color="#ABCADB"
+         id="stop10" />
+    </linearGradient>
+    <marker
+       id="a"
+       markerWidth="4"
+       markerHeight="4"
+       refX="9"
+       refY="5"
+       orient="auto">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#137e98"
+         id="path10" />
+    </marker>
+    <style
+       id="style10">text{font-family:'Microsoft YaHei','Noto Sans CJK SC',sans-serif;fill:#083B4C}</style>
+  </defs>
+  <rect
+     width="1552.3829"
+     height="841.82837"
+     fill="#f5fbfc"
+     id="rect10"
+     x="0"
+     y="0"
+     style="stroke-width:0.876772" />
+  <g
+     fill="none"
+     stroke-width="4"
+     marker-end="url(#a)"
+     id="g16"
+     transform="translate(-80,-110)">
+    <path
+       d="m 850,191 v 55"
+       stroke="#159c9b"
+       id="path11"
+       style="marker-end:url(#Triangle)" />
+    <path
+       d="m 850,396 v 70"
+       stroke="#168fa0"
+       id="path12"
+       style="marker-end:url(#Triangle)" />
+    <path
+       d="m 850,616 v 55"
+       stroke="#0a718f"
+       id="path13"
+       style="marker-end:url(#Triangle)" />
+    <path
+       d="m 1190,730 h 50"
+       stroke="#247b98"
+       id="path14"
+       style="marker-end:url(#Triangle)" />
+    <path
+       d="m 1400,785 v 92 h -130"
+       stroke="#075b78"
+       id="path15" />
+    <path
+       d="m 1270,877 h 50"
+       stroke="#386b88"
+       id="path16" />
+  </g>
+  <g
+     fill="none"
+     stroke-width="2.5"
+     stroke-dasharray="8, 6"
+     marker-end="url(#a)"
+     id="g19"
+     transform="translate(-80,-110)">
+    <path
+       d="M 430,335 H 365"
+       stroke="#2aa79d"
+       id="path17" />
+    <path
+       d="M 430,555 H 365"
+       stroke="#6b96a8"
+       id="path18" />
+    <path
+       d="M 225,380 V 877 H 430"
+       stroke="#2aa79d"
+       id="path19" />
+  </g>
+  <rect
+     x="480"
+     y="10"
+     width="580"
+     height="85"
+     rx="18"
+     fill="url(#g1)"
+     stroke="#16a6a1"
+     stroke-width="2"
+     id="rect19"
+     style="fill:url(#g1)" />
+  <rect
+     x="350"
+     y="150"
+     width="840"
+     height="150"
+     rx="18"
+     fill="url(#g2)"
+     stroke="#1595a5"
+     stroke-width="2"
+     id="rect20"
+     style="fill:url(#g2)" />
+  <rect
+     x="0"
+     y="180"
+     width="285"
+     height="90"
+     rx="16"
+     fill="#ecfaf7"
+     stroke="#2aa79d"
+     stroke-width="2"
+     id="rect21" />
+  <rect
+     x="350"
+     y="370"
+     width="840"
+     height="150"
+     rx="18"
+     fill="url(#g3)"
+     stroke="#0a718f"
+     stroke-width="2"
+     id="rect22"
+     style="fill:url(#g3)" />
+  <rect
+     x="0"
+     y="400"
+     width="285"
+     height="90"
+     rx="16"
+     fill="#f2f7f9"
+     stroke="#6b96a8"
+     stroke-width="2"
+     stroke-dasharray="8, 6"
+     id="rect23" />
+  <rect
+     x="420"
+     y="575"
+     width="700"
+     height="90"
+     rx="18"
+     fill="url(#g4)"
+     stroke="#517a91"
+     stroke-width="2"
+     id="rect24"
+     style="fill:url(#g4)" />
+  <polygon
+     points="1400,785 1250,730 1400,675 1550,730 "
+     fill="#e7f2f7"
+     stroke="#247b98"
+     stroke-width="2"
+     id="polygon24"
+     transform="translate(-80,-110)" />
+  <rect
+     x="350"
+     y="705"
+     width="840"
+     height="125"
+     rx="18"
+     fill="url(#g5)"
+     stroke="#075b78"
+     stroke-width="2"
+     id="rect25"
+     style="fill:url(#g5)" />
+  <rect
+     x="1240"
+     y="720"
+     width="300"
+     height="90"
+     rx="16"
+     fill="#e8eef3"
+     stroke="#386b88"
+     stroke-width="2"
+     id="rect26" />
+  <text
+     x="770"
+     y="45"
+     text-anchor="middle"
+     font-size="21px"
+     font-weight="700"
+     id="text26">当前任务 Running</text>
+  <text
+     x="770"
+     y="73"
+     text-anchor="middle"
+     font-size="15"
+     id="text27"
+     style="font-size:17.3333px">位于 Processor.current</text>
+  <text
+     x="770"
+     y="188"
+     text-anchor="middle"
+     font-size="22px"
+     font-weight="700"
+     id="text28">prepare_to_wait(...)</text>
+  <text
+     x="395"
+     y="220"
+     font-size="15"
+     id="text29"
+     style="font-size:17.3333px">task_status = Interruptible</text>
+  <text
+     x="395"
+     y="247"
+     font-size="15"
+     id="text30"
+     style="font-size:17.3333px">wait_reason = Some(...)</text>
+  <text
+     x="395"
+     y="274"
+     font-size="15"
+     id="text31"
+     style="font-size:17.3333px">current_wq_handle = Some(...)</text>
+  <text
+     x="830"
+     y="245"
+     font-size="15"
+     id="text32"
+     style="font-size:17.3333px">将任务放入等待队列</text>
+  <text
+     x="142"
+     y="216"
+     text-anchor="middle"
+     font-size="20px"
+     font-weight="700"
+     id="text33">WaitQueue</text>
+  <text
+     x="142"
+     y="244"
+     text-anchor="middle"
+     font-size="15px"
+     id="text34">保存等待任务及其 handle</text>
+  <text
+     x="770"
+     y="408"
+     text-anchor="middle"
+     font-size="22px"
+     font-weight="700"
+     id="text35">block_current_and_run_next()</text>
+  <text
+     x="395"
+     y="446"
+     font-size="15"
+     id="text36"
+     style="font-size:17.3333px">从 Processor.current 取走当前任务</text>
+  <text
+     x="395"
+     y="475"
+     font-size="15"
+     id="text37"
+     style="font-size:17.3333px">确认任务仍应睡眠</text>
+  <text
+     x="830"
+     y="446"
+     font-size="15"
+     id="text38"
+     style="font-size:17.3333px">保存 TaskContext</text>
+  <text
+     x="830"
+     y="475"
+     font-size="15"
+     id="text39"
+     style="font-size:17.3333px">切回 idle / 调度器上下文</text>
+  <text
+     x="142"
+     y="435"
+     text-anchor="middle"
+     font-size="16px"
+     id="text40">idle / scheduler</text>
+  <text
+     x="142"
+     y="462"
+     text-anchor="middle"
+     font-size="15px"
+     id="text41">继续选择其他任务</text>
+  <text
+     x="770"
+     y="610"
+     text-anchor="middle"
+     font-size="21px"
+     font-weight="700"
+     id="text42">任务 Sleeping / Interruptible</text>
+  <text
+     x="770"
+     y="638"
+     text-anchor="middle"
+     font-size="15"
+     id="text43"
+     style="font-size:17.3333px">等待条件满足，不再占用 Processor.current</text>
+  <text
+     x="1320"
+     y="614"
+     text-anchor="middle"
+     font-size="17px"
+     font-weight="700"
+     id="text44">等待条件满足</text>
+  <text
+     x="1320"
+     y="638"
+     text-anchor="middle"
+     font-size="17px"
+     font-weight="700"
+     id="text45">或收到唤醒事件</text>
+  <text
+     x="770"
+     y="740"
+     text-anchor="middle"
+     font-size="22px"
+     font-weight="700"
+     id="text46">wakeup_task(task)</text>
+  <text
+     x="395"
+     y="772"
+     font-size="15"
+     id="text47"
+     style="font-size:17.3333px">从等待队列取出任务</text>
+  <text
+     x="395"
+     y="797"
+     font-size="15"
+     id="text48"
+     style="font-size:17.3333px">清理等待状态 / handle</text>
+  <text
+     x="820"
+     y="785"
+     font-size="15"
+     id="text49"
+     style="font-size:17.3333px">放入目标 hart 运行队列</text>
+  <text
+     x="1390"
+     y="755"
+     text-anchor="middle"
+     font-size="20px"
+     font-weight="700"
+     id="text50">目标 hart Run Queue</text>
+  <text
+     x="1390"
+     y="785"
+     text-anchor="middle"
+     font-size="15px"
+     id="text51">任务重新变为可运行状态</text>
+  <text
+     xml:space="preserve"
+     id="text52"
+     style="font-size:17.3333px;line-height:1.2;font-family:'微软雅黑';-inkscape-font-specification:'微软雅黑';letter-spacing:0px;word-spacing:5px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect52);display:inline;fill:#1c5e90;fill-rule:evenodd;stroke:#1c5e90;stroke-width:2.371"
+     transform="translate(-80,-110)" />
+</svg>
