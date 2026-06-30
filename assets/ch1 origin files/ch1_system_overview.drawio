@@ -1,0 +1,110 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.0.7 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="26.0.7">
+  <diagram name="ch1_system_overview" id="ch1_system_overview">
+    <mxGraphModel dx="2940" dy="1058" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="760" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="layer_user" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#EAF3FF;strokeColor=#8DB8E8;strokeWidth=2;shadow=0;" parent="1" vertex="1">
+          <mxGeometry x="50" y="55" width="1200" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="layer_service" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#EAFBF2;strokeColor=#84C7A1;strokeWidth=2;shadow=0;" parent="1" vertex="1">
+          <mxGeometry x="50" y="195" width="1200" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="layer_core" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFF4E6;strokeColor=#E7B06A;strokeWidth=2;shadow=0;" parent="1" vertex="1">
+          <mxGeometry x="50" y="390" width="1200" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="layer_hal" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#F3EAFE;strokeColor=#B89BE6;strokeWidth=2;shadow=0;" parent="1" vertex="1">
+          <mxGeometry x="50" y="565" width="1200" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_user_layer" value="用户程序与 Linux 兼容运行环境" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;fontColor=#1E3A8A;" parent="1" vertex="1">
+          <mxGeometry x="80" y="65" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_service_layer" value="系统服务层" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;fontColor=#166534;" parent="1" vertex="1">
+          <mxGeometry x="80" y="205" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_core_layer" value="内核核心层" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;fontColor=#92400E;" parent="1" vertex="1">
+          <mxGeometry x="80" y="400" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_hal_layer" value="HAL 与平台层" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;fontColor=#5B21B6;" parent="1" vertex="1">
+          <mxGeometry x="80" y="575" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="user_main" value="应用 / Shell / 测试程序&lt;br&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;面向 Linux 语义运行，而非绑定具体架构&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#FFFFFF;strokeColor=#5B8FD6;strokeWidth=2;fontSize=18;fontStyle=1;fontColor=#1F2937;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="160" y="94" width="330" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="u_process" value="进程" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#DBEAFE;strokeColor=#5B8FD6;fontSize=15;fontStyle=1;fontColor=#1E3A8A;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="560" y="102" width="120" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="u_fd" value="文件描述符" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#DBEAFE;strokeColor=#5B8FD6;fontSize=15;fontStyle=1;fontColor=#1E3A8A;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="700" y="102" width="120" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="u_signal" value="信号" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#DBEAFE;strokeColor=#5B8FD6;fontSize=15;fontStyle=1;fontColor=#1E3A8A;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="840" y="102" width="120" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="u_socket" value="套接字" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#DBEAFE;strokeColor=#5B8FD6;fontSize=15;fontStyle=1;fontColor=#1E3A8A;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="980" y="102" width="120" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="svc_fs" value="文件子系统&lt;br&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;统一文件对象与描述符视图&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#4D9D6D;strokeWidth=2;fontSize=16;fontStyle=1;fontColor=#1F2937;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="100" y="250" width="250" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="svc_signal" value="信号与等待队列&lt;br&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;异步通知、阻塞与唤醒&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#4D9D6D;strokeWidth=2;fontSize=16;fontStyle=1;fontColor=#1F2937;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="385" y="250" width="250" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="svc_net" value="网络栈&lt;br&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;socket、连接与数据收发&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#4D9D6D;strokeWidth=2;fontSize=16;fontStyle=1;fontColor=#1F2937;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="670" y="250" width="250" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="svc_vfs_dev" value="虚拟文件与设备&lt;br&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;proc、dev、pipe、console&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#4D9D6D;strokeWidth=2;fontSize=16;fontStyle=1;fontColor=#1F2937;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="955" y="250" width="250" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="core_sched" value="调度与进程&lt;br&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;任务状态、上下文切换、退出等待&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#D18732;strokeWidth=2;fontSize=16;fontStyle=1;fontColor=#1F2937;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="155" y="440" width="280" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="core_mm" value="内存管理&lt;br&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;地址空间、页表、VMA 与页对象&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#D18732;strokeWidth=2;fontSize=16;fontStyle=1;fontColor=#1F2937;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="510" y="440" width="280" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="core_sync" value="同步与资源回收&lt;br&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;锁、引用计数、RAII 式释放&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#D18732;strokeWidth=2;fontSize=16;fontStyle=1;fontColor=#1F2937;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="865" y="440" width="280" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="plat_rv" value="RISC-V 64" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#9B72D9;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#3B0764;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="165" y="622" width="240" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="TqtNzMZV66A7AxXd1UHp-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#9673a6;strokeWidth=2;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;endArrow=classic;fillColor=#e1d5e7;" edge="1" parent="1" source="hal_mid" target="plat_rv">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TqtNzMZV66A7AxXd1UHp-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" edge="1" parent="1" source="hal_mid" target="plat_la">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hal_mid" value="Trap / IRQ / Paging / Timer&lt;br&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;平台差异收敛到统一 HAL 接口&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#9B72D9;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#3B0764;align=center;verticalAlign=middle;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="490" y="615" width="320" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="plat_la" value="LoongArch 64" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#9B72D9;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#3B0764;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="895" y="622" width="240" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="e_user_service" value="向下进入服务语义" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#4B5563;strokeWidth=2;fontSize=12;fontColor=#374151;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="layer_user" target="layer_service" edge="1">
+          <mxGeometry x="-0.0041" relative="1" as="geometry">
+            <mxPoint x="650" y="200" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_service_core" value="依赖核心机制" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#4B5563;strokeWidth=2;fontSize=12;fontColor=#374151;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="layer_service" target="layer_core" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_core_hal" value="通过 HAL 接触硬件" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#4B5563;strokeWidth=2;fontSize=12;fontColor=#374151;labelBackgroundColor=#FFFFFF;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" parent="1" source="layer_core" target="layer_hal" edge="1">
+          <mxGeometry x="0.0382" relative="1" as="geometry">
+            <mxPoint x="650" y="520" as="sourcePoint" />
+            <mxPoint x="650" y="560" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="theme_obj" value="主线 1&lt;br&gt;&lt;b&gt;统一对象模型&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#F8FAFC;strokeColor=#94A3B8;strokeWidth=1.5;fontSize=13;fontColor=#334155;align=center;verticalAlign=middle;spacing=6;" parent="1" vertex="1">
+          <mxGeometry x="1145" y="177" width="150" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="theme_wait" value="主线 2&lt;br&gt;&lt;b&gt;阻塞—唤醒&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#F8FAFC;strokeColor=#94A3B8;strokeWidth=1.5;fontSize=13;fontColor=#334155;align=center;verticalAlign=middle;spacing=6;" parent="1" vertex="1">
+          <mxGeometry x="1145" y="372" width="150" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="theme_hal" value="主线 3&lt;br&gt;&lt;b&gt;跨架构 HAL&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#F8FAFC;strokeColor=#94A3B8;strokeWidth=1.5;fontSize=13;fontColor=#334155;align=center;verticalAlign=middle;spacing=6;" parent="1" vertex="1">
+          <mxGeometry x="1145" y="540" width="150" height="58" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
