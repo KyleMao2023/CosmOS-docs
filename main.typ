@@ -151,3 +151,7 @@ if y == 0 {
 = 总结与展望
 
 #include "ch9-conclusion.typ"
+
+= AI工具使用情况
+
+#include "ch10-ai.typ"
