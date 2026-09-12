@@ -168,6 +168,8 @@ pub fn init_frame_allocator() {
 
 这一设计让物理内存布局由平台描述驱动，而不是由内核配置常量单方面假定。它对后续移植很重要：同样的 buddy 代码既可以管理 QEMU 中连续的 DRAM，也可以管理被 firmware、设备 MMIO、保留内存切碎后的多个可用区间。分配器内部维护一个固定大小的 `PpnRegion` 数组，记录当前真正受管理的页号范围；释放时会再次检查目标页是否落在这些范围内，从而防止把内核镜像、设备保留区或未纳管物理页错误塞回空闲链表。
 
+在决赛阶段面向构建负载的调优中，这套 buddy 组织又叠加了两项结构改进，此处先记结论、机制留待第九章展开：其一，每个 order 的空闲块链表从单链表升级为*双向链表 + 位图索引*——位图以 O(1) 判定"buddy 是否空闲"，免去了释放合并时在同阶链表中的线性扫描，高阶分裂与合并也不再需要逐块摘链；其二，引入 *per-hart 帧缓存*：每个 hart 持有一组小容量（32 页）的本地空闲页栈，分配与释放优先在本地完成，批量回填（一次 8 页）与批量上缴把对全局分配器锁的争用摊薄到批粒度。两者服务于同一负载特征——rustc 类进程缺页频率极高，全局分配器锁与 buddy 合并扫描曾是缺页路径上可测的热点。
+
 CosmOS 的 buddy 没有为每个空闲块额外分配元数据，而是把“下一空闲块”的页号写入空闲块起始页自身。`push_block` 把块头页加入对应 order 的单链表；`pop_block` 取出一块；`alloc_order` 找不到目标阶时向更高阶借块并逐级拆分；释放时则用 `ppn ^ (1 << order)` 找 buddy，若 buddy 当前也在同阶空闲链表中，就摘下并合并到更高阶。这个设计节省了早期内核最宝贵的常驻元数据开销，代价是只有空闲页可以承载链表指针，分配页在交给调用者前必须清零。
 
 ```rust
@@ -199,6 +201,8 @@ fn dealloc_order(&mut self, ppn: PhysPageNum, order: usize) {
 内核地址空间由全局 `KERNEL_SPACE` 描述，它承担两类完全不同的映射：一类是启动后长期存在的内核代码、数据、trampoline、设备或 direct map；另一类是运行期会增长和回收的 kernel heap window。前者更接近“固定内核视图”，后者则是内核自身动态分配能力的基础。`mm::init()` 的顺序正是围绕这个依赖关系安排的：先有页帧，才能 bootstrap heap；先激活内核页表，才能把后续 heap 虚拟窗口映射成真正可访问的内存。
 
 内核堆采用“两阶段”策略。早期 `init_heap` 只给 allocator 一小段 bootstrap heap，足够支撑后续元数据分配；等 `KERNEL_SPACE` 激活并且 kernel heap window 的页表子树预建完成后，`init_heap_virtual_window` 才启用按需增长。这里的关键优化是 `ensure_subtree_root_untracked`：内核 heap window 被约束在一个根页表项覆盖的范围内，初始化时预先创建这一棵子树的根页表页，后续增长只需要在这棵子树下安装叶子 PTE，不必反复持有全局 `KERNEL_SPACE` 锁从根页表重新走完整路径。
+
+在 buddy 之上，内核堆后来还补了一层 *slab 小对象分配器*：16/32/64/128/256 字节五个尺寸类，各自以整页 chunk 承载定长槽位的空闲链表，超出 256 字节的请求回落 buddy。文件子系统里 dentry、inode、VMA 节点这类高频生灭的小对象由此不再各占一张 4 KiB 页的碎片；chunk 级的保留与归还策略（清空时保留一个 chunk 防抖动）兼顾了内存占用与分配延迟。这部分与决赛调优的关系同样见第九章。
 
 ```rust
 pub fn ensure_subtree_root_untracked(&mut self, vpn: VirtPageNum) -> PhysPageNum {
@@ -253,7 +257,7 @@ pub struct Vma {
 
 这套模型的优势在于：页表只是当前硬件状态，VMA 才是可恢复的语义状态。`mprotect` 可以拆分 VMA 并只改权限；`munmap` 可以裁剪或删除 VMA 并把已经 present 的页放入延迟释放批次；file-backed 缺页可以在没有 PTE 的情况下从 VMA 找到 inode、文件页号和共享属性；`fork` 可以根据 VMA 类型决定是共享匿名页、降权私有页，还是继承 direct cache page。换言之，VMA 让“未映射但合法”“已映射私有页”“已映射 page cache 页”这三种状态能够在同一段地址空间中共存。
 
-#figure(image("assets/mm_user_layout.drawio.pdf", width: 92%), caption: [用户地址空间与 VMA 元数据示意图])
+#figure(image("assets/cosmos_process_vm_layout_rv_la.svg", width: 100%), caption: [用户地址空间示意图]) <vm_layout>
 
 // 图片生成说明：assets/mm_user_layout.svg
 // 目标：简要表达 `MemorySet`、VMA、页表和页对象之间的关系。
@@ -372,24 +376,26 @@ pub fn flush_then_release(self) {
 
 全局 shootdown 也被用于内核栈回收。任务退出时，内核栈所在的内核虚拟地址区间可能仍残留在某些 hart 的 TLB 中；如果立即复用同一虚拟地址和页框，远端旧 TLB 同样可能造成破坏。CosmOS 为 kernel stack 设计了 deferred recycle：优先把完整映射的 kernel stack id 放入小缓存以便快速复用；需要真正拆映射时，则把 VA 区间、页框和 stack id 放入全局 deferred 状态，等全局 shootdown 完成后再归还页框与 id。
 
+shootdown 的开销本身后来也被重新设计。初版实现按地址空间 token 触发*全量*本地 flush——正确但粗暴：构建类负载下 fork 风暴与 `mprotect` 频繁触发 shootdown，每次都使本 hart 的全部用户翻译失效，刚捂热的代码页翻译随之蒸发。决赛阶段的改动有两层：一是引入 *ASID*，让每个用户地址空间携带启动期内单调不回收的硬件标识，进程间切换不再互相驱逐 TLB，shootdown 也按 ASID 定向失效；二是内核高半区共享后，普通陷入不再切换页表（详见第九章主题一），`satp` 只在调度器切换地址空间时写入。这两项把"跨 hart 可见性"协议的触发频率压低了一个量级，而协议本身——锁内摘映射收集旧页、锁外 shootdown、延迟释放——保持不变。
+
 == 权衡与展望
 
 回顾第四章，CosmOS 的内存管理选择了一条“语义清晰优先”的路线。HAL 把不同架构的页表编码压到 `PagingArch` 后面，使 `MemorySet`、COW、mmap、page cache 等上层机制可以复用同一套页表代码；VMA 保存用户地址空间语义，页表保存硬件当前状态，二者分离后，lazy allocation、`mprotect` 拆分、`munmap` 裁剪和 file-backed fault 都有了明确落点；`FrameTracker`、`PrivatePage`、`CachePage` 和 `UserReleaseBatch` 则把物理页生命周期从裸页号提升为可推导的所有权关系。
 
 这套设计已经支撑了比较完整的用户态内存语义：`brk`、匿名 `mmap`、file-backed `mmap`、`MAP_SHARED`、`MAP_PRIVATE`、fork COW、truncate invalidation、OOM 日志与 page cache reclaim、用户页表 shootdown、kernel stack deferred recycle 都已经接入同一组核心机制。尤其是 page cache 与 mmap 的统一，使普通文件 I/O 和内存映射文件不再维护两份数据；延迟释放协议则让多 hart 下的页表修改不再依赖“刚好没有远端旧 TLB”的运气。
 
-代价也很明确。第一，`MAP_SHARED` 的 dirty tracking 仍是 sticky dirty 的第一阶段实现：写 fault 后会把 cache page 标脏，但还没有形成“写回前清 dirty / 重新 write-protect / 下次写再次通知”的精确闭环。第二，TLB shootdown 仍然偏粗粒度：当前按地址空间 token 触发全量本地 flush，没有 ASID，也没有按 VA range 的精确 `sfence.vma` / `invtlb`。第三，文件映射反向映射仍是 inode 到 process 的弱引用注册表，足够支持保守 truncate invalidation，但还不是 Linux 式 per-page rmap。第四，page cache reclaim 仍是同步触发的简化 CLOCK/second-chance，没有后台 writeback 线程，也没有完整 active/inactive 分层。
+代价与遗留也很明确。第一，`MAP_SHARED` 的 dirty tracking 仍是 sticky dirty 的第一阶段实现：写 fault 后会把 cache page 标脏，但还没有形成“写回前清 dirty / 重新 write-protect / 下次写再次通知”的精确闭环。第二，文件映射反向映射仍是 inode 到 process 的弱引用注册表，足够支持保守 truncate invalidation，但还不是 Linux 式 per-page rmap。第三，page cache reclaim 仍以同步触发的简化 CLOCK/second-chance 为主（决赛阶段已为预读方向引入后台 `kreadahead` 内核线程，见第九章，但按脏页驱动回写的分层尚未建成）。此外，初赛版曾把“无 ASID 的全量 TLB flush”与“无按 VA range 精确 flush”列为主要不足，这两项已在决赛阶段实现并回填到上文 shootdown 一节。
 
 #figure(
   table(
     columns: (1.1fr, 1.8fr, 1.8fr),
     [方向], [当前状态], [后续改进],
     [dirty tracking], [`MAP_SHARED` 使用 sticky dirty], [建立精确 dirty 闭环，写回后重新 write-protect],
-    [TLB shootdown], [按地址空间全量 flush], [引入 ASID 与按 VA range 精确 flush],
     [file rmap], [inode -> process 弱引用注册表], [扩展为 inode/page -> VMA/page 级反向映射],
-    [reclaim], [同步 CLOCK/second-chance], [后台 writeback 与冷热页分层],
+    [reclaim], [同步 CLOCK/second-chance，预读有后台线程], [按脏页驱动的后台 writeback 与冷热页分层],
+    [ASID 与 TLB 精确刷新], [已实现（ASID 定向 + 按页精确刷）], [扩展按范围批量刷的模拟器友好实现],
   ),
   caption: [内存管理当前取舍与后续方向],
 )
 
-这些限制并不改变当前设计的主线：先用较小的机制集合把语义做正确，再逐步把性能和精度补上。未来无论是 ASID、精确 dirty tracking，还是更完整的 page cache rmap，都可以沿着现有分层继续演进：HAL 负责硬件差异，VMA 负责语义，页对象负责生命周期，shootdown 负责跨 hart 可见性。
+这些限制并不改变当前设计的主线：先用较小的机制集合把语义做正确，再逐步把性能和精度补上。未来无论是精确 dirty tracking，还是更完整的 page cache rmap，都可以沿着现有分层继续演进：HAL 负责硬件差异，VMA 负责语义，页对象负责生命周期，shootdown 负责跨 hart 可见性。

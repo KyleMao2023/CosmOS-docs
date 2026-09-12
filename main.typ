@@ -1,20 +1,8 @@
-#import "@preview/codelst:2.0.2": sourcecode, sourcefile, lineref, code-frame
+#import "@preview/zebraw:0.6.3": *
 #import "@preview/hydra:0.5.2": hydra
 #import "@preview/lovelace:0.3.1": pseudocode-list
 #let code-block = block.with(inset: 0.65em, radius: 4pt)
-#show raw.where(block: true):it => code-block(sourcecode(
-  it,
-  showlines: true,
-  numbers-step: 1,
-  numbers-first: 1,
-  highlighted: (),
-  gutter: 7pt,
-  label-regex: regex("<(highlight)>"),
-  highlight-labels: true,
-  numbers-align: right + top,
-  highlight-color: rgb("#eaeabdad"),
-  numbers-style: (i) => text(fill: rgb("#a0a0a0"), i),
-))
+#show: zebraw.with(lang: true, radius: 5pt, extend: true, hanging-indent: true, indentation: 4, numbering-font-args: (fill: rgb("#a5b3e3")))
 #show raw.where(block: true): set block(inset: (top: 0.6pt, bottom: 0.6pt))
 #show raw.where(block: true): set par(leading: 2.5mm, justify: false)
 #show raw.where(block: true): set text(hyphenate: false, cjk-latin-spacing: none)
@@ -93,6 +81,9 @@ if y == 0 {
 )
 #show image: set align(center)
 
+#show table: set text(0.95em)
+#show table: set par(leading: 0.8em, spacing: 1em)
+
 #set page(width: 210mm, height: 297mm, margin: 25mm, header: context 
 {
   set par(leading: 5pt, spacing: 5pt)
@@ -140,7 +131,7 @@ if y == 0 {
 
 #include "ch1-summary.typ"
 
-= 任务调度
+= 任务与调度
 
 #include "ch2-task.typ"
 
@@ -172,9 +163,11 @@ if y == 0 {
 
 #include "ch9-agile.typ"
 
+#include "ch9-buildstorm.typ"
+
 = 总结与展望
 
-#include "ch9-conclusion.typ"
+#include "ch11-conclusion.typ"
 
 = AI工具使用情况
 

@@ -1,7 +1,7 @@
 // 第三章：进程管理 —— 由 main.typ 在 `= 进程管理` 之后 #include。
 #import "@preview/lovelace:0.3.1": pseudocode-list
 
-本章讨论 CosmOS 的进程管理子系统。若说上一章的任务调度回答的是“哪个执行流获得 CPU”，那么进程管理回答的则是“这个执行流拥有哪些资源，以及这些资源在 fork、clone、exec、exit 和 wait 中如何转移”。在 CosmOS 中，任务是调度实体，进程是资源容器：一个进程拥有地址空间、文件描述符表、当前工作目录、凭据、信号处置、子进程集合、资源限制、定时器和若干线程；调度器只运行任务，而用户态观察到的进程语义主要由 `ProcessControlBlock` 维护。
+本章讨论 CosmOS 的进程管理子系统。若说上一章的任务与调度管理回答的是“哪个执行流获得 CPU”，那么进程管理回答的则是“这个执行流拥有哪些资源，以及这些资源在 fork、clone、exec、exit 和 wait 中如何转移”。在 CosmOS 中，任务是调度实体，进程是资源容器：一个进程拥有地址空间、文件描述符表、当前工作目录、凭据、信号处置、子进程集合、资源限制、定时器和若干线程；调度器只运行任务，而用户态观察到的进程语义主要由 `ProcessControlBlock` 维护。
 
 进程管理的实现集中在 `os/src/task/process.rs`、`os/src/task/mod.rs`、`os/src/task/id.rs` 与 `os/src/syscall/process.rs`。`ProcessControlBlock` 管进程级资源，`TaskControlBlock` 管线程级执行状态，`TaskUserRes` 管每个线程在用户地址空间中的栈和 trap context，`PID2PCB` 与 `TID2TASK` 分别提供进程号和 Linux 可见线程号的查找入口。这样的拆分让进程生命周期可以沿着清晰的路径展开，也让线程、信号和调度之间的接口保持可控。
 
@@ -13,7 +13,7 @@
 
 整个进程生命周期可以概括为：
 
-#figure(image("assets/process.drawio.pdf"), caption: [进程生命周期概览图])
+#figure(image("assets/process2.drawio.pdf"), caption: [进程生命周期概览图])
 
 这一章沿着这几条路径展开，而不是单独罗列系统调用。原因在于，进程管理的正确性主要来自生命周期阶段之间的顺序：什么时候可以发布给调度器，什么时候还不能释放内核栈，什么时候必须先把 fd 表项移出锁外再 drop，什么时候 zombie 还要保留在父进程的 children 中。
 
@@ -115,7 +115,7 @@ Linux 把 `fork`、`vfork`、线程创建和部分命名空间创建都压进了
 
 进程分支由 `ProcessControlBlock::clone_process` 实现。它当前面向 fork-like 语义，要求父进程只有一个线程；若多线程进程尝试走该分支，内核返回 `EINVAL`。这个限制是有意的：多线程 fork 需要处理其他线程持有的用户态锁、robust futex、信号掩码和异步取消状态，若没有完整协议，很容易产生子进程继承半锁定状态的问题。
 
-进程创建的第一步是处理地址空间。普通 fork 使用 `MemorySet::from_existed_user` 复制父地址空间，并通过 COW 和 TLB shootdown 维护父子页表一致性；带 `CLONE_VM` 的 process-style clone 则使用共享 VM 的构造路径。随后内核复制虚拟内存布局、凭据、信号处置、cwd/root、exec_path、umask、资源限制、时间命名空间偏移、网络命名空间标记和共享内存附件等状态。
+进程创建的第一步是处理地址空间。普通 fork 使用 `MemorySet::from_existed_user` 复制父地址空间，并通过 COW 和 TLB shootdown 维护父子页表一致性；带 `CLONE_VM` 的 process-style clone 则使用共享 VM 的构造路径。地址空间复制本身在决赛阶段做过一轮批量化改造——先在锁内收集私有页批次、按物理连续段合并，再批量安装子侧 PTE 与父侧降权，避免逐页完整页表遍历；其动机与机制在第九章主题二展开。随后内核复制虚拟内存布局、凭据、信号处置、cwd/root、exec_path、umask、资源限制、时间命名空间偏移、网络命名空间标记和共享内存附件等状态。
 
 文件描述符表按表项克隆。`FdEntry` 本身区分 fd 表项标志与底层 `FileDescription`，克隆 fd 表时复制表项并共享底层打开文件描述，从而保留文件偏移和文件状态标志的常见 Unix 语义。若后续 `exec` 遇到 `FD_CLOEXEC`，则只关闭对应 fd 表项。
 
@@ -128,7 +128,7 @@ insert_into_pid2process(child_pid, child)
 add_task(child_main_thread)
 ```
 
-`CLONE_VFORK` 当前被模拟为 fork-like process clone。若指定 vfork，父进程会在自己的 `wait_exit_queue` 上等待子进程变成 zombie，再继续执行。这没有实现完整的“父子共享地址空间且父阻塞直到 exec/exit”的 Linux vfork 内部细节，但足以给依赖 vfork 等待语义的用户态提供保守行为。
+`CLONE_VM|CLONE_VFORK`（glibc `posix_spawn` 的路径）实现为一条*共享视图快路径*：子进程的页表直接借用父进程的根页表帧，零页表分配、零 COW 降权；父进程在 `wait_exit_queue` 上等待，直到子进程 exec 或退出时把运行期累积的地址空间状态整体交还父进程后才放行。借用期间父子页表共享，子进程的写对父进程立即可见，这正对应 Linux vfork 的语义。快路径有一条安全边界：多线程父进程回退到独立的共享 VM 克隆，因为其他线程可能在借用期间修改地址空间，借用视图无法隔离这种变化。这条快路径的演进（从最初“模拟为 fork-like 等待”到真正的页表借用）与批量 COW 一起，是决赛阶段构建负载优化的核心部分，详见第九章。
 
 === 线程分支：共享 PCB 的任务创建
 
@@ -150,7 +150,7 @@ interpreter [optional-arg] script-path original-argv[1..]
 
 解释器递归最多 4 层，避免脚本循环依赖。最终得到 ELF 字节、重写后的 argv 和绝对 exec_path 后，`ProcessControlBlock::exec` 才开始替换进程映像。
 
-当前 exec 路径要求进程只有一个线程。它先装载新 ELF，构造新的 `MemorySet` 和 `ProcessVmLayout`，然后在 PCB 锁内用新地址空间替换旧地址空间，并更新 exec_path 和 environment。POSIX 要求 exec 后用户自定义信号处理函数恢复为默认处置，而显式忽略的信号保持忽略；内核按这一规则重置 `signal_actions`，并清空进程级 pending signals。
+当前 exec 路径要求进程只有一个线程。它先装载新 ELF，构造新的 `MemorySet` 和 `ProcessVmLayout`，然后在 PCB 锁内用新地址空间替换旧地址空间，并更新 exec_path 和 environment。ELF 装载采用*懒加载*：装载器只预读 ELF 头与程序头表，为各 `PT_LOAD` 段登记 VMA 而不实际装页，代码与数据页推迟到首次缺页时经 page cache 物化（动机与收益见第九章主题二）；另有一条“刚写完的产物立即被 exec”的一致性路径，按目标文件的 `(fs_id, ino)` 精确同步 page cache，而非全局扫描。POSIX 要求 exec 后用户自定义信号处理函数恢复为默认处置，而显式忽略的信号保持忽略；内核按这一规则重置 `signal_actions`，并清空进程级 pending signals。
 
 随后，旧地址空间不能在持锁状态下直接销毁。内核把旧 `MemorySet` 转成 deferred reclaim 批次，必要时对已加载旧地址空间的 hart 做 TLB 处理，再释放旧用户页。带 `FD_CLOEXEC` 的 fd 表项也先从表中取出，释放锁后统一 drop。SysV 共享内存附件在 exec 中被 detach。
 
@@ -164,7 +164,7 @@ interpreter [optional-arg] script-path original-argv[1..]
 
 如果退出的是非主线程，且不是 `exit_group`，内核只处理该线程。带 `clear_child_tid` 的线程会从进程任务表中摘除并回收用户资源；传统 `sys_waittid` 语义下的线程则可暂时保留 zombie 任务，等待同进程其他线程回收。无论哪种情况，当前内核栈都必须等上下文切换完成后才能释放，因此退出任务引用会交给 `stop_task` 延迟释放。
 
-如果退出的是主线程，或调用的是 `exit_group`，整个进程进入 zombie 状态。内核会把 `ProcessControlBlockInner.is_zombie` 置真，记录 `exit_reason`，然后处理几类资源：
+如果退出的是主线程，或调用的是 `exit_group`，整个进程进入 zombie 状态。内核会把 `ProcessControlBlockInner.is_zombie` 置真，记录 `exit_reason`，然后处理几类资源。其中文件映射的回写遵循与第六章同构的“锁内收集、锁外执行”纪律：持地址空间锁时仅收集脏范围得到一个回写计划，锁释放后才执行真正的块 I/O，任务保持 Running 直至回写完成——避免在不可睡眠的临界区内触发块设备等待（`msync`/`munmap`/`mremap` 复用同一两段式协议）。
 
 #figure(image("assets/process_exit_reclaim_inkscape.svg"), caption: [进程退出时的资源回收路径])
 

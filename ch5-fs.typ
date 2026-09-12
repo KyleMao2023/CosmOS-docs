@@ -1,6 +1,6 @@
 // 第五章：文件子系统 —— 由 main.typ 在 `= 文件子系统` 之后 #include。
 
-文件子系统是本内核中分层最细、性能优化空间也最大的部分。它跨越两个 crate：独立的 `fs` 库提供磁盘文件系统与 VFS（支持 easyfs、ext4、fat32 三种后端），内核侧 `os/src/fs` 提供 fd 与 `File` 抽象、page cache，以及 devfs/procfs/sysfs/tmpfs 等特殊文件系统。贯穿这两层的，是一组*分工明确*的缓存——从最顶层的 stat 属性快照，到最底层的磁盘块缓存，共五级。本章先给出整体架构，再依次讨论 VFS 与多后端、五级缓存的分工、以 iozone 为代表的读写性能优化与实测，最后着重讨论这套分工的一个结构性局限——page cache 与 block cache 对文件数据的*双重缓存*。
+文件子系统是本内核中分层最细、性能优化空间也最大的部分。它跨越两个 crate：独立的 `fs` 库提供磁盘文件系统与 VFS（支持 easyfs、ext4、fat32 三种后端），内核侧 `os/src/fs` 提供 fd 与 `File` 抽象、page cache，以及 devfs/procfs/sysfs/tmpfs 等特殊文件系统。贯穿这两层的，是一组*分工明确*的缓存——从最顶层的 stat 属性快照，到最底层的磁盘块缓存，共五级。本章先给出整体架构，再依次讨论 VFS 与多后端、五级缓存的分工、以 iozone 为代表的读写性能优化与实测，最后回顾这套分工曾有过的一个结构性冗余——page cache 与 block cache 对文件数据的*双重缓存*——及其在决赛阶段的消除。
 
 == 总体架构
 
@@ -47,9 +47,11 @@ VFS 的中心抽象是 `VfsNode` trait，三种磁盘后端（easyfs、ext4、fa
 
    最顶层的 *stat cache* 最朴素也最划算：每次 `stat`/`fstat` 都要读 inode 的元数据（mode、size、nlink、时间戳），而元数据在一次打开期间极少变化。`Inode` 因此缓存最近一次读到的 `VfsAttrs` 快照，任何修改（`create`/`unlink`/`truncate`/`write` 扩容）都会调用 `invalidate_stat_cache` 使其失效，下一次 `stat` 再重新填充。这把重复 `stat` 的代价从“读一次磁盘 inode”降到一次内存读取。
 
-   *Dentry cache* 以 `(fs_id, parent_ino, name)` 为键缓存“名字 → 子 inode”的解析结果，高/低水位 4096/2304，同样采用 CLOCK 回收。它*强持有*子 inode 的 `Arc`，使得即便 inode cache 因自身水位试图回收某 inode，只要它仍被一条热 dentry 指着，就不会被真正释放——这避免了“热路径上的 inode 被反复重建”。`unlink`/`rmdir`/`rename` 会显式失效对应 dentry。
+   *Dentry cache* 以 `(fs_id, parent_ino, name)` 为键缓存“名字 → 子 inode”的解析结果，高/低水位 16384/12288，同样采用 CLOCK 回收。它*强持有*子 inode 的 `Arc`，使得即便 inode cache 因自身水位试图回收某 inode，只要它仍被一条热 dentry 指着，就不会被真正释放——这避免了“热路径上的 inode 被反复重建”。`unlink`/`rmdir`/`rename` 会显式失效对应 dentry。
 
-   *Inode cache* 以 `(fs_id, ino)` 为键强持有 `Arc<Inode>`，高/低水位 2048/1536。它的首要职责不是“省磁盘读”，而是*身份去重*：确保同一文件在全内核只有一个 `Inode` 实例。回收采用二次机会：仅当 cache 自身是唯一持有者（`strong_count == 1`）且访问位已清时才真正丢弃，否则给第二次机会。
+   *Inode cache* 以 `(fs_id, ino)` 为键强持有 `Arc<Inode>`，高/低水位同为 16384/12288——dentry 强持有 inode，两者水位必须联动才能同时兑现容量。它的首要职责不是“省磁盘读”，而是*身份去重*：确保同一文件在全内核只有一个 `Inode` 实例。回收采用二次机会：仅当 cache 自身是唯一持有者（`strong_count == 1`）且访问位已清时才真正丢弃，否则给第二次机会。
+
+   这两组水位在初赛版本只有 4096/2304 与 2048/1536。决赛阶段依据真实构建负载的工作集画像（一次 `cargo build` 同时引用上万个名字）提升到当前值，并在此期间把 dentry cache 的组织从全局单锁 `BTreeMap` 演进为“按父目录分桶的两级结构 + `RwLock`”——查找路径只取读锁、命中零分配——同时引入*负缓存项*记录“确认不存在的名字”。这些演进的动机与步骤在第九章主题三展开。
 
 + Page cache：文件数据缓存
 
@@ -153,23 +155,23 @@ VFS 的中心抽象是 `VfsNode` trait，三种磁盘后端（easyfs、ext4、fa
 
 数字呈现出一条与五级缓存*截然不同*的曲线。在 1 KB / 4 KB 小记录上，顺序读、顺序写普遍提升 20%–30%（4 KB 顺序写约 *1.32 倍*）；最戏剧性的是 4 KB 随机读，从约 24253 跃升到 80547 KB/s，约 *3.3 倍*——随机访问没有任何局部性可供预取与热页缓存摊薄，每一次随机读都付满一次完整 syscall 的固定开销，此时单页零分配缓冲省下的 `Vec` 分配在单次调用成本里占比最大，收益自然最显著。而一旦记录增大到 64 KB / 256 KB，固定开销被大批量数据摊薄（同样 64 MB 的文件，256 KB 记录只需 256 次 syscall，4 KB 记录却要 16384 次），且大缓冲必然跨页、不再命中单页快速路径，三处优化的收益便迅速回落到约 1.0 倍。这条“小记录受益、大记录无感”的曲线，正是入口微优化作用在*每 syscall 固定成本*而非 I/O 总量上的特征签名，与前面五级缓存“命中即省 I/O”的收益曲线相互补充、互不重叠。
 
-=== 缓存分工的局限：数据块的双重缓存
+=== 缓存分工的曾经过患：数据块的双重缓存及其消除
 
-五级缓存的清晰分工也带来了一个结构性的冗余，值得在这里坦率讨论：*文件数据被缓存了两遍*。
+初赛版本中，五级缓存的清晰分工曾带来一个结构性的冗余：*文件数据被缓存了两遍*。
 
 问题的根源在于 page cache 与 block cache 分属两层、且 page cache 位于 `fs` 库*之上*。当 page cache 发生缺页时，`ensure_page_uptodate` 通过 `inode.read_at(...)` 向下取数据；而 `inode.read_at` 属于磁盘 FS 层，最终经 `DiskInode` 调用 `get_block_cache` 读取一个个 512 字节的数据块。也就是说，装入一个 4 KB 页，会让其下的 8 个 512 字节数据块同时进入 block cache：
 
-#figure(image("assets/read_mapping_pagecache_flow.drawio.pdf", width: 100%), caption: [page cache与block cache交互示意图])
+#figure(image("assets/read_mapping_pagecache_flow.drawio.pdf", width: 100%), caption: [page cache与block cache交互示意图（初赛版本的装页路径）])
 
 结果是一份热文件数据同时占据两份内存：page cache 里的一个 4 KB 页，以及 block cache 里的 8 个 512 字节块（合计约 4 KB）。一旦页面驻留，block cache 中那 8 份数据块拷贝就成了“死重”——它们只在最初装入时派上用场，之后既不会被再次命中（因为读请求已在 page cache 截住），又白白占用着 block cache 的容量。相比之下，元数据块（inode 表、位图、间接索引块）只经 block cache 缓存、page cache 并不触及，这部分*没有*冗余，是 block cache 必须保留的职责。
 
-主流 Linux 的做法是把二者*统一*：page cache 同时就是 block cache，块设备自身被建模为一个 `bdev` inode，它的数据页即为块缓存（早期以 buffer head 挂在页上，现代内核以 folio 为载体），从而保证任何磁盘块在内存中只有一份拷贝。本内核之所以保留两层独立的缓存，有历史与结构两方面的原因：`fs` 库源自 rCore 风格的 easyfs，自带一个独立的 block cache；page cache 是后来在内核层之上补加的，并未引入一个横跨两层的 buffer-cache 抽象。在两个 crate 之间做这种统一改动是侵入性较大的，因此当前的设计以*可接受的内存冗余*换取了分层上的清晰与可独立旁路、便于 benchmark 的好处。
+主流 Linux 的做法是把二者*统一*：page cache 同时就是 block cache，块设备自身被建模为一个 `bdev` inode，它的数据页即为块缓存（早期以 buffer head 挂在页上，现代内核以 folio 为载体），从而保证任何磁盘块在内存中只有一份拷贝。本内核初赛时保留两层独立缓存，是以*可接受的内存冗余*换取分层清晰与可独立旁路的便利；决赛阶段，构建负载的内存压力使这个冗余不再可接受，最终以更小的改动达成了同样的不变量：磁盘文件系统层新增 `read_at_page_cache` 接口，page cache 装页*直接*经它读块设备——文件数据只在 page cache 存在一份，block cache 回归纯元数据块职责。两级缓存的其余协议（状态位、水位、CLOCK 回收）均未改变。这一改动连同读路径上的预读与预映射，构成第九章主题三的读路径演进链。
 
 == 特殊文件：pipe 与 tty
 
 并非所有文件都落在磁盘栈上。pipe 与 tty 是两类*完全绕过* VFS 与各级缓存的特殊文件：它们没有磁盘 inode、不经过 page cache、也不触碰 block cache，而是直接在内存中实现 `File` trait，并复用第六章的等待队列与 poll 机制。
 
-pipe 是内核中最基本的 IPC 原语，也是 shell 管道 `|` 的支撑。它由一对读 / 写句柄共享同一个 1 KiB 的环形缓冲区（`Arc<SpinNoIrqLock<PipeRingBuffer>>`）构成。其核心是 `read_nonblocking` / `write_nonblocking` 这对非阻塞操作：缓冲区空且仍有写端时读返回 `EAGAIN`，缓冲区满时写返回 `EAGAIN`，所有写端都关闭时读返回 0（即 EOF）。阻塞型的 `read` / `write` 在此之上循环，遇 `EAGAIN` 便在 `read_wait` / `write_wait` 上入睡，被对端的写 / 读唤醒后重试。poll 就绪检测同样落在这两个队列上，并在最后一个写端关闭时上报 `POLLHUP`；两端的 `poll_source_id` 都指向共享环形缓冲区的地址，因此任一端的状态变化都能经 `notify_poll_source` 唤醒关心它的等待者。pipe 的 `Drop` 会主动唤醒所有阻塞者并广播 `POLLIN | POLLOUT | POLLHUP`，避免对端永远阻塞。
+pipe 是内核中最基本的 IPC 原语，也是 shell 管道 `|` 的支撑。它由一对读 / 写句柄共享同一个 1.5 KiB 的环形缓冲区（`Arc<SpinNoIrqLock<PipeRingBuffer>>`；初赛为 1 KiB，决赛阶段为构建工具的 jobserver 令牌传递扩容，减少高频小消息的唤醒次数）构成。其核心是 `read_nonblocking` / `write_nonblocking` 这对非阻塞操作：缓冲区空且仍有写端时读返回 `EAGAIN`，缓冲区满时写返回 `EAGAIN`，所有写端都关闭时读返回 0（即 EOF）。阻塞型的 `read` / `write` 在此之上循环，遇 `EAGAIN` 便在 `read_wait` / `write_wait` 上入睡，被对端的写 / 读唤醒后重试。poll 就绪检测同样落在这两个队列上，并在最后一个写端关闭时上报 `POLLHUP`；两端的 `poll_source_id` 都指向共享环形缓冲区的地址，因此任一端的状态变化都能经 `notify_poll_source` 唤醒关心它的等待者。pipe 的 `Drop` 会主动唤醒所有阻塞者并广播 `POLLIN | POLLOUT | POLLHUP`，避免对端永远阻塞。
 
 #figure(image("assets/fs_pipe.svg", width: 100%), caption: [pipe 内部结构与常用方法示意图])
 

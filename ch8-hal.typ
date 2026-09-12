@@ -79,17 +79,20 @@ PTE 的语义位用架构中立的 `PTEFlags` 表达，由 `make_pte` / `pte_fla
   table(
     columns: (1.25fr, 1.9fr, 1.9fr),
     [维度], [RISC-V Sv39], [LoongArch],
-    [地址空间 token], [`MODE=8 << 60 | ppn`（写入 `satp`）], [`ppn << 12`（写入 `PGDL`）],
-    [激活与 TLB 刷新], [`satp` 写 + `sfence.vma`], [`PGDL`/`ASID` 写 + `invtlb`，配 `dbar`/`ibar`],
+    [地址空间 token], [`MODE=8 << 60 | ASID << 44 | ppn`（写入 `satp`）], [`ppn << 12`（写入 `PGDL`）],
+    [激活与 TLB 刷新], [`satp` 写；按 ASID / 按页 `sfence.vma`], [内核走 DMW 窗口；用户根经 `PGDL` 写 + `invtlb`，配 `dbar`/`ibar`],
     [叶子 PTE 编码], [`ppn << 10 | flags`], [`ppn << 12`，含 PLV/MAT 位],
     [读写执行权限], [R/W/X 位“置位即允许”], [GNR/GNX 位“置位即*禁止*”（反相语义）],
     [目录项], [复用叶子编码（带 V 位）], [*裸下一级表指针*（不得带权限位）],
     [页表遍历], [硬件按 `satp` 模式隐式遍历], [由 `PWCL`/`PWCH` 配置的硬件遍历器 + TLB 重填处理],
+    [内核映射进入用户根], [复制内核高半区顶层项并置 G 位（全局）], [DMW 覆盖内核执行；仅共享内核堆子树的根项],
   ),
   caption: [两种架构的分页实现对比],
 )
 
 两处差异尤其值得玩味。其一是 LoongArch 的*反相权限语义*：它没有直接的“可读/可执行”位，而是用 `GNR`/`GNX`（全局不可读/不可执行）来表达——要禁止读或执行，就把对应位置 1。`make_pte` 因此写成“若 `!R` 则置 `GNR`，若 `!X` 则置 `GNX`”，与 RISC-V“置位即允许”的直觉完全相反，是一个极易写反的陷阱。其二是目录项：LoongArch 的硬件页表遍历器把非叶子目录项当作“下一级表的物理地址”直接消费，*不得*带上任何叶子式的权限位（否则会被误判为叶子）。为此 trait 提供了一个可覆盖的 `make_dir_entry`，默认实现复用叶子编码，而 LoongArch 重写为裸指针，并在接口注释里明确点名了这条约束。这两处正是 HAL 通过“默认实现 + 按需覆盖”来吸收架构差异的典型范例。
+
+表中最后一行是决赛阶段补上的能力，也是这层抽象的一次实战检验：为消除陷入路径的页表切换，RISC-V 侧把内核整体搬入 Sv39 高半区、每个用户根页表复制内核半区顶层项并标记全局；LoongArch 侧则利用 DMW 直接映射窗口让内核执行不依赖页表切换，仅共享低地址内核堆窗口的根项。同一目标（“普通陷入不换根页表”）在两种架构上落成了*不同*的实现，而 `PagingArch` 的接口集（token 编码、TLB 刷新粒度、目录项构造）恰好为两者提供了各自的落点，没有逼任何一方迁就对方的模型。TLB 刷新的接口也随 ASID 的引入按粒度拆分为 `flush_tlb_asid / flush_tlb_page_asid / flush_tlb_range_asid`；这套地址空间布局改动的动机与测量见第九章主题一。
 
 #figure(image("assets/hal_pagingarch.pdf"), caption: [`PagingArch` 中RV与LA的差异封装示意图])
 

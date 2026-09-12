@@ -1,0 +1,1570 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="1800"
+   height="1320"
+   viewBox="0 0 1800 1320"
+   role="img"
+   aria-labelledby="title desc"
+   version="1.1"
+   id="svg135"
+   sodipodi:docname="cosmos_process_vm_layout_rv_la.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview135"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.060086"
+     inkscape:cx="1213.1091"
+     inkscape:cy="647.11729"
+     inkscape:window-width="3200"
+     inkscape:window-height="1876"
+     inkscape:window-x="-12"
+     inkscape:window-y="-12"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g134" />
+  <title
+     id="title">CosmOS 进程虚拟内存布局：RISC-V 与 LoongArch64</title>
+  <desc
+     id="desc">两列对照示意图，低地址在下，高地址在上，展示 CosmOS 在 RISC-V Sv39 和 LoongArch64 上的用户区域、内核区域、固定地址以及由源码常量推导出的边界。</desc>
+  <defs
+     id="defs11">
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#reservedHatch"
+       id="pattern139"
+       patternTransform="rotate(35,-48,-152.23648)" />
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#hatch"
+       id="pattern138"
+       patternTransform="rotate(35,-48,-152.23648)" />
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#reservedHatch"
+       id="pattern137"
+       patternTransform="rotate(35,-59,-187.12398)" />
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#reservedHatch"
+       id="pattern136"
+       patternTransform="rotate(35,-59,-187.12398)" />
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#hatch"
+       id="pattern135"
+       patternTransform="rotate(35,-59,-187.12398)" />
+    <linearGradient
+       id="headerBlue"
+       x1="0"
+       x2="1"
+       y1="0"
+       y2="1">
+      <stop
+         offset="0"
+         stop-color="#2563eb"
+         id="stop1" />
+      <stop
+         offset="1"
+         stop-color="#0ea5e9"
+         id="stop2" />
+    </linearGradient>
+    <linearGradient
+       id="headerGreen"
+       x1="0"
+       x2="1"
+       y1="0"
+       y2="1">
+      <stop
+         offset="0"
+         stop-color="#16a34a"
+         id="stop3" />
+      <stop
+         offset="1"
+         stop-color="#14b8a6"
+         id="stop4" />
+    </linearGradient>
+    <linearGradient
+       id="userBlue"
+       x1="0"
+       x2="1"
+       y1="0"
+       y2="0">
+      <stop
+         offset="0"
+         stop-color="#eff6ff"
+         id="stop5" />
+      <stop
+         offset="1"
+         stop-color="#dbeafe"
+         id="stop6" />
+    </linearGradient>
+    <linearGradient
+       id="kernelGreen"
+       x1="0"
+       x2="1"
+       y1="0"
+       y2="0">
+      <stop
+         offset="0"
+         stop-color="#f0fdf4"
+         id="stop7" />
+      <stop
+         offset="1"
+         stop-color="#dcfce7"
+         id="stop8" />
+    </linearGradient>
+    <pattern
+       id="hatch"
+       width="10"
+       height="10"
+       patternUnits="userSpaceOnUse"
+       patternTransform="rotate(35)">
+      <rect
+         width="10"
+         height="10"
+         fill="#f8fafc"
+         id="rect8" />
+      <line
+         x1="0"
+         y1="0"
+         x2="0"
+         y2="10"
+         stroke="#cbd5e1"
+         stroke-width="3"
+         id="line8" />
+    </pattern>
+    <pattern
+       id="reservedHatch"
+       width="10"
+       height="10"
+       patternUnits="userSpaceOnUse"
+       patternTransform="rotate(35)">
+      <rect
+         width="10"
+         height="10"
+         fill="#ecfdf5"
+         id="rect9" />
+      <line
+         x1="0"
+         y1="0"
+         x2="0"
+         y2="10"
+         stroke="#86efac"
+         stroke-width="3"
+         id="line9" />
+    </pattern>
+    <marker
+       id="arrowHigh"
+       viewBox="0 0 10 10"
+       refX="8"
+       refY="5"
+       markerWidth="8"
+       markerHeight="8"
+       orient="auto-start-reverse">
+      <path
+         d="M 0 0 L 10 5 L 0 10 z"
+         fill="#2563eb"
+         id="path9" />
+    </marker>
+    <marker
+       id="arrowBlue"
+       viewBox="0 0 10 10"
+       refX="8"
+       refY="5"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto-start-reverse">
+      <path
+         d="M 0 0 L 10 5 L 0 10 z"
+         fill="#2563eb"
+         id="path10" />
+    </marker>
+    <marker
+       id="arrowGreen"
+       viewBox="0 0 10 10"
+       refX="8"
+       refY="5"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto-start-reverse">
+      <path
+         d="M 0 0 L 10 5 L 0 10 z"
+         fill="#16a34a"
+         id="path11" />
+    </marker>
+    <style
+       id="style11">
+      .sans { font-family: &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, sans-serif; }
+      .mono { font-family: &quot;Cascadia Mono&quot;, &quot;JetBrains Mono&quot;, &quot;Noto Sans Mono&quot;, monospace; }
+      .title { font: 700 32px &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Microsoft YaHei&quot;, sans-serif; fill: #0f172a; letter-spacing: 1px; }
+      .subtitle { font: 400 16px &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Microsoft YaHei&quot;, sans-serif; fill: #475569; }
+      .chip { font: 600 14px &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Microsoft YaHei&quot;, sans-serif; fill: #0f3b78; }
+      .panelTitle { font: 700 22px &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Microsoft YaHei&quot;, sans-serif; fill: #0f172a; }
+      .panelSub { font: 400 14px &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Microsoft YaHei&quot;, sans-serif; fill: #475569; }
+      .barLabel { font: 700 14px &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Microsoft YaHei&quot;, sans-serif; fill: #0f172a; text-anchor: middle; }
+      .barSmall { font: 500 12px &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Microsoft YaHei&quot;, sans-serif; fill: #334155; text-anchor: middle; }
+      .addr { font: 600 13px &quot;Cascadia Mono&quot;, &quot;JetBrains Mono&quot;, &quot;Noto Sans Mono&quot;, monospace; fill: #0f172a; }
+      .callout { font: 400 13px &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Microsoft YaHei&quot;, sans-serif; fill: #475569; }
+      .axis { font: 600 14px &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Microsoft YaHei&quot;, sans-serif; fill: #2563eb; }
+      .note { font: 400 13px &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Microsoft YaHei&quot;, sans-serif; fill: #64748b; }
+      .leader { fill: none; stroke: #94a3b8; stroke-width: 1.2; }
+      .tick { stroke: #94a3b8; stroke-width: 1.2; }
+      .boundary { stroke: #64748b; stroke-width: 1.4; stroke-dasharray: 5 5; }
+    </style>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#kernelGreen"
+       id="linearGradient135"
+       x1="841.44709"
+       y1="394.21491"
+       x2="1030.2908"
+       y2="394.21491"
+       gradientTransform="matrix(1.437167,0,0,0.69581336,-118,0)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#userBlue"
+       id="linearGradient136"
+       x1="1937.1289"
+       y1="274.24375"
+       x2="2371.8736"
+       y2="274.24375"
+       gradientTransform="matrix(0.62427442,0,0,1.6018596,-118,0)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#kernelGreen"
+       id="linearGradient137"
+       x1="236.08947"
+       y1="394.21491"
+       x2="424.93322"
+       y2="394.21491"
+       gradientTransform="matrix(1.437167,0,0,0.69581336,-96,0)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#userBlue"
+       id="linearGradient138"
+       x1="543.51098"
+       y1="274.24375"
+       x2="978.25568"
+       y2="274.24375"
+       gradientTransform="matrix(0.62427442,0,0,1.6018596,-96,0)"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <rect
+     width="1800"
+     height="1320"
+     fill="#f8fbff"
+     id="rect11" />
+  <!-- Header -->
+  <text
+     x="900"
+     y="48"
+     text-anchor="middle"
+     class="title"
+     id="text11">CosmOS 进程虚拟内存布局</text>
+  <text
+     x="900"
+     y="76"
+     text-anchor="middle"
+     class="subtitle"
+     id="text12">RISC-V Sv39 与 LoongArch64 对照 · 低地址在下，高地址在上</text>
+  <g
+     id="g15">
+    <rect
+       x="55"
+       y="96"
+       width="380"
+       height="34"
+       rx="17"
+       fill="#eff6ff"
+       stroke="#bfdbfe"
+       id="rect12" />
+    <text
+       x="245"
+       y="118"
+       text-anchor="middle"
+       class="chip"
+       id="text13">共同约束　VA_BITS = 39 · 3 级页表 · 4 KiB 页</text>
+    <rect
+       x="455"
+       y="96"
+       width="430"
+       height="34"
+       rx="17"
+       fill="#f0fdf4"
+       stroke="#bbf7d0"
+       id="rect13" />
+    <text
+       x="670"
+       y="118"
+       text-anchor="middle"
+       class="chip"
+       fill="#166534"
+       id="text14">用户低半区　0x0 ≤ VA &lt; 0x0000_0040_0000_0000</text>
+    <rect
+       x="905"
+       y="96"
+       width="840"
+       height="34"
+       rx="17"
+       fill="#f8fafc"
+       stroke="#cbd5e1"
+       id="rect14" />
+    <text
+       x="1325"
+       y="118"
+       text-anchor="middle"
+       class="chip"
+       fill="#475569"
+       id="text15">蓝色 = 用户 VMA　·　绿色 = 内核/保留页　·　灰色 = 间隔或未映射</text>
+  </g>
+  <!-- RV panel -->
+  <g
+     id="g72">
+    <rect
+       x="40"
+       y="155"
+       width="850"
+       height="1130"
+       rx="22"
+       fill="#ffffff"
+       stroke="#bfdbfe"
+       stroke-width="2"
+       id="rect15" />
+    <rect
+       x="40"
+       y="155"
+       width="850"
+       height="78"
+       rx="22"
+       fill="#eff6ff"
+       id="rect16" />
+    <path
+       d="M40 211 H890"
+       stroke="#dbeafe"
+       stroke-width="1"
+       id="path16" />
+    <rect
+       x="70"
+       y="177"
+       width="82"
+       height="28"
+       rx="14"
+       fill="url(#headerBlue)"
+       id="rect17" />
+    <text
+       x="111"
+       y="197"
+       text-anchor="middle"
+       class="sans"
+       font-size="15"
+       font-weight="700"
+       fill="#ffffff"
+       id="text17">RV64</text>
+    <text
+       x="171"
+       y="190"
+       class="panelTitle"
+       id="text18">RISC-V / Sv39</text>
+    <text
+       x="171"
+       y="213"
+       class="panelSub"
+       id="text19">高半区共享内核映射 · TRAMPOLINE 位于最高页</text>
+    <!-- Address axis -->
+    <line
+       x1="196"
+       y1="1117"
+       x2="196"
+       y2="277"
+       stroke="#2563eb"
+       stroke-width="2"
+       marker-end="url(#arrowHigh)"
+       id="line19" />
+    <text
+       x="196"
+       y="263"
+       text-anchor="middle"
+       class="axis"
+       id="text20"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">高地址 ↑</text>
+    <text
+       x="196"
+       y="1144"
+       text-anchor="middle"
+       class="axis"
+       id="text21"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">低地址</text>
+    <text
+       x="196"
+       y="1164"
+       text-anchor="middle"
+       class="mono"
+       font-size="12px"
+       fill="#64748b"
+       id="text22">0x0</text>
+    <!-- Memory bar -->
+    <rect
+       x="234"
+       y="255"
+       width="290"
+       height="890"
+       rx="18"
+       fill="#ffffff"
+       stroke="#64748b"
+       stroke-width="2"
+       id="rect22" />
+    <rect
+       x="244"
+       y="275"
+       width="270"
+       height="130"
+       rx="12"
+       fill="url(#kernelGreen)"
+       stroke="#16a34a"
+       stroke-width="1.4"
+       id="rect23"
+       style="fill:url(#linearGradient137)" />
+    <rect
+       x="244"
+       y="275"
+       width="270"
+       height="36"
+       rx="10"
+       fill="#bbf7d0"
+       stroke="#16a34a"
+       stroke-width="1.4"
+       id="rect24" />
+    <text
+       x="379"
+       y="297"
+       class="barLabel"
+       id="text24"
+       style="font-style:normal;font-variant:normal;font-weight:700;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">TRAMPOLINE</text>
+    <text
+       x="379"
+       y="332"
+       class="barLabel"
+       id="text25"
+       style="font-style:normal;font-variant:normal;font-weight:700;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">内核高半区</text>
+    <text
+       x="379"
+       y="351"
+       class="barSmall"
+       id="text26"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">MMIO · RAM direct-map · kernel heap</text>
+    <text
+       x="379"
+       y="373"
+       class="barSmall"
+       id="text27"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">每个进程共享的内核视图</text>
+    <line
+       x1="244"
+       y1="389"
+       x2="514"
+       y2="389"
+       class="boundary"
+       id="line27" />
+    <text
+       x="379"
+       y="400"
+       class="barSmall"
+       id="text28"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">high-half base →</text>
+    <rect
+       x="244"
+       y="405"
+       width="270"
+       height="35"
+       fill="url(#hatch)"
+       stroke="#cbd5e1"
+       id="rect28"
+       style="fill:url(#pattern138)" />
+    <text
+       x="379"
+       y="427"
+       class="barSmall"
+       id="text29"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">Sv39 非规范地址空洞</text>
+    <rect
+       x="244"
+       y="440"
+       width="270"
+       height="695"
+       rx="12"
+       fill="url(#userBlue)"
+       stroke="#2563eb"
+       stroke-width="1.4"
+       id="rect29"
+       style="fill:url(#linearGradient138)" />
+    <text
+       x="379"
+       y="460"
+       class="barSmall"
+       fill="#1d4ed8"
+       id="text30"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">用户低半区：动态 VMA + 固定页</text>
+    <rect
+       x="244"
+       y="466"
+       width="270"
+       height="28"
+       rx="5"
+       fill="url(#reservedHatch)"
+       stroke="#16a34a"
+       stroke-width="1.2"
+       id="rect30"
+       style="fill:url(#pattern139)" />
+    <text
+       x="379"
+       y="484"
+       class="barSmall"
+       id="text31"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">TrapContext（tid=0，内核保存）</text>
+    <rect
+       x="244"
+       y="535"
+       width="270"
+       height="54"
+       rx="8"
+       fill="#bfdbfe"
+       stroke="#2563eb"
+       id="rect31" />
+    <text
+       x="379"
+       y="558"
+       class="barLabel"
+       id="text32"
+       style="font-style:normal;font-variant:normal;font-weight:700;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">动态链接器</text>
+    <text
+       x="379"
+       y="578"
+       class="barSmall"
+       id="text33"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">INTERP_BASE · 若 ELF 含 PT_INTERP</text>
+    <rect
+       x="244"
+       y="650"
+       width="270"
+       height="70"
+       rx="8"
+       fill="#bfdbfe"
+       stroke="#2563eb"
+       id="rect33" />
+    <text
+       x="379"
+       y="680"
+       class="barLabel"
+       id="text34"
+       style="font-style:normal;font-variant:normal;font-weight:700;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">mmap 区域</text>
+    <text
+       x="379"
+       y="700"
+       class="barSmall"
+       id="text35"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">anonymous · file-backed · shared</text>
+    <path
+       d="M 474,709 V 661"
+       stroke="#2563eb"
+       stroke-width="1.6"
+       marker-end="url(#arrowBlue)"
+       id="path35" />
+    <text
+       x="483"
+       y="690"
+       class="mono"
+       font-size="11px"
+       fill="#1d4ed8"
+       id="text36">mmap ↑</text>
+    <rect
+       x="244"
+       y="720"
+       width="270"
+       height="11"
+       fill="#bbf7d0"
+       stroke="#16a34a"
+       id="rect36" />
+    <text
+       x="379"
+       y="729"
+       class="barSmall"
+       font-size="10"
+       id="text37"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">vDSO / rt_sigreturn</text>
+    <rect
+       x="244"
+       y="800"
+       width="270"
+       height="78"
+       rx="8"
+       fill="#bfdbfe"
+       stroke="#2563eb"
+       id="rect37" />
+    <text
+       x="379"
+       y="830"
+       class="barLabel"
+       id="text38"
+       style="font-style:normal;font-variant:normal;font-weight:700;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">用户栈（主线程）</text>
+    <text
+       x="379"
+       y="851"
+       class="barSmall"
+       id="text39"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">8 MiB · tid=0 · 相邻线程留 4 KiB 间隔</text>
+    <path
+       d="m 474,822 v 42"
+       stroke="#2563eb"
+       stroke-width="1.6"
+       marker-end="url(#arrowBlue)"
+       id="path39" />
+    <text
+       x="483"
+       y="847"
+       class="mono"
+       font-size="11px"
+       fill="#1d4ed8"
+       id="text40">向下</text>
+    <rect
+       x="244"
+       y="960"
+       width="270"
+       height="72"
+       rx="8"
+       fill="#dbeafe"
+       stroke="#2563eb"
+       id="rect40" />
+    <text
+       x="379"
+       y="988"
+       class="barLabel"
+       id="text41"
+       style="font-style:normal;font-variant:normal;font-weight:700;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">ELF LOAD segments</text>
+    <text
+       x="379"
+       y="1008"
+       class="barSmall"
+       id="text42"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">.text · .rodata · .data · .bss</text>
+    <path
+       d="M 452,1016 V 969"
+       stroke="#2563eb"
+       stroke-width="1.6"
+       marker-end="url(#arrowBlue)"
+       id="path42" />
+    <text
+       x="461"
+       y="994"
+       class="mono"
+       font-size="11px"
+       fill="#1d4ed8"
+       id="text43">brk ↑</text>
+    <text
+       x="379"
+       y="1057"
+       class="barSmall"
+       id="text44"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">image_end = start_brk · heap 由 brk/sbrk 扩展</text>
+    <line
+       x1="244"
+       y1="1135"
+       x2="514"
+       y2="1135"
+       class="boundary"
+       id="line44" />
+    <text
+       x="379"
+       y="1122"
+       class="barSmall"
+       id="text45"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">未映射/按需分配区域</text>
+    <!-- RV callouts -->
+    <path
+       d="m 524,292 h 15"
+       class="leader"
+       id="path45" />
+    <text
+       x="549"
+       y="286"
+       class="addr"
+       id="text46"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0xffff_ffff_ffff_f000</text>
+    <text
+       x="549"
+       y="304"
+       class="callout"
+       id="text47"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">TRAMPOLINE · 最后一页</text>
+    <path
+       d="m 524,333 h 15"
+       class="leader"
+       id="path47" />
+    <text
+       x="549"
+       y="328"
+       class="addr"
+       id="text48"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0xffff_ffe0_0000_0000</text>
+    <text
+       x="549"
+       y="346"
+       class="callout"
+       id="text49"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">MMIO aperture</text>
+    <path
+       d="m 524,365 h 15"
+       class="leader"
+       id="path49" />
+    <text
+       x="549"
+       y="360"
+       class="addr"
+       id="text50"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0xffff_ffc0_8020_0000</text>
+    <text
+       x="549"
+       y="378"
+       class="callout"
+       id="text51"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">kernel .text 链接基址附近</text>
+    <path
+       d="m 524,397 h 15"
+       class="leader"
+       id="path51" />
+    <text
+       x="549"
+       y="392"
+       class="addr"
+       id="text52"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0xffff_ffc0_0000_0000</text>
+    <text
+       x="549"
+       y="410"
+       class="callout"
+       id="text53"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">KERNEL_ADDR_OFFSET = heap base</text>
+    <path
+       d="m 524,455 h 15"
+       class="leader"
+       id="path53" />
+    <text
+       x="549"
+       y="450"
+       class="addr"
+       id="text54"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0x0000_0040_0000_0000</text>
+    <text
+       x="549"
+       y="468"
+       class="callout"
+       id="text55"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">USER_SPACE_END（exclusive）</text>
+    <path
+       d="m 524,479 h 15"
+       class="leader"
+       id="path55" />
+    <text
+       x="549"
+       y="494"
+       class="addr"
+       id="text56"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0x0000_003f_ffff_e000</text>
+    <text
+       x="549"
+       y="512"
+       class="callout"
+       id="text57"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">TRAP_CONTEXT_BASE · tid=0</text>
+    <path
+       d="m 524,556 h 15"
+       class="leader"
+       id="path57" />
+    <text
+       x="549"
+       y="550"
+       class="addr"
+       id="text58"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0x0000_0002_0000_0000</text>
+    <text
+       x="549"
+       y="568"
+       class="callout"
+       id="text59"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">INTERP_BASE · 动态链接器</text>
+    <path
+       d="m 524,681 h 15"
+       class="leader"
+       id="path59" />
+    <text
+       x="549"
+       y="675"
+       class="addr"
+       id="text60"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0x0000_0001_0000_0000</text>
+    <text
+       x="549"
+       y="693"
+       class="callout"
+       id="text61"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">USER_MMAP_BASE · mmap 提示基址</text>
+    <path
+       d="m 524,726 h 15"
+       class="leader"
+       id="path61" />
+    <text
+       x="549"
+       y="720"
+       class="addr"
+       id="text62"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0x0000_0000_ffff_f000</text>
+    <text
+       x="549"
+       y="738"
+       class="callout"
+       id="text63"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">USER_VDSO_BASE = mmap_base − 4 KiB</text>
+    <path
+       d="m 524,830 h 15"
+       class="leader"
+       id="path63" />
+    <text
+       x="549"
+       y="824"
+       class="addr"
+       id="text64"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0x0000_0000_0800_0000</text>
+    <text
+       x="549"
+       y="842"
+       class="callout"
+       id="text65"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">USER_STACK_BASE · +0x0080_0000</text>
+    <path
+       d="m 524,988 h 15"
+       class="leader"
+       id="path65" />
+    <text
+       x="549"
+       y="982"
+       class="addr"
+       id="text66"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0x0000_0000_0020_0000</text>
+    <text
+       x="549"
+       y="1000"
+       class="callout"
+       id="text67"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">USER_PIE_BASE · ET_DYN 常用 load bias</text>
+    <text
+       x="70"
+       y="1202"
+       class="note"
+       id="text68">地址格式为 16 位十六进制分组；纵向位置只表达地址先后，不表示真实空间比例。</text>
+    <text
+       x="70"
+       y="1225"
+       class="note"
+       id="text69">RV：内核页表高半区共享；用户 trap context 仍位于低半区顶端附近。</text>
+    <rect
+       x="70"
+       y="1243"
+       width="14"
+       height="14"
+       rx="3"
+       fill="#bfdbfe"
+       stroke="#2563eb"
+       id="rect69" />
+    <text
+       x="92"
+       y="1255"
+       class="note"
+       id="text70">用户映射</text>
+    <rect
+       x="175"
+       y="1243"
+       width="14"
+       height="14"
+       rx="3"
+       fill="#dcfce7"
+       stroke="#16a34a"
+       id="rect70" />
+    <text
+       x="197"
+       y="1255"
+       class="note"
+       id="text71">内核/保留</text>
+    <rect
+       x="300"
+       y="1243"
+       width="14"
+       height="14"
+       rx="3"
+       fill="url(#hatch)"
+       stroke="#cbd5e1"
+       id="rect71" />
+    <text
+       x="322"
+       y="1255"
+       class="note"
+       id="text72">间隔</text>
+  </g>
+  <!-- LA panel -->
+  <g
+     id="g134">
+    <rect
+       x="910"
+       y="155"
+       width="850"
+       height="1130"
+       rx="22"
+       fill="#ffffff"
+       stroke="#bbf7d0"
+       stroke-width="2"
+       id="rect72" />
+    <rect
+       x="910"
+       y="155"
+       width="850"
+       height="78"
+       rx="22"
+       fill="#f0fdf4"
+       id="rect73" />
+    <path
+       d="M910 211 H1760"
+       stroke="#dcfce7"
+       stroke-width="1"
+       id="path73" />
+    <rect
+       x="940"
+       y="177"
+       width="82"
+       height="28"
+       rx="14"
+       fill="url(#headerGreen)"
+       id="rect74" />
+    <text
+       x="981"
+       y="197"
+       text-anchor="middle"
+       class="sans"
+       font-size="15"
+       font-weight="700"
+       fill="#ffffff"
+       id="text74">LA64</text>
+    <text
+       x="1041"
+       y="190"
+       class="panelTitle"
+       id="text75">LoongArch64</text>
+    <text
+       x="1041"
+       y="213"
+       class="panelSub"
+       id="text76">DMW 高地址窗口 · KERNEL_HEAP 位于低半区保留窗</text>
+    <!-- Address axis -->
+    <line
+       x1="1044"
+       y1="1117"
+       x2="1044"
+       y2="277"
+       stroke="#2563eb"
+       stroke-width="2"
+       marker-end="url(#arrowHigh)"
+       id="line76" />
+    <text
+       x="1044"
+       y="263"
+       text-anchor="middle"
+       class="axis"
+       id="text77"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">高地址 ↑</text>
+    <text
+       x="1044"
+       y="1144"
+       text-anchor="middle"
+       class="axis"
+       id="text78"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">低地址</text>
+    <text
+       x="1044"
+       y="1164"
+       text-anchor="middle"
+       class="mono"
+       font-size="12px"
+       fill="#64748b"
+       id="text79">0x0</text>
+    <!-- Memory bar -->
+    <rect
+       x="1082"
+       y="255"
+       width="290"
+       height="890"
+       rx="18"
+       fill="#ffffff"
+       stroke="#64748b"
+       stroke-width="2"
+       id="rect79" />
+    <rect
+       x="1092"
+       y="275"
+       width="270"
+       height="130"
+       rx="12"
+       fill="url(#kernelGreen)"
+       stroke="#16a34a"
+       stroke-width="1.4"
+       id="rect80"
+       style="fill:url(#linearGradient135)" />
+    <rect
+       x="1092"
+       y="275"
+       width="270"
+       height="43"
+       rx="10"
+       fill="#bbf7d0"
+       stroke="#16a34a"
+       stroke-width="1.4"
+       id="rect81" />
+    <text
+       x="1227"
+       y="296"
+       class="barLabel"
+       id="text81"
+       style="font-style:normal;font-variant:normal;font-weight:700;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">cached DMW1</text>
+    <text
+       x="1227"
+       y="312"
+       class="barSmall"
+       id="text82"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">RAM / kernel sections</text>
+    <text
+       x="1227"
+       y="346"
+       class="barLabel"
+       id="text83"
+       style="font-style:normal;font-variant:normal;font-weight:700;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">uncached DMW0</text>
+    <text
+       x="1227"
+       y="365"
+       class="barSmall"
+       id="text84"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">MMIO · 不走用户低半区</text>
+    <text
+       x="1227"
+       y="390"
+       class="barSmall"
+       id="text85"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">内核直接映射窗口</text>
+    <rect
+       x="1092"
+       y="405"
+       width="270"
+       height="35"
+       fill="url(#hatch)"
+       stroke="#cbd5e1"
+       id="rect85"
+       style="fill:url(#pattern135)" />
+    <text
+       x="1227"
+       y="427"
+       class="barSmall"
+       id="text86"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">高地址窗口与用户低半区之间</text>
+    <rect
+       x="1092"
+       y="440"
+       width="270"
+       height="695"
+       rx="12"
+       fill="url(#userBlue)"
+       stroke="#2563eb"
+       stroke-width="1.4"
+       id="rect86"
+       style="fill:url(#linearGradient136)" />
+    <text
+       x="1227"
+       y="460"
+       class="barSmall"
+       fill="#1d4ed8"
+       id="text87"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">用户低半区：0x0 … USER_SPACE_END</text>
+    <rect
+       x="1092"
+       y="466"
+       width="270"
+       height="24"
+       rx="5"
+       fill="#bbf7d0"
+       stroke="#16a34a"
+       stroke-width="1.2"
+       id="rect87" />
+    <text
+       x="1227"
+       y="482"
+       class="barSmall"
+       id="text88"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">TRAMPOLINE（低半区最后页）</text>
+    <rect
+       x="1092"
+       y="490"
+       width="270"
+       height="24"
+       rx="5"
+       fill="url(#reservedHatch)"
+       stroke="#16a34a"
+       stroke-width="1.2"
+       id="rect88"
+       style="fill:url(#pattern136)" />
+    <text
+       x="1227"
+       y="506"
+       class="barSmall"
+       id="text89"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">TrapContext（tid=0，内核保存）</text>
+    <rect
+       x="1092"
+       y="555"
+       width="270"
+       height="78"
+       rx="8"
+       fill="#bfdbfe"
+       stroke="#2563eb"
+       id="rect89" />
+    <text
+       x="1227"
+       y="585"
+       class="barLabel"
+       id="text90"
+       style="font-style:normal;font-variant:normal;font-weight:700;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">用户栈（主线程）</text>
+    <text
+       x="1227"
+       y="606"
+       class="barSmall"
+       id="text91"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">8 MiB · tid=0 · 栈向低地址增长</text>
+    <path
+       d="m 1322,578 v 42"
+       stroke="#2563eb"
+       stroke-width="1.6"
+       marker-end="url(#arrowBlue)"
+       id="path91" />
+    <text
+       x="1331"
+       y="603"
+       class="mono"
+       font-size="11px"
+       fill="#1d4ed8"
+       id="text92">向下</text>
+    <rect
+       x="1092"
+       y="650"
+       width="270"
+       height="48"
+       rx="8"
+       fill="url(#reservedHatch)"
+       stroke="#16a34a"
+       stroke-width="1.3"
+       id="rect92"
+       style="fill:url(#pattern137)" />
+    <text
+       x="1227"
+       y="671"
+       class="barLabel"
+       id="text93"
+       style="font-style:normal;font-variant:normal;font-weight:700;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">内核堆保留窗</text>
+    <text
+       x="1227"
+       y="689"
+       class="barSmall"
+       id="text94"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">不允许用户 VMA 覆盖</text>
+    <rect
+       x="1092"
+       y="760"
+       width="270"
+       height="64"
+       rx="8"
+       fill="#bfdbfe"
+       stroke="#2563eb"
+       id="rect94" />
+    <text
+       x="1227"
+       y="787"
+       class="barLabel"
+       id="text95"
+       style="font-style:normal;font-variant:normal;font-weight:700;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">mmap 区域</text>
+    <text
+       x="1227"
+       y="806"
+       class="barSmall"
+       id="text96"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">anonymous · file-backed · shared</text>
+    <path
+       d="M 1322,812 V 770"
+       stroke="#2563eb"
+       stroke-width="1.6"
+       marker-end="url(#arrowBlue)"
+       id="path96" />
+    <text
+       x="1331"
+       y="794"
+       class="mono"
+       font-size="11px"
+       fill="#1d4ed8"
+       id="text97">mmap ↑</text>
+    <rect
+       x="1092"
+       y="824"
+       width="270"
+       height="11"
+       fill="#bbf7d0"
+       stroke="#16a34a"
+       id="rect97" />
+    <text
+       x="1227"
+       y="833"
+       class="barSmall"
+       font-size="10"
+       id="text98"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">vDSO / rt_sigreturn</text>
+    <rect
+       x="1092"
+       y="860"
+       width="270"
+       height="54"
+       rx="8"
+       fill="#bfdbfe"
+       stroke="#2563eb"
+       id="rect98" />
+    <text
+       x="1227"
+       y="883"
+       class="barLabel"
+       id="text99"
+       style="font-style:normal;font-variant:normal;font-weight:700;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">动态链接器</text>
+    <text
+       x="1227"
+       y="902"
+       class="barSmall"
+       id="text100"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">INTERP_BASE · 若 ELF 含 PT_INTERP</text>
+    <rect
+       x="1092"
+       y="970"
+       width="270"
+       height="72"
+       rx="8"
+       fill="#dbeafe"
+       stroke="#2563eb"
+       id="rect100" />
+    <text
+       x="1227"
+       y="998"
+       class="barLabel"
+       id="text101"
+       style="font-style:normal;font-variant:normal;font-weight:700;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">ELF LOAD segments</text>
+    <text
+       x="1227"
+       y="1018"
+       class="barSmall"
+       id="text102"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">.text · .rodata · .data · .bss</text>
+    <path
+       d="M 1300,1026 V 979"
+       stroke="#2563eb"
+       stroke-width="1.6"
+       marker-end="url(#arrowBlue)"
+       id="path102" />
+    <text
+       x="1309"
+       y="1004"
+       class="mono"
+       font-size="11px"
+       fill="#1d4ed8"
+       id="text103">brk ↑</text>
+    <text
+       x="1227"
+       y="1065"
+       class="barSmall"
+       id="text104"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">image_end = start_brk · 受 mmap_base 约束</text>
+    <line
+       x1="1092"
+       y1="1135"
+       x2="1362"
+       y2="1135"
+       class="boundary"
+       id="line104" />
+    <text
+       x="1227"
+       y="1122"
+       class="barSmall"
+       id="text105"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">未映射/按需分配区域</text>
+    <!-- LA callouts -->
+    <path
+       d="m 1372,292 h 15"
+       class="leader"
+       id="path105" />
+    <text
+       x="1397"
+       y="286"
+       class="addr"
+       id="text106"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0x9000_0000_9000_0000</text>
+    <text
+       x="1397"
+       y="304"
+       class="callout"
+       id="text107"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">kernel image VIRT_BASE 附近</text>
+    <path
+       d="m 1372,320 h 15"
+       class="leader"
+       id="path107" />
+    <text
+       x="1397"
+       y="326"
+       class="addr"
+       id="text108"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0x9000_0000_0000_0000</text>
+    <text
+       x="1397"
+       y="344"
+       class="callout"
+       id="text109"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">KERNEL_ADDR_OFFSET · cached DMW1</text>
+    <path
+       d="m 1372,356 h 15"
+       class="leader"
+       id="path109" />
+    <text
+       x="1397"
+       y="362"
+       class="addr"
+       id="text110"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0x8000_0000_0000_0000</text>
+    <text
+       x="1397"
+       y="380"
+       class="callout"
+       id="text111"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">IO_ADDR_OFFSET · uncached DMW0</text>
+    <path
+       d="m 1372,455 h 15"
+       class="leader"
+       id="path111" />
+    <text
+       x="1397"
+       y="450"
+       class="addr"
+       id="text112"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0x0000_0040_0000_0000</text>
+    <text
+       x="1397"
+       y="468"
+       class="callout"
+       id="text113"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">USER_SPACE_END（exclusive）</text>
+    <path
+       d="m 1372,478 h 15"
+       class="leader"
+       id="path113" />
+    <text
+       x="1397"
+       y="484"
+       class="addr"
+       id="text114"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0x0000_003f_ffff_f000</text>
+    <text
+       x="1397"
+       y="502"
+       class="callout"
+       id="text115"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">TRAMPOLINE · 低半区最后页</text>
+    <path
+       d="m 1372,502 h 15"
+       class="leader"
+       id="path115" />
+    <text
+       x="1397"
+       y="518"
+       class="addr"
+       id="text116"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0x0000_003f_ffff_e000</text>
+    <text
+       x="1397"
+       y="536"
+       class="callout"
+       id="text117"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">TRAP_CONTEXT_BASE · tid=0</text>
+    <path
+       d="m 1372,585 h 15"
+       class="leader"
+       id="path117" />
+    <text
+       x="1397"
+       y="579"
+       class="addr"
+       id="text118"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0x0000_003e_0000_0000</text>
+    <text
+       x="1397"
+       y="597"
+       class="callout"
+       id="text119"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">USER_STACK_BASE · +0x0080_0000</text>
+    <path
+       d="m 1372,674 h 15"
+       class="leader"
+       id="path119" />
+    <text
+       x="1397"
+       y="668"
+       class="addr"
+       id="text120"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0x0000_0038_0000_0000</text>
+    <text
+       x="1397"
+       y="686"
+       class="callout"
+       id="text121"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">KERNEL_HEAP_BASE · +0x4000_0000</text>
+    <path
+       d="m 1372,787 h 15"
+       class="leader"
+       id="path121" />
+    <text
+       x="1397"
+       y="781"
+       class="addr"
+       id="text122"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0x0000_0020_0000_0000</text>
+    <text
+       x="1397"
+       y="799"
+       class="callout"
+       id="text123"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">USER_MMAP_BASE · mmap 提示基址</text>
+    <path
+       d="m 1372,829 h 15"
+       class="leader"
+       id="path123" />
+    <text
+       x="1397"
+       y="823"
+       class="addr"
+       id="text124"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0x0000_001f_ffff_f000</text>
+    <text
+       x="1397"
+       y="841"
+       class="callout"
+       id="text125"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">USER_VDSO_BASE = mmap_base − 4 KiB</text>
+    <path
+       d="m 1372,884 h 15"
+       class="leader"
+       id="path125" />
+    <text
+       x="1397"
+       y="878"
+       class="addr"
+       id="text126"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0x0000_001e_0000_0000</text>
+    <text
+       x="1397"
+       y="896"
+       class="callout"
+       id="text127"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">INTERP_BASE · 动态链接器</text>
+    <path
+       d="m 1372,998 h 15"
+       class="leader"
+       id="path127" />
+    <text
+       x="1397"
+       y="992"
+       class="addr"
+       id="text128"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Cascadia Mono', 'JetBrains Mono', 'Noto Sans Mono', monospace">0x0000_0000_0020_0000</text>
+    <text
+       x="1397"
+       y="1010"
+       class="callout"
+       id="text129"
+       style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:13px;line-height:normal;font-family:'Noto Sans CJK SC', 'Source Han Sans CN', 'Microsoft YaHei', sans-serif">USER_PIE_BASE · ET_DYN 常用 load bias</text>
+    <text
+       x="940"
+       y="1202"
+       class="note"
+       id="text130">LA 的 kernel text/data/stack 通过 DMW 直接访问；可增长 kernel heap 使用低地址共享页表窗口。</text>
+    <text
+       x="940"
+       y="1225"
+       class="note"
+       id="text131">线程栈：USER_STACK_BASE + tid × (USER_STACK_SIZE + 0x1000)；TrapContext 按 tid 向低地址分配。</text>
+    <rect
+       x="940"
+       y="1243"
+       width="14"
+       height="14"
+       rx="3"
+       fill="#bfdbfe"
+       stroke="#2563eb"
+       id="rect131" />
+    <text
+       x="962"
+       y="1255"
+       class="note"
+       id="text132">用户映射</text>
+    <rect
+       x="1045"
+       y="1243"
+       width="14"
+       height="14"
+       rx="3"
+       fill="#dcfce7"
+       stroke="#16a34a"
+       id="rect132" />
+    <text
+       x="1067"
+       y="1255"
+       class="note"
+       id="text133">内核/保留</text>
+    <rect
+       x="1170"
+       y="1243"
+       width="14"
+       height="14"
+       rx="3"
+       fill="url(#hatch)"
+       stroke="#cbd5e1"
+       id="rect133" />
+    <text
+       x="1192"
+       y="1255"
+       class="note"
+       id="text134">间隔</text>
+  </g>
+  <!-- Footer source note -->
+  <text
+     x="900"
+     y="1308"
+     text-anchor="middle"
+     class="note"
+     id="text135">地址依据当前源码：os/src/config.rs、os/src/platform/*/qemu_virt、os/src/arch/*/paging.rs；动态 VMA 的实际边界随进程而变。</text>
+</svg>

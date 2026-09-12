@@ -1,0 +1,7 @@
+metric,value,unit,source,status
+page_cache_sequential_read,22,x,cosmos_docs/ch5-fs.typ,draft-candidate
+page_cache_sequential_write,34,x,cosmos_docs/ch5-fs.typ,draft-candidate
+page_cache_random_read,3,x,cosmos_docs/ch5-fs.typ,draft-candidate
+page_cache_random_write,2.2,x,cosmos_docs/ch5-fs.typ,draft-candidate
+trap_cache_chain,24-29,percent,cosmos_docs/ch9-buildstorm.typ,draft-candidate
+statx_chart,see-svg,percent,cosmos_docs/assets/statx_latency_compare_simple.svg,draft-candidate

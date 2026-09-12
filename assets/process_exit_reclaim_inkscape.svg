@@ -25,8 +25,8 @@
      inkscape:deskcolor="#d1d1d1"
      showguides="true"
      inkscape:zoom="1.3333333"
-     inkscape:cx="913.5"
-     inkscape:cy="195"
+     inkscape:cx="913.87502"
+     inkscape:cy="489.75001"
      inkscape:window-width="3200"
      inkscape:window-height="1876"
      inkscape:window-x="-12"
@@ -389,18 +389,6 @@
   <g
      id="arrows"
      transform="translate(8.0000001,-22.326271)">
-    <path
-       class="arrow-line"
-       d="m 850,230 v 45"
-       id="path13" />
-    <path
-       class="arrow-line"
-       d="m 850,365 v 45"
-       id="path14" />
-    <path
-       class="arrow-line"
-       d="m 850,500 v 45"
-       id="path15" />
     <path
        class="arrow-line"
        d="m 582.5,424.16699 v 45"

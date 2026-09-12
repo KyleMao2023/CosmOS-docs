@@ -1,3 +1,4 @@
 *.pdf
 !assets/*.pdf
 *.DS_Store
+*.pptx

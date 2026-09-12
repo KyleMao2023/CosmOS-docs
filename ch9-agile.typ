@@ -35,6 +35,8 @@ CosmOS 目前使用两种内核侧观测方式。它们都通过 procfs 暴露�
 
 两者经常配合使用。以文件系统优化为例，`/proc/io_perf` 可以先告诉我们 page cache 是否命中、block cache 是否被击穿、dentry cache 是否正在发挥作用；如果最终吞吐仍不理想，再用 `perf_probe` 拆开命中路径，判断耗时究竟落在 fd 查找、用户缓冲翻译、BTreeMap 查找还是 CachePage 拷贝上。换言之，`io_perf` 给方向，`perf_probe` 给切口。
 
+决赛阶段，这套组合之上又添了一件“画像”工具：`/proc/syscalls_count`（`syscalls_count` feature）按系统调用号统计调用次数与内核侧累计耗时。它回答的是排在最前面的那个问题——*这个负载到底在忙什么*。面对全新的真实负载（工具链构建）时，我们先跑一轮计数画像再决定优化顺序，`statx`/`openat` 与缺页计数的量级由此确立，元数据缓存与用户缓冲翻译微优化的优先级也有了依据。它的使用案例见本章末节的构建负载优化。
+
 == io_perf：稳定的事件仪表盘
 
 `/proc/io_perf` 最初服务于第五章的文件系统实验。那些实验需要把性能收益逐层归因：page cache、block cache、dentry cache、stat cache 各自命中了多少次，未命中了多少次，是否发生了淘汰。单看 iozone 的 KB/s 只能知道“变快了”或“变慢了”，却无法说明原因；吞吐上升可能来自 page cache 命中，也可能来自系统调用入口变短，还可能只是运行波动。

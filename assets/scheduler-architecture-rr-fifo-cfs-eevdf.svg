@@ -1,0 +1,331 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1660" viewBox="0 0 2400 1660" role="img" aria-labelledby="title desc">
+  <title id="title">xxOS 调度器结构与选择原理：RR、FIFO、CFS、EEVDF</title>
+  <desc id="desc">展示 xxOS 每个 hart 的 RunQueue、实时优先级队列、CFS 与 EEVDF fair class，以及统一的唤醒、入队、抢占和选取路径。</desc>
+
+  <defs>
+    <linearGradient id="page" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7f9fc"/>
+      <stop offset="1" stop-color="#edf2f8"/>
+    </linearGradient>
+    <linearGradient id="header" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#13233d"/>
+      <stop offset="0.58" stop-color="#1e3a5f"/>
+      <stop offset="1" stop-color="#274c77"/>
+    </linearGradient>
+    <linearGradient id="fairBlue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eff7ff"/>
+      <stop offset="1" stop-color="#dceeff"/>
+    </linearGradient>
+    <linearGradient id="fairViolet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7f2ff"/>
+      <stop offset="1" stop-color="#e9ddff"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#19324d" flood-opacity="0.11"/>
+    </filter>
+    <filter id="smallShadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#19324d" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#55718d"/>
+    </marker>
+    <marker id="arrowLight" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#9ab0c5"/>
+    </marker>
+    <marker id="arrowRed" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#d95362"/>
+    </marker>
+    <marker id="arrowViolet" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#7b5ab5"/>
+    </marker>
+    <style>
+      .font { font-family: "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", "PingFang SC", Arial, sans-serif; }
+      .mono { font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace; }
+      .title { font-size: 44px; font-weight: 760; letter-spacing: 1px; }
+      .subtitle { font-size: 20px; font-weight: 420; letter-spacing: .4px; }
+      .eyebrow { font-size: 14px; font-weight: 760; letter-spacing: 2.8px; }
+      .section { font-size: 16px; font-weight: 780; letter-spacing: 1.8px; }
+      .cardTitle { font-size: 24px; font-weight: 760; }
+      .cardSub { font-size: 15px; font-weight: 500; }
+      .body { font-size: 17px; font-weight: 450; }
+      .bodySmall { font-size: 15px; font-weight: 450; }
+      .bodyTiny { font-size: 13px; font-weight: 450; }
+      .monoSmall { font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace; font-size: 14px; }
+      .monoBody { font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace; font-size: 16px; }
+      .label { font-size: 12px; font-weight: 760; letter-spacing: 1.4px; }
+      .muted { fill: #61758a; }
+      .ink { fill: #19324d; }
+      .line { stroke: #c8d5e3; stroke-width: 1.5; }
+      .arrow { fill: none; stroke: #55718d; stroke-width: 2.6; marker-end: url(#arrow); }
+      .arrowSoft { fill: none; stroke: #9ab0c5; stroke-width: 2; marker-end: url(#arrowLight); }
+      .arrowRed { fill: none; stroke: #d95362; stroke-width: 2.6; marker-end: url(#arrowRed); }
+      .arrowViolet { fill: none; stroke: #7b5ab5; stroke-width: 2.6; marker-end: url(#arrowViolet); }
+      .dash { stroke-dasharray: 7 7; }
+    </style>
+  </defs>
+
+  <rect width="2400" height="1660" fill="url(#page)"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="2400" height="180" fill="url(#header)"/>
+  <path d="M 0 180 H 2400" stroke="#87b7d8" stroke-width="3" opacity=".65"/>
+  <text x="82" y="48" class="font eyebrow" fill="#9bc9e5">XXOS  /  SCHEDULER NOTE</text>
+  <text x="80" y="105" class="font title" fill="#ffffff">调度器结构与选择原理</text>
+  <text x="82" y="143" class="font subtitle" fill="#c6d9e8">每个 hart 的 RunQueue · RT 优先级队列 · 编译期选择 CFS / EEVDF</text>
+
+  <g filter="url(#smallShadow)">
+    <rect x="1680" y="32" width="310" height="48" rx="24" fill="#234d73" stroke="#6da4ca"/>
+    <circle cx="1708" cy="56" r="7" fill="#f3b55b"/>
+    <text x="1727" y="62" class="font bodySmall" fill="#e9f3fa">SCHED_EEVDF = 0  →  CFS</text>
+    <rect x="2010" y="32" width="310" height="48" rx="24" fill="#3e3976" stroke="#a99ae3"/>
+    <circle cx="2038" cy="56" r="7" fill="#d9b4ff"/>
+    <text x="2057" y="62" class="font bodySmall" fill="#f1eaff">SCHED_EEVDF = 1  →  EEVDF</text>
+  </g>
+
+  <!-- A. Core containers -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="220" width="680" height="540" rx="20" fill="#ffffff" stroke="#d3dfeb" stroke-width="2"/>
+  </g>
+  <text x="112" y="263" class="font section" fill="#2b6e9d">A  /  核心容器</text>
+  <text x="112" y="296" class="font cardTitle ink">每个 hart 一套本地 RunQueue</text>
+
+  <rect x="112" y="320" width="616" height="48" rx="10" fill="#19324d"/>
+  <text x="132" y="351" class="mono monoBody" fill="#f5f9fc">RUN_QUEUES [SpinNoIrqLock&lt;RunQueue&gt;; MAX_HARTS]</text>
+
+  <!-- RunQueue mini cards -->
+  <rect x="112" y="388" width="296" height="178" rx="13" fill="#eef6fc" stroke="#a9cde5" stroke-width="1.6"/>
+  <rect x="428" y="388" width="300" height="178" rx="13" fill="#eef6fc" stroke="#a9cde5" stroke-width="1.6"/>
+  <text x="132" y="419" class="font cardSub" fill="#1b6795">hart 0 : RunQueue</text>
+  <text x="448" y="419" class="font cardSub" fill="#1b6795">hart n : RunQueue</text>
+  <line x1="132" y1="433" x2="388" y2="433" stroke="#bdd9eb"/>
+  <line x1="448" y1="433" x2="708" y2="433" stroke="#bdd9eb"/>
+  <text x="132" y="458" class="mono monoSmall" fill="#315d7b">rt_queues[0..=99]</text>
+  <text x="132" y="481" class="font bodyTiny muted">100 个槽位；可用优先级 1..99</text>
+  <text x="132" y="510" class="mono monoSmall" fill="#315d7b">highest_rt_prio</text>
+  <text x="132" y="533" class="font bodyTiny muted">更大的数 = 更高 RT 优先级</text>
+  <text x="448" y="458" class="mono monoSmall" fill="#315d7b">cfs_tasks : BTreeMap</text>
+  <text x="448" y="481" class="font bodyTiny muted">fair entities 的有序容器</text>
+  <text x="448" y="510" class="mono monoSmall" fill="#315d7b">cfs_load · min_vruntime</text>
+  <text x="448" y="533" class="font bodyTiny muted">负载选择 / 唤醒放置基线</text>
+
+  <!-- task state strip -->
+  <rect x="112" y="586" width="616" height="138" rx="13" fill="#f8fafc" stroke="#d4e0ea" stroke-width="1.5"/>
+  <text x="132" y="615" class="font cardSub" fill="#19324d">TaskSchedState：任务的调度账本</text>
+  <text x="132" y="643" class="mono monoSmall" fill="#48647e">policy · rt_priority · remaining_slice_ticks</text>
+  <text x="132" y="669" class="mono monoSmall" fill="#48647e">nice · weight · vruntime_ns · eevdf_deadline_ns</text>
+  <text x="132" y="695" class="mono monoSmall" fill="#48647e">on_rq · on_cpu · resched_reason · cpu_affinity_mask</text>
+  <rect x="574" y="602" width="134" height="31" rx="15" fill="#e6eef6"/>
+  <text x="641" y="623" class="font label" text-anchor="middle" fill="#45647e">TCB INNER LOCK</text>
+
+  <!-- B. Unified path -->
+  <g filter="url(#shadow)">
+    <rect x="800" y="220" width="1520" height="540" rx="20" fill="#ffffff" stroke="#d3dfeb" stroke-width="2"/>
+  </g>
+  <text x="832" y="263" class="font section" fill="#2b6e9d">B  /  统一调度路径</text>
+  <text x="832" y="296" class="font cardTitle ink">入队、抢占与选取都围绕本地 hart 运行</text>
+
+  <!-- enqueue lane -->
+  <text x="840" y="332" class="font label" fill="#8498aa">ENQUEUE / WAKEUP</text>
+  <rect x="840" y="348" width="220" height="56" rx="10" fill="#f5f8fb" stroke="#cbd9e5"/>
+  <text x="950" y="372" class="font bodySmall ink" text-anchor="middle">wakeup / add_task</text>
+  <text x="950" y="392" class="font bodyTiny muted" text-anchor="middle">Runnable</text>
+  <path d="M 1060 376 H 1100" class="arrow"/>
+  <rect x="1100" y="348" width="286" height="56" rx="10" fill="#eef7fb" stroke="#9fcde0"/>
+  <text x="1243" y="372" class="mono monoSmall" text-anchor="middle" fill="#245a78">select_target_hart</text>
+  <text x="1243" y="392" class="font bodyTiny muted" text-anchor="middle">affinity；RT 偏好 / fair 最轻</text>
+  <path d="M 1386 376 H 1426" class="arrow"/>
+  <rect x="1426" y="348" width="286" height="56" rx="10" fill="#eef9f4" stroke="#a9d9c0"/>
+  <text x="1569" y="372" class="mono monoSmall" text-anchor="middle" fill="#266847">enqueue_locked</text>
+  <text x="1569" y="392" class="font bodyTiny muted" text-anchor="middle">RT 队列 / fair tree 分流</text>
+  <path d="M 1712 376 H 1752" class="arrow"/>
+  <rect x="1752" y="348" width="270" height="56" rx="10" fill="#fff7eb" stroke="#ebc98d"/>
+  <text x="1887" y="372" class="font bodySmall ink" text-anchor="middle">notify / preempt</text>
+  <text x="1887" y="392" class="font bodyTiny muted" text-anchor="middle">本核 resched · 远核 IPI</text>
+  <path d="M 2022 376 H 2062" class="arrow"/>
+  <rect x="2062" y="348" width="226" height="56" rx="10" fill="#fff0f1" stroke="#e8aab1"/>
+  <text x="2175" y="372" class="font bodySmall" text-anchor="middle" fill="#a93b4a">higher priority?</text>
+  <text x="2175" y="392" class="font bodyTiny muted" text-anchor="middle">设置 deferred resched</text>
+
+  <!-- target selection legend -->
+  <rect x="840" y="422" width="650" height="66" rx="11" fill="#f8fafc" stroke="#d5e0e9"/>
+  <circle cx="864" cy="445" r="6" fill="#d95362"/>
+  <text x="880" y="450" class="font bodySmall ink">RT：优先使用 preferred hart（必须满足 affinity）</text>
+  <circle cx="864" cy="470" r="6" fill="#4b91bd"/>
+  <text x="880" y="475" class="font bodySmall ink">Other：比较各 hart 的 (cfs_load, cfs_nr_running)</text>
+  <text x="1283" y="475" class="font bodyTiny muted">→ 选最轻队列</text>
+
+  <!-- pick lane -->
+  <text x="840" y="523" class="font label" fill="#8498aa">PICK NEXT</text>
+  <rect x="840" y="540" width="250" height="62" rx="11" fill="#19324d"/>
+  <text x="965" y="567" class="mono monoBody" text-anchor="middle" fill="#ffffff">pick_next_task(hart)</text>
+  <text x="965" y="588" class="font bodyTiny" text-anchor="middle" fill="#b8cfdf">dequeue_task → steal_cfs_task</text>
+  <path d="M 1090 571 H 1130" class="arrow"/>
+  <polygon points="1190,520 1262,571 1190,622 1118,571" fill="#fff8eb" stroke="#e3bd73" stroke-width="2"/>
+  <text x="1190" y="566" class="font bodySmall ink" text-anchor="middle">RT 有任务？</text>
+  <text x="1190" y="586" class="font bodyTiny muted" text-anchor="middle">highest_rt_prio</text>
+  <path d="M 1262 571 H 1310" class="arrowRed"/>
+  <text x="1280" y="556" class="font label" fill="#c14b59">YES</text>
+  <rect x="1310" y="528" width="336" height="86" rx="12" fill="#fff1f2" stroke="#e2a5ad" stroke-width="1.7"/>
+  <text x="1478" y="557" class="mono monoSmall" text-anchor="middle" fill="#a83d4b">dequeue_highest_rt()</text>
+  <text x="1478" y="581" class="font bodySmall ink" text-anchor="middle">最高优先级队列 pop_front</text>
+  <text x="1478" y="601" class="font bodyTiny muted" text-anchor="middle">FIFO / RR 在此共享取队头</text>
+  <path d="M 1190 622 V 654 H 1310" class="arrow"/>
+  <text x="1205" y="647" class="font label" fill="#61758a">NO</text>
+  <rect x="1310" y="628" width="518" height="86" rx="12" fill="#edf6ff" stroke="#a6cce6" stroke-width="1.7"/>
+  <text x="1569" y="657" class="font bodySmall ink" text-anchor="middle">fair：CFS 取最小 vruntime；EEVDF 取可运行实体中最早 deadline</text>
+  <text x="1569" y="681" class="font bodyTiny muted" text-anchor="middle">本地无任务时，仅尝试跨 hart steal CFS，不 steal RT</text>
+  <path d="M 1646 571 H 1870" class="arrow"/>
+  <path d="M 1828 671 H 1870" class="arrow"/>
+  <rect x="1870" y="540" width="418" height="174" rx="13" fill="#f5f8fb" stroke="#c8d7e4" stroke-width="1.7"/>
+  <text x="2079" y="572" class="font cardSub" text-anchor="middle" fill="#19324d">Running / context switch</text>
+  <text x="2079" y="603" class="mono monoSmall" text-anchor="middle" fill="#48647e">on_cpu = true · on_rq = false</text>
+  <line x1="1910" y1="625" x2="2248" y2="625" stroke="#d2dee8"/>
+  <text x="2079" y="652" class="font bodyTiny muted" text-anchor="middle">安全点处理 ReschedReason</text>
+  <text x="2079" y="678" class="font bodyTiny muted" text-anchor="middle">suspend_current_and_run_next → __switch</text>
+  <text x="2079" y="703" class="font bodyTiny muted" text-anchor="middle">退出任务由 stop_task 暂保内核栈</text>
+
+  <!-- Four policy cards -->
+  <text x="80" y="808" class="font section" fill="#2b6e9d">C  /  四种策略的队列结构与决策规则</text>
+  <text x="2320" y="808" class="font bodySmall" text-anchor="end" fill="#71869a">共同前提：RT class 总是先于 fair class</text>
+
+  <!-- FIFO card -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="838" width="540" height="552" rx="18" fill="#ffffff" stroke="#e1c5c9" stroke-width="2"/>
+    <rect x="80" y="838" width="540" height="11" rx="5" fill="#d95362"/>
+  </g>
+  <circle cx="123" cy="889" r="24" fill="#fff0f1" stroke="#e7a5ad"/>
+  <text x="123" y="897" class="font cardTitle" text-anchor="middle" fill="#b53e4d">F</text>
+  <text x="164" y="889" class="font cardTitle ink">FIFO</text>
+  <text x="164" y="915" class="font cardSub" fill="#b14b57">SCHED_FIFO · 实时 / 静态优先级</text>
+  <rect x="108" y="946" width="484" height="76" rx="11" fill="#fff5f5" stroke="#edc1c6"/>
+  <text x="128" y="973" class="mono monoSmall" fill="#a83d4b">rt_queues[prio] : VecDeque&lt;TCB&gt;</text>
+  <text x="128" y="998" class="font bodySmall ink">prio 99  &gt;  …  &gt;  prio 1；同一优先级按队列顺序</text>
+  <g>
+    <rect x="128" y="1040" width="92" height="36" rx="8" fill="#f8dfe2" stroke="#e2a5ad"/><text x="174" y="1064" class="font bodySmall" text-anchor="middle" fill="#8f3745">T₁</text>
+    <rect x="230" y="1040" width="92" height="36" rx="8" fill="#f8dfe2" stroke="#e2a5ad"/><text x="276" y="1064" class="font bodySmall" text-anchor="middle" fill="#8f3745">T₂</text>
+    <rect x="332" y="1040" width="92" height="36" rx="8" fill="#f8dfe2" stroke="#e2a5ad"/><text x="378" y="1064" class="font bodySmall" text-anchor="middle" fill="#8f3745">T₃</text>
+    <path d="M 438 1058 H 545" class="arrowRed"/>
+    <text x="540" y="1042" class="font bodyTiny" text-anchor="end" fill="#b14b57">pop_front</text>
+  </g>
+  <line x1="108" y1="1102" x2="592" y2="1102" class="line"/>
+  <text x="108" y="1132" class="font body" fill="#19324d">运行至阻塞 / 主动让出 / 更高 RT 到来</text>
+  <text x="108" y="1162" class="font bodySmall muted">• timer tick 只检查是否有更高优先级 RT 任务</text>
+  <text x="108" y="1189" class="font bodySmall muted">• 同优先级任务不会因 tick 被强制轮转</text>
+  <text x="108" y="1216" class="font bodySmall muted">• 常规入队在队尾；被高优先级抢占后可置队头</text>
+  <rect x="108" y="1250" width="484" height="101" rx="11" fill="#f9fbfd" stroke="#dce5ed"/>
+  <text x="128" y="1278" class="font label" fill="#a83d4b">PREEMPTION</text>
+  <text x="128" y="1305" class="font bodySmall ink">只有 incoming.rt_priority &gt; current.rt_priority</text>
+  <text x="128" y="1330" class="font bodyTiny muted">ReschedReason::HigherRtPriority</text>
+
+  <!-- RR card -->
+  <g filter="url(#shadow)">
+    <rect x="640" y="838" width="540" height="552" rx="18" fill="#ffffff" stroke="#e4d0b0" stroke-width="2"/>
+    <rect x="640" y="838" width="540" height="11" rx="5" fill="#e69b45"/>
+  </g>
+  <circle cx="683" cy="889" r="24" fill="#fff6e9" stroke="#eccb9c"/>
+  <text x="683" y="897" class="font cardTitle" text-anchor="middle" fill="#b36d21">R</text>
+  <text x="724" y="889" class="font cardTitle ink">RR</text>
+  <text x="724" y="915" class="font cardSub" fill="#a96b2b">SCHED_RR · 实时 / 同优先级轮转</text>
+  <rect x="668" y="946" width="484" height="76" rx="11" fill="#fff8ed" stroke="#efd5ae"/>
+  <text x="688" y="973" class="mono monoSmall" fill="#a96b2b">rt_queues[prio] : VecDeque&lt;TCB&gt;</text>
+  <text x="688" y="998" class="font bodySmall ink">同 FIFO 容器；时间片耗尽后重新排到队尾</text>
+  <g>
+    <rect x="688" y="1040" width="92" height="36" rx="8" fill="#f8e4c7" stroke="#e9c58f"/><text x="734" y="1064" class="font bodySmall" text-anchor="middle" fill="#9c6021">T₁</text>
+    <rect x="790" y="1040" width="92" height="36" rx="8" fill="#f8e4c7" stroke="#e9c58f"/><text x="836" y="1064" class="font bodySmall" text-anchor="middle" fill="#9c6021">T₂</text>
+    <rect x="892" y="1040" width="92" height="36" rx="8" fill="#f8e4c7" stroke="#e9c58f"/><text x="938" y="1064" class="font bodySmall" text-anchor="middle" fill="#9c6021">T₃</text>
+    <path d="M 998 1058 C 1035 1018 1083 1018 1124 1058" fill="none" stroke="#e69b45" stroke-width="2.4" marker-end="url(#arrow)"/>
+    <text x="1128" y="1042" class="font bodyTiny" text-anchor="end" fill="#a96b2b">tail</text>
+  </g>
+  <line x1="668" y1="1102" x2="1152" y2="1102" class="line"/>
+  <text x="668" y="1132" class="font body" fill="#19324d">默认 time_slice_ticks = 10</text>
+  <text x="668" y="1162" class="font bodySmall muted">• 每个 tick：remaining_slice_ticks − 1</text>
+  <text x="668" y="1189" class="font bodySmall muted">• 到期且存在 ≥ 同优先级任务 → 让出并重置</text>
+  <text x="668" y="1216" class="font bodySmall muted">• 没有同级队友 → 直接重置时间片继续运行</text>
+  <rect x="668" y="1250" width="484" height="101" rx="11" fill="#fffaf3" stroke="#f0ddbf"/>
+  <text x="688" y="1278" class="font label" fill="#b36d21">PREEMPTION</text>
+  <text x="688" y="1305" class="font bodySmall ink">更高 RT：立即抢占；同级：时间片到期轮转</text>
+  <text x="688" y="1330" class="font bodyTiny muted">ReschedReason::HigherRtPriority / RrTimesliceExpired</text>
+
+  <!-- CFS card -->
+  <g filter="url(#shadow)">
+    <rect x="1200" y="838" width="540" height="552" rx="18" fill="url(#fairBlue)" stroke="#b1d1e9" stroke-width="2"/>
+    <rect x="1200" y="838" width="540" height="11" rx="5" fill="#4b91bd"/>
+  </g>
+  <circle cx="1243" cy="889" r="24" fill="#e3f1fb" stroke="#a5cce4"/>
+  <text x="1243" y="897" class="font cardTitle" text-anchor="middle" fill="#2d719b">C</text>
+  <text x="1284" y="889" class="font cardTitle ink">CFS</text>
+  <text x="1284" y="915" class="font cardSub" fill="#2f7198">SCHED_OTHER · 默认 fair class</text>
+  <rect x="1228" y="946" width="484" height="76" rx="11" fill="#f5fbff" stroke="#b9d9eb"/>
+  <text x="1248" y="973" class="mono monoSmall" fill="#2d719b">BTreeMap&lt;(vruntime_ns, task_ptr), TCB&gt;</text>
+  <text x="1248" y="998" class="font bodySmall ink">pick：key 最小的实体（最左节点）</text>
+  <rect x="1228" y="1040" width="484" height="52" rx="10" fill="#e1f0fa" stroke="#b5d5e8"/>
+  <text x="1470" y="1072" class="mono monoSmall" text-anchor="middle" fill="#2d719b">Δvruntime = Δexec × 1024 / weight</text>
+  <line x1="1228" y1="1118" x2="1712" y2="1118" class="line"/>
+  <text x="1228" y="1148" class="font bodySmall ink">wakeup placement</text>
+  <text x="1228" y="1174" class="mono monoSmall" fill="#386d8e">max(saved_vruntime, min_vruntime − 1 ms)</text>
+  <text x="1228" y="1204" class="font bodySmall muted">• target latency = 24 ms；min granularity = 3 ms</text>
+  <text x="1228" y="1231" class="font bodySmall muted">• 按总 load 计算 ideal runtime，再判断 tick 抢占</text>
+  <rect x="1228" y="1250" width="484" height="101" rx="11" fill="#f8fcff" stroke="#c4deed"/>
+  <text x="1248" y="1278" class="font label" fill="#2d719b">YIELD / PREEMPTION</text>
+  <text x="1248" y="1305" class="font bodySmall ink">sched_yield：vruntime + 3 ms penalty</text>
+  <text x="1248" y="1330" class="font bodyTiny muted">wakeup：incoming vruntime + 1 ms &lt; current → CfsPreempt</text>
+
+  <!-- EEVDF card -->
+  <g filter="url(#shadow)">
+    <rect x="1760" y="838" width="560" height="552" rx="18" fill="url(#fairViolet)" stroke="#c8b8e9" stroke-width="2"/>
+    <rect x="1760" y="838" width="560" height="11" rx="5" fill="#7b5ab5"/>
+  </g>
+  <circle cx="1803" cy="889" r="24" fill="#eee6ff" stroke="#c5b4e6"/>
+  <text x="1803" y="897" class="font cardTitle" text-anchor="middle" fill="#65469b">E</text>
+  <text x="1844" y="889" class="font cardTitle ink">EEVDF</text>
+  <text x="1844" y="915" class="font cardSub" fill="#694c9f">SCHED_OTHER · feature = sched_eevdf</text>
+  <rect x="1788" y="946" width="504" height="76" rx="11" fill="#fbf9ff" stroke="#d3c6ed"/>
+  <text x="1808" y="973" class="mono monoSmall" fill="#694c9f">BTreeMap&lt;(virtual_deadline_ns, task_ptr), TCB&gt;</text>
+  <text x="1808" y="998" class="font bodySmall ink">复用 fair tree，但排序键改为 deadline</text>
+  <rect x="1788" y="1040" width="504" height="52" rx="10" fill="#eee7ff" stroke="#d2c3ef"/>
+  <text x="2040" y="1072" class="mono monoSmall" text-anchor="middle" fill="#694c9f">D = vruntime + slice × 1024 / weight</text>
+  <line x1="1788" y1="1118" x2="2292" y2="1118" class="line"/>
+  <text x="1788" y="1148" class="font bodySmall ink">两步选择</text>
+  <text x="1788" y="1174" class="font bodySmall" fill="#694c9f">① eligible：vruntime ≤ weighted average</text>
+  <text x="1788" y="1201" class="font bodySmall" fill="#694c9f">② eligible 中选最早 D；无 eligible 时取树首项</text>
+  <text x="1788" y="1231" class="font bodySmall muted">默认 request slice = 3 ms；比较 slack = 1 ms</text>
+  <rect x="1788" y="1250" width="504" height="101" rx="11" fill="#fcfaff" stroke="#dbd0ef"/>
+  <text x="1808" y="1278" class="font label" fill="#694c9f">LAG SUMMARY / PREEMPTION</text>
+  <text x="1808" y="1305" class="font bodySmall ink">RunQueue 缓存 weighted_vruntime / total_weight</text>
+  <text x="1808" y="1330" class="font bodyTiny muted">eligible deadline + 1 ms &lt; current deadline → CfsPreempt</text>
+
+  <!-- lifecycle -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="1430" width="2240" height="160" rx="18" fill="#ffffff" stroke="#d3dfeb" stroke-width="2"/>
+  </g>
+  <text x="112" y="1464" class="font section" fill="#2b6e9d">D  /  任务状态与安全点</text>
+  <text x="112" y="1490" class="font bodyTiny muted">队列容器负责“谁先运行”；任务状态负责“当前由谁拥有”</text>
+  <rect x="438" y="1450" width="222" height="58" rx="11" fill="#eef7fb" stroke="#abd3e4"/>
+  <text x="549" y="1475" class="font bodySmall ink" text-anchor="middle">Runnable</text>
+  <text x="549" y="1495" class="mono monoSmall" text-anchor="middle" fill="#4c718a">on_rq = true</text>
+  <path d="M 660 1479 H 710" class="arrow"/>
+  <rect x="710" y="1450" width="222" height="58" rx="11" fill="#f4f8fb" stroke="#c7d6e2"/>
+  <text x="821" y="1475" class="font bodySmall ink" text-anchor="middle">dequeue</text>
+  <text x="821" y="1495" class="mono monoSmall" text-anchor="middle" fill="#4c718a">on_cpu = true</text>
+  <path d="M 932 1479 H 982" class="arrow"/>
+  <rect x="982" y="1450" width="222" height="58" rx="11" fill="#fff8eb" stroke="#e8c883"/>
+  <text x="1093" y="1475" class="font bodySmall ink" text-anchor="middle">Running</text>
+  <text x="1093" y="1495" class="mono monoSmall" text-anchor="middle" fill="#876522">on_rq = false</text>
+  <path d="M 1204 1479 H 1254" class="arrow"/>
+  <rect x="1254" y="1450" width="330" height="58" rx="11" fill="#fff0f1" stroke="#e3a6ad"/>
+  <text x="1419" y="1475" class="font bodySmall ink" text-anchor="middle">timer / wakeup / yield / block</text>
+  <text x="1419" y="1495" class="font bodyTiny" text-anchor="middle" fill="#a94250">产生 ReschedReason（延后到安全点）</text>
+  <path d="M 1584 1479 H 1634" class="arrowRed"/>
+  <rect x="1634" y="1450" width="330" height="58" rx="11" fill="#f8f3ff" stroke="#cbb9e9"/>
+  <text x="1799" y="1475" class="mono monoSmall" text-anchor="middle" fill="#694c9f">suspend_current_and_run_next</text>
+  <text x="1799" y="1495" class="font bodyTiny" text-anchor="middle" fill="#7b659b">enqueue / sleep → __switch</text>
+  <path d="M 1799 1510 C 1799 1542 560 1542 549 1510" fill="none" stroke="#9ab0c5" stroke-width="2.2" stroke-dasharray="7 7" marker-end="url(#arrowLight)"/>
+  <text x="1190" y="1559" class="font bodyTiny" text-anchor="middle" fill="#7890a4">循环：重新进入本地 RunQueue 的选择秩序</text>
+  <rect x="1988" y="1450" width="300" height="58" rx="11" fill="#f4f6f8" stroke="#cbd6df"/>
+  <text x="2138" y="1475" class="font bodySmall ink" text-anchor="middle">Zombie / stop_task</text>
+  <text x="2138" y="1495" class="font bodyTiny muted" text-anchor="middle">退出时保留栈引用至切换完成</text>
+
+  <!-- footer -->
+  <text x="80" y="1630" class="font bodyTiny" fill="#6c8295">实现锚点：os/src/sched/runqueue.rs · policy.rs · api.rs · processor.rs · task/task.rs · syscall/sched.rs</text>
+  <text x="2320" y="1630" class="font bodyTiny" text-anchor="end" fill="#6c8295">current worktree · 2026-08-18</text>
+</svg>

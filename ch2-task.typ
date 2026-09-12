@@ -1,22 +1,25 @@
-// 第二章：任务调度 —— 由 main.typ 在 `= 任务调度` 之后 #include。
+// 第二章：任务与调度 —— 由 main.typ 在 `= 任务与调度` 之后 #include。
 
-本章关注 CosmOS 的任务调度子系统。调度器处在内核控制流的中心：用户程序通过 trap 进入内核，内核在系统调用、中断、阻塞等待或信号返回等节点上重新评估当前任务是否还能继续运行；一旦需要切换，调度器负责保存当前任务的内核态上下文，选择另一个可运行任务，并把 CPU 控制权交给它。换言之，调度器并不只是一个“队列选择算法”，它同时定义了任务生命周期、阻塞—唤醒语义、跨 hart 迁移和上下文切换的正确边界。
+本章关注 CosmOS 的任务与调度子系统。调度器处在内核控制流的中心：用户程序通过 trap 进入内核，内核在系统调用、中断、阻塞等待或信号返回等节点上重新评估当前任务是否还能继续运行；一旦需要切换，调度器负责保存当前任务的内核态上下文，选择另一个可运行任务，并把 CPU 控制权交给它。换言之，调度器并不只是一个“队列选择算法”，它同时定义了任务生命周期、阻塞—唤醒语义、跨 hart 迁移和上下文切换的正确边界。本章也明确区分任务与进程：任务是 CPU 的调度实体，进程管理章节再讨论这些任务背后的资源生命周期。
 
 CosmOS 的调度实现位于 `os/src/sched/`，任务对象定义位于 `os/src/task/`。两者刻意分层：`task` 模块描述“任务是什么”，包括内核栈、trap 上下文、所属进程、等待原因和信号状态；`sched` 模块描述“任务如何被运行”，包括 per-hart 运行队列、调度策略、抢占请求和汇编上下文切换。这样的划分使进程管理、文件系统阻塞、futex、poll、信号与定时器都能复用同一套调度入口，而不需要各自实现私有的切换逻辑。
 
-从策略上看，CosmOS 没有停留在最简单的 FIFO 调度器，而是实现了一个 Linux 风格的多调度类框架：实时任务支持 `SCHED_FIFO` 与 `SCHED_RR`，普通任务使用 CFS 风格的虚拟运行时间，用户态可以通过 `sched_*`、`setpriority` 和 `sched_setaffinity` 等系统调用改变调度属性。每个 hart 拥有一条本地运行队列，timer 与 IPI 只提出重新调度请求，真正切换统一发生在明确的安全点。
+从策略上看，CosmOS 实现了一个 Linux 风格的多调度类框架：实时任务支持 `SCHED_FIFO` 与 `SCHED_RR`，普通任务 `SCHED_OTHER` 在编译期可选择 CFS 或 EEVDF。也就是说，用户可见的策略有三类，但普通 fair class 有两种实现模式；FIFO/RR 始终共享 RT 优先级队列，CFS/EEVDF 共享普通任务的运行队列结构。用户态可以通过 `sched_*`、`setpriority` 和 `sched_setaffinity` 等系统调用改变调度属性。每个 hart 拥有一条本地运行队列，timer 与 IPI 只提出重新调度请求，真正切换统一发生在明确的安全点。
 
 == 设计总览
 
 传统的简易内核常把调度器写成一个全局就绪队列：任务阻塞时从队列中消失，唤醒时再放回队尾，时钟中断到来时取下一个任务运行。这种模型足以解释协作式调度，却难以支撑三个现实需求。第一，Linux 用户态要求 nice、实时优先级、时间片、CPU 亲和性等接口具有可观察语义；第二，多 hart 环境下，一个全局队列会让所有 CPU 在每次调度时争用同一把锁；第三，阻塞与唤醒可能发生在不同 hart 上，若没有清晰的“任务是否仍在 CPU 上”的状态，远端 hart 可能切入一个寄存器尚未保存完成的任务。
 
-CosmOS 因此采用“per-hart 调度器 + 多调度类 + 延迟抢占”的结构。每个 hart 有一个 `Processor` 保存当前任务和 idle 上下文，有一个 `RunQueue` 保存该 hart 的可运行任务。实时任务进入按优先级划分的 FIFO 队列，普通任务进入以虚拟运行时间排序的 CFS 队列。timer 中断、软件中断和唤醒路径只设置 `resched_reason`，等当前 trap 即将返回用户态时再调用 `schedule_if_needed` 完成切换。
+CosmOS 因此采用“per-hart 调度器 + 多调度类 + 延迟抢占”的结构。每个 hart 有一个 `Processor` 保存当前任务和 idle 上下文，有一个 `RunQueue` 保存该 hart 的可运行任务。实时任务进入按优先级划分的 FIFO 队列，普通任务进入 fair tree：CFS 以 `vruntime` 排序，EEVDF 以 virtual deadline 排序并额外判断 eligibility。timer 中断、软件中断和唤醒路径只设置 `resched_reason`，等当前 trap 即将返回用户态时再调用 `schedule_if_needed` 完成切换。
 
 可以把整个调度循环概括为下面的路径：
 
-#image("/assets/scheduler_path_bluegreen.png")
+#figure(
+  image("assets/scheduler-architecture-rr-fifo-cfs-eevdf.svg", width: 100%),
+  caption: [CosmOS 调度器的容器、选择路径与四种策略],
+) <scheduler_architecture>
 
-这一流程有一个重要特征：调度器自己的控制流是显式存在的。任务之间不是直接互相跳转，而是统一切回每个 hart 的 idle 调度上下文，再由 idle loop 选择下一项工作。这让任务退出、内核栈释放、阻塞取消和跨 hart 唤醒都更容易推理。
+这张图同时展示了调度器的两条主线：入队侧根据 affinity、任务类别和负载选择目标 hart，选取侧严格遵循“最高 RT 优先级在前，fair class 在后”的顺序。调度器自己的控制流是显式存在的：任务之间不是直接互相跳转，而是统一切回每个 hart 的 idle 调度上下文，再由 idle loop 选择下一项工作。这让任务退出、内核栈释放、阻塞取消和跨 hart 唤醒都更容易推理。
 
 == 核心数据结构
 
@@ -87,20 +90,23 @@ pub struct TaskSchedState {
     pub exec_start_ns: u64,
     pub cfs_slice_start_ns: u64,
     pub cfs_rq_key: Option<(u64, usize)>,
+    pub eevdf_deadline_ns: u64,
+    pub cfs_initialized: bool,
     pub resched_reason: Option<ReschedReason>,
+    pub rt_enqueue_head: bool,
     pub cpu_affinity_mask: usize,
 }
 ```
 
-`last_cpu` 是唤醒和定时器选择目标 hart 的默认依据；`on_rq` 防止重复入队；`resched_reason` 表示当前任务应在安全点离开 CPU；`cpu_affinity_mask` 用位图限制任务可以运行在哪些 hart 上。普通任务还维护 `vruntime_ns`、`weight`、`exec_start_ns` 等 CFS 统计字段，实时任务则主要使用 `rt_priority` 和 `remaining_slice_ticks`。
+`last_cpu` 是唤醒和定时器选择目标 hart 的默认依据；`on_rq` 防止重复入队；`resched_reason` 表示当前任务应在安全点离开 CPU；`cpu_affinity_mask` 用位图限制任务可以运行在哪些 hart 上。普通任务还维护 `vruntime_ns`、`weight`、`exec_start_ns` 等 fair-class 统计字段；CFS 将 `cfs_rq_key` 解释为 `(vruntime, task_ptr)`，EEVDF 则解释为 `(virtual_deadline, task_ptr)`，并把当前请求的 deadline 保存在 `eevdf_deadline_ns`。实时任务则主要使用 `rt_priority`、`remaining_slice_ticks` 和 `rt_enqueue_head`。
 
 == 调度策略
 
-CosmOS 当前支持三类可运行任务策略：`SCHED_FIFO`、`SCHED_RR` 与 `SCHED_OTHER`。内部还有一个 `SchedPolicy::Idle`，只表示 idle 调度上下文，不作为普通任务入队。
+从用户可见的 Linux 策略编号看，CosmOS 当前支持三类可运行任务策略：`SCHED_FIFO`、`SCHED_RR` 与 `SCHED_OTHER`。但 `SCHED_OTHER` 有两个编译期 fair-class 实现：默认的 CFS，以及通过 `SCHED_EEVDF=1` / `sched_eevdf` feature 选择的 EEVDF。因此本章按四种调度模式解释它们的结构与原理；它们并不是四个互相独立的 `SchedPolicy` 枚举值。内部还有一个 `SchedPolicy::Idle`，只表示 idle 调度上下文，不作为普通任务入队。
 
 === 实时调度类
 
-实时任务的优先级范围是 1 到 99，数值越大优先级越高。每个 `RunQueue` 为实时调度类维护 100 个 `VecDeque`，并用 `highest_rt_prio` 缓存当前最高非空优先级。选择任务时，调度器总是先检查实时队列；只要存在实时任务，普通 CFS 任务就不会被选中。
+实时任务的优先级范围是 1 到 99，数值越大优先级越高。每个 `RunQueue` 为实时调度类维护 100 个 `VecDeque` 槽位（0 号不作为用户实时优先级），并用 `highest_rt_prio` 缓存当前最高非空优先级。选择任务时，调度器总是先检查实时队列；只要存在实时任务，普通 CFS/EEVDF 任务就不会被选中。
 
 `SCHED_FIFO` 的语义是“高优先级先运行，同优先级 FIFO”。一个 FIFO 任务一旦获得 CPU，不会因为时间片耗尽而被同优先级任务轮转；它只会在主动阻塞、主动让出、退出，或更高优先级任务进入运行队列时离开 CPU。timer tick 对 FIFO 任务只做一件事：检查本 hart 是否已有更高优先级实时任务可运行，若有则设置 `HigherRtPriority`。
 
@@ -145,28 +151,72 @@ $
 
 这相当于给短睡眠的交互型任务一点响应优势，但不允许长期睡眠任务无限“攒优先级”。当新唤醒任务的 `vruntime` 明显小于当前运行任务时，唤醒路径会设置 `CfsPreempt`，让当前任务在安全点切出。
 
+=== EEVDF：带 eligibility 的虚拟截止时间
+
+EEVDF（Earliest Eligible Virtual Deadline First）是 CosmOS 对普通 fair class 提供的另一种编译期实现。打开 `SCHED_EEVDF=1` 后，`os/Makefile` 为内核加入 `sched_eevdf` feature；`SCHED_FIFO` 与 `SCHED_RR` 的实时路径不变，只有 `SCHED_OTHER` 的排序和抢占判断从 CFS 切换为 EEVDF。这里的“deadline”是公平调度内部的虚拟排序量，不是 Linux `SCHED_DEADLINE` 那个独立的实时调度类。
+
+EEVDF 仍然沿用 CFS 的 `vruntime` 账本和 nice 权重，但不直接把最小 `vruntime` 当作唯一选择条件。对任务 i，设 `v_i` 为其虚拟运行时间、`w_i` 为其权重、`s` 为本次 fair request 的长度，则当前实现计算：
+
+$
+  D_i = v_i + s times "NICE_0_LOAD" / w_i \
+  v_"avg" = (w_1 times v_1 + dots + w_n times v_n) / (w_1 + dots + w_n)
+$
+
+默认 `s = EEVDF_DEFAULT_SLICE_NS = 3 ms`，`NICE_0_LOAD = 1024`。先用加权平均虚拟运行时间判断资格：
+
+$
+  "eligible"(i) "iff" v_i <= v_"avg"
+$
+
+然后在 eligible 的任务中选择 `D_i` 最小者。由于 `cfs_tasks` 按 `(virtual_deadline, task_ptr)` 排序，当前实现可以从树的最早 deadline 开始寻找第一个 eligible 实体；如果暂时没有 eligible 实体，则退化为取树首项，保证调度器仍能向前推进。运行中的 fair 任务不在 `cfs_tasks` 中，因此 `RunQueue` 缓存队列中实体的加权 `vruntime` 分子与权重分母，在比较时按需要把当前任务临时加入平均值计算。
+
+EEVDF 的 timer 抢占也不是“每个 tick 无条件轮转”。当前任务至少运行一个 `EEVDF_DEFAULT_SLICE_NS` 后，调度器才比较最早 eligible deadline；只有当
+
+$
+  D_"incoming" + "EEVDF_WAKEUP_GRANULARITY_NS" < D_"current"
+$
+
+时，才设置 `CfsPreempt`。唤醒路径使用同一类 deadline 比较，并以 `EEVDF_WAKEUP_GRANULARITY_NS = 1 ms` 作为比较余量。这使得 EEVDF 同时保留了 nice 加权公平性和“先服务已经 eligible 且 deadline 更早实体”的选择原则。
+
+#figure(
+  table(
+    columns: (1.2fr, 2fr, 2fr),
+    [维度], [CFS], [EEVDF],
+    [fair tree key], [`(vruntime, task_ptr)`], [`(virtual_deadline, task_ptr)`],
+    [选择资格], [直接比较最小 `vruntime`], [`vruntime <= v_avg` 后比较 deadline],
+    [timer 抢占], [ideal runtime + `vruntime` 差距], [fair slice 到期且存在更早 eligible deadline],
+    [共享状态], [`nice`、`weight`、`vruntime`、`min_vruntime`], [左侧状态全部复用，另加 deadline 与加权平均缓存],
+  ),
+  caption: [CFS 与 EEVDF 的实现差异],
+)
+
 === Deadline 属性的兼容处理
 
-Linux 还定义了 `SCHED_DEADLINE`，但它需要 EDF/CBS 一类更复杂的实时调度机制。CosmOS 当前并不实现 deadline 调度类；系统调用层只校验 `runtime <= deadline <= period` 等基本合法性，并把 deadline 相关字段保存为用户可读属性，实际执行仍落在普通公平调度类下。这样做的目的不是声称支持 deadline 实时性，而是让用户态兼容性测试能观察到合理的 `sched_getattr` 行为。
+Linux 还定义了 `SCHED_DEADLINE`，但它需要 EDF/CBS 一类独立的实时调度机制。CosmOS 当前并不实现这个独立调度类；系统调用层只校验 `runtime <= deadline <= period` 等基本合法性，并把 deadline 相关字段保存为用户可读属性，实际执行仍落在 `SCHED_OTHER` 的 CFS 或 EEVDF fair class 下。不要把 EEVDF 的 `virtual_deadline` 与 Linux 用户态 `sched_deadline` 混为一谈：前者是内部排序量，后者目前只是兼容性字段。
 
 == 运行队列
 
-每个 hart 的 `RunQueue` 同时保存实时队列和 CFS 队列：
+每个 hart 的 `RunQueue` 同时保存 RT 队列和 fair 队列。CFS 与 EEVDF 不会各自创建一套调度器对象，而是通过编译期 feature 解释同一个 fair tree 的排序键：
 
 ```rust
 struct RunQueue {
     rt_queues: [VecDeque<Arc<TaskControlBlock>>; RT_QUEUE_LEVELS],
     highest_rt_prio: Option<u8>,
     rt_nr_running: usize,
+    // CFS: (vruntime, task_ptr); EEVDF: (virtual_deadline, task_ptr)
     cfs_tasks: BTreeMap<(u64, usize), Arc<TaskControlBlock>>,
     cfs_nr_running: usize,
     cfs_load: u64,
+    #[cfg(feature = "sched_eevdf")]
+    eevdf_weighted_vruntime_ns: u128,
+    #[cfg(feature = "sched_eevdf")]
+    eevdf_total_weight: u128,
     min_vruntime_ns: u64,
     stop_task: Option<Arc<TaskControlBlock>>,
 }
 ```
 
-`pick_next_task` 的选择顺序非常直接：先从最高优先级实时队列取任务；若没有实时任务，再取 `vruntime` 最小的 CFS 任务；若本 hart 完全没有普通任务，则尝试从其他 hart 窃取一个亲和性允许的 CFS 任务。当前实现只窃取普通任务，不窃取实时任务，因为实时任务的优先级语义和唤醒延迟比负载均衡更重要。
+`pick_next_task` 的选择顺序非常直接：先从最高优先级实时队列取任务；若没有实时任务，再进入 fair tree。CFS 取 `vruntime` 最小的任务，EEVDF 则从 virtual deadline 最早的位置开始寻找 eligible 实体；若本 hart 完全没有普通任务，则尝试从其他 hart 窃取一个亲和性允许的 fair 任务。当前实现只窃取普通任务，不窃取实时任务，因为实时任务的优先级语义和唤醒延迟比负载均衡更重要。
 
 入队时，`enqueue_task_on(task, preferred_hart)` 会根据任务的 CPU 亲和性和当前 online hart 集合选择目标 hart。实时任务倾向于留在 preferred hart；如果该 hart 已不在亲和性集合内，则选择集合中的第一个 hart。普通任务会做更积极的轻量负载分配：若 preferred hart 可用且为空，就直接使用；否则扫描允许的 hart，选择 `(cfs_load, cfs_nr_running)` 最小者。这里使用 `cfs_load` 而不只是任务数量，是因为 nice 权重不同的普通任务对 CPU 的需求并不相同。
 
@@ -211,7 +261,7 @@ CosmOS 使用延迟抢占。timer 中断、软件中断和唤醒路径并不在�
     [`HigherRtPriority`], [更高优先级实时任务进入运行队列，当前任务应让出 CPU。],
     [`RrTimesliceExpired`], [`SCHED_RR` 时间片耗尽，需要同优先级轮转。],
     [`Yield`], [当前任务主动调用 `sched_yield`。],
-    [`CfsPreempt`], [CFS 判断当前任务已运行足够久，或新唤醒任务更应运行。],
+    [`CfsPreempt`], [CFS/EEVDF 判断当前任务已运行足够久，或新唤醒 fair 实体更应运行。],
     [`Migration`], [CPU 亲和性或跨 hart 入队要求重新评估运行位置。],
   ),
   caption: [重新调度原因],
@@ -223,7 +273,7 @@ CosmOS 使用延迟抢占。timer 中断、软件中断和唤醒路径并不在�
 
 这种设计把硬中断处理和上下文切换解耦。硬中断上下文中锁、栈和嵌套状态都更敏感，如果在任意中断点直接执行 `__switch`，调度器需要处理大量额外约束。延迟到 trap 尾部后，内核可以先完成系统调用返回值、信号检查、fatal signal 处理和进程退出检查，再在一个统一位置决定是否切换。
 
-内核态 timer 中断也会调用 `on_timer_tick`，因此任务在内核中消耗的时间同样计入 RR 时间片和 CFS 运行时间。这比只统计用户态 tick 更接近 Linux “任务占用 CPU” 的语义。
+内核态 timer 中断也会调用 `on_timer_tick`，因此任务在内核中消耗的时间同样计入 RR 时间片和 CFS/EEVDF fair-class 运行时间。这比只统计用户态 tick 更接近 Linux “任务占用 CPU” 的语义。
 
 == 阻塞与唤醒
 
@@ -243,11 +293,11 @@ CosmOS 使用延迟抢占。timer 中断、软件中断和唤醒路径并不在�
 
 调度相关系统调用集中在 `os/src/syscall/sched.rs`。这些接口的实现原则是：任何会改变运行队列排序的属性，都必须先把任务从队列中取下，修改状态后再重新入队；任何会影响正在运行任务的属性，都必须请求其所在 hart 重新调度。
 
-`sched_yield` 的语义随策略变化。普通任务调用后进入 `yield_current_and_run_next`，内核给它追加 `CFS_YIELD_PENALTY_NS` 的虚拟运行时间，使它短期内不容易再次被选中。实时任务只有在本 hart 存在同等或更高优先级实时任务时才真正让出，否则继续运行，避免无意义切换。
+`sched_yield` 的语义随策略变化。普通任务调用后进入 `yield_current_and_run_next`，内核给它追加 `FAIR_YIELD_PENALTY_NS`（当前为 3ms）的虚拟运行时间；CFS 直接按增加后的 `vruntime` 排序，EEVDF 则据此重新计算 virtual deadline，使它短期内不容易再次被选中。实时任务只有在本 hart 存在同等或更高优先级实时任务时才真正让出，否则继续运行，避免无意义切换。
 
 `sched_setscheduler` 和 `sched_setattr` 可以改变任务的调度策略、实时优先级、nice 和 deadline 可见字段。若目标任务已经在运行队列中，内核先调用 `remove_task`，更新属性，再通过 `enqueue_task_on` 按新策略放回队列。若目标任务正在 CPU 上运行，则根据它所在 hart 设置 `Migration` 或发送 IPI，让它在安全点重新参与调度。
 
-`setpriority` / `getpriority` 当前支持 `PRIO_PROCESS`。设置 nice 时，内核会更新进程内所有线程的 `nice` 与 `weight`。如果某个线程已经在 CFS 队列中，必须出队再入队，因为它的权重已经影响队列负载和后续虚拟时间计算。
+`setpriority` / `getpriority` 当前支持 `PRIO_PROCESS`。设置 nice 时，内核会更新进程内所有线程的 `nice` 与 `weight`。如果某个线程已经在 fair 队列中，必须出队再入队，因为它的权重已经影响队列负载、`vruntime` 计算和 EEVDF deadline。
 
 `sched_setaffinity` 把用户传入的 CPU 集合与 online hart 集合求交。若交集为空，返回 `EINVAL`；若任务正在运行且当前 hart 不再属于新集合，内核设置 `Migration` 或向对应 hart 发送 IPI；若任务正在运行队列中，则先移除，再按新亲和性重新选择目标 hart。
 
@@ -274,6 +324,6 @@ CosmOS 使用延迟抢占。timer 中断、软件中断和唤醒路径并不在�
 
 == 小结
 
-CosmOS 的任务调度器可以概括为三层：最底层是架构相关的 `__switch`，负责保存和恢复内核态 callee-saved 上下文；中间层是 per-hart `Processor` 与 `RunQueue`，负责维护任务归属和选择下一个任务；上层是 Linux 风格的调度策略和系统调用接口，负责把 nice、实时优先级、时间片、亲和性等用户态语义映射到内核调度状态。
+CosmOS 的任务调度器可以概括为三层：最底层是架构相关的 `__switch`，负责保存和恢复内核态 callee-saved 上下文；中间层是 per-hart `Processor` 与 `RunQueue`，负责维护任务归属和选择下一个任务；上层是 Linux 风格的调度策略和系统调用接口，负责把 nice、实时优先级、时间片、亲和性等用户态语义映射到内核调度状态。普通任务在这一层可以选择 CFS 或 EEVDF，但二者共享任务状态、fair tree 和上下文切换协议。
 
 这一章最重要的结论是：调度正确性来自清晰的状态边界。一个任务要么属于某个 hart 的 `current`，要么属于某个运行队列，要么属于某条等待队列；切换过程中的短暂半状态必须用 `on_cpu`、本地关中断和 Release/Acquire 配对保护起来。后续的进程管理、信号、futex、poll、定时器和文件系统阻塞都建立在这套边界之上，因此调度器的设计直接决定了整个内核并发语义的可靠性。

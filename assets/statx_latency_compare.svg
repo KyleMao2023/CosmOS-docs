@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-labelledby="title desc">
+  <title id="title">CosmOS statx 微基准优化前后延迟对比</title>
+  <desc id="desc">比较 b8e226f 与当前 cf37756 的五类 statx 用例，单位为每次调用纳秒，数值越低越好。</desc>
+  <defs>
+    <style>
+      .sans { font-family: "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif; }
+      .mono { font-family: "JetBrains Mono", "DejaVu Sans Mono", monospace; }
+      .title { font-size: 28px; font-weight: 700; fill: #0f172a; }
+      .subtitle { font-size: 15px; fill: #64748b; }
+      .axis { font-size: 13px; fill: #64748b; }
+      .label { font-size: 16px; fill: #1e293b; }
+      .value { font-size: 13px; font-weight: 600; fill: #334155; }
+      .improve { font-size: 14px; font-weight: 700; fill: #047857; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="760" fill="#f8fafc"/>
+  <text x="64" y="58" class="sans title">statx 微基准：优化前后单次调用延迟</text>
+  <text x="64" y="88" class="sans subtitle">CosmOS RISC-V · QEMU TCG · SMP=1 · 三轮交替运行取中位数 · 单位：ns/call（越低越好）</text>
+
+  <rect x="48" y="120" width="1184" height="560" rx="18" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <rect x="814" y="148" width="16" height="16" rx="4" fill="#94a3b8"/>
+  <text x="838" y="161" class="sans axis">优化前 b8e226f</text>
+  <rect x="982" y="148" width="16" height="16" rx="4" fill="#0f766e"/>
+  <text x="1006" y="161" class="sans axis">当前 cf37756</text>
+  <text x="1130" y="161" class="sans axis">改善</text>
+
+  <text x="84" y="195" class="sans axis">测试用例</text>
+  <text x="330" y="195" class="sans axis">0</text>
+  <text x="522" y="195" class="sans axis">4,000</text>
+  <text x="714" y="195" class="sans axis">8,000</text>
+  <text x="906" y="195" class="sans axis">12,000</text>
+  <text x="1098" y="195" class="sans axis">16,000</text>
+
+  <g stroke="#e2e8f0" stroke-width="1">
+    <line x1="330" y1="208" x2="330" y2="618"/>
+    <line x1="522" y1="208" x2="522" y2="618"/>
+    <line x1="714" y1="208" x2="714" y2="618"/>
+    <line x1="906" y1="208" x2="906" y2="618"/>
+    <line x1="1098" y1="208" x2="1098" y2="618"/>
+  </g>
+
+  <g class="sans label">
+    <text x="84" y="246">path_fixed</text>
+    <text x="84" y="326">empty_path</text>
+    <text x="84" y="406">relative_dirfd</text>
+    <text x="84" y="486">path_rotate_first</text>
+    <text x="84" y="566">path_rotate_repeat</text>
+  </g>
+
+  <!-- scale: 768 px = 16000 ns -->
+  <g>
+    <rect x="330" y="220" width="580.50" height="18" rx="5" fill="#94a3b8"/>
+    <rect x="330" y="244" width="361.69" height="18" rx="5" fill="#0f766e"/>
+    <text x="920" y="234" class="sans value">12,093.816</text>
+    <text x="702" y="258" class="sans value">7,535.152</text>
+    <rect x="1130" y="225" width="76" height="34" rx="17" fill="#ecfdf5" stroke="#a7f3d0"/>
+    <text x="1168" y="247" text-anchor="middle" class="sans improve">−37.7%</text>
+
+    <rect x="330" y="300" width="242.11" height="18" rx="5" fill="#94a3b8"/>
+    <rect x="330" y="324" width="175.51" height="18" rx="5" fill="#0f766e"/>
+    <text x="582" y="314" class="sans value">5,043.937</text>
+    <text x="516" y="338" class="sans value">3,656.498</text>
+    <rect x="1130" y="305" width="76" height="34" rx="17" fill="#ecfdf5" stroke="#a7f3d0"/>
+    <text x="1168" y="327" text-anchor="middle" class="sans improve">−27.5%</text>
+
+    <rect x="330" y="380" width="353.82" height="18" rx="5" fill="#94a3b8"/>
+    <rect x="330" y="404" width="284.59" height="18" rx="5" fill="#0f766e"/>
+    <text x="694" y="394" class="sans value">7,371.228</text>
+    <text x="626" y="418" class="sans value">5,929.000</text>
+    <rect x="1130" y="385" width="76" height="34" rx="17" fill="#ecfdf5" stroke="#a7f3d0"/>
+    <text x="1168" y="407" text-anchor="middle" class="sans improve">−19.6%</text>
+
+    <rect x="330" y="460" width="682.31" height="18" rx="5" fill="#94a3b8"/>
+    <rect x="330" y="484" width="397.95" height="18" rx="5" fill="#0f766e"/>
+    <text x="1022" y="474" class="sans value">14,214.844</text>
+    <text x="740" y="498" class="sans value">8,290.625</text>
+    <rect x="1130" y="465" width="76" height="34" rx="17" fill="#ecfdf5" stroke="#a7f3d0"/>
+    <text x="1168" y="487" text-anchor="middle" class="sans improve">−41.7%</text>
+
+    <rect x="330" y="540" width="614.77" height="18" rx="5" fill="#94a3b8"/>
+    <rect x="330" y="564" width="399.96" height="18" rx="5" fill="#0f766e"/>
+    <text x="954" y="554" class="sans value">12,807.666</text>
+    <text x="742" y="578" class="sans value">8,332.568</text>
+    <rect x="1130" y="545" width="76" height="34" rx="17" fill="#ecfdf5" stroke="#a7f3d0"/>
+    <text x="1168" y="567" text-anchor="middle" class="sans improve">−34.9%</text>
+  </g>
+
+  <line x1="330" y1="618" x2="1098" y2="618" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="64" y="649" class="sans subtitle">固定路径、空路径与相对目录句柄各运行 100,000 次；旋转路径分别运行 128 / 2,048 次。</text>
+  <text x="64" y="672" class="sans subtitle">优化后为当前 HEAD 相对 b8e226f 的累计结果，包含路径解析与用户缓冲单页 fast path 等改动。</text>
+</svg>

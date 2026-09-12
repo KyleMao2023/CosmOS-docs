@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="296.96793mm"
+   height="124.51292mm"
+   viewBox="0 0 296.96793 124.51292"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="statx_latency_compare_simple.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.4253648"
+     inkscape:cx="709.29213"
+     inkscape:cy="265.19528"
+     inkscape:window-width="3200"
+     inkscape:window-height="1876"
+     inkscape:window-x="-12"
+     inkscape:window-y="-12"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(10.583334,-63.5)">
+    <rect
+       x="182.53563"
+       y="63.5"
+       width="4.2333331"
+       height="4.2333331"
+       rx="1.0583333"
+       fill="#94a3b8"
+       id="rect3"
+       style="stroke-width:0.264583" />
+    <text
+       x="188.88562"
+       y="66.939583"
+       class="sans axis"
+       id="text3"
+       style="font-size:3.43958px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#64748b;stroke-width:0.264583">优化前 b8e226f</text>
+    <rect
+       x="226.98563"
+       y="63.5"
+       width="4.2333331"
+       height="4.2333331"
+       rx="1.0583333"
+       fill="#0f766e"
+       id="rect4"
+       style="stroke-width:0.264583" />
+    <text
+       x="233.33563"
+       y="66.939583"
+       class="sans axis"
+       id="text4"
+       style="font-size:3.43958px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#64748b;stroke-width:0.264583">当前 cf37756</text>
+    <text
+       x="273.02322"
+       y="66.939583"
+       class="sans axis"
+       id="text5"
+       style="font-size:3.43958px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#64748b;stroke-width:0.264583">改善</text>
+    <text
+       x="-10.610206"
+       y="75.935417"
+       class="sans axis"
+       id="text6"
+       style="font-size:3.43958px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#64748b;stroke-width:0.264583">测试用例</text>
+    <text
+       x="54.477295"
+       y="75.935417"
+       class="sans axis"
+       id="text7"
+       style="font-size:3.43958px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#64748b;stroke-width:0.264583">0</text>
+    <text
+       x="105.27729"
+       y="75.935417"
+       class="sans axis"
+       id="text8"
+       style="font-size:3.43958px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#64748b;stroke-width:0.264583">4,000</text>
+    <text
+       x="156.07729"
+       y="75.935417"
+       class="sans axis"
+       id="text9"
+       style="font-size:3.43958px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#64748b;stroke-width:0.264583">8,000</text>
+    <text
+       x="206.87729"
+       y="75.935417"
+       class="sans axis"
+       id="text10"
+       style="font-size:3.43958px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#64748b;stroke-width:0.264583">12,000</text>
+    <text
+       x="257.67728"
+       y="75.935417"
+       class="sans axis"
+       id="text11"
+       style="font-size:3.43958px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#64748b;stroke-width:0.264583">16,000</text>
+    <g
+       stroke="#e2e8f0"
+       stroke-width="1"
+       id="g15"
+       transform="matrix(0.26458333,0,0,0.26458333,-32.835205,24.341667)">
+      <line
+         x1="330"
+         y1="208"
+         x2="330"
+         y2="618"
+         id="line11" />
+      <line
+         x1="522"
+         y1="208"
+         x2="522"
+         y2="618"
+         id="line12" />
+      <line
+         x1="714"
+         y1="208"
+         x2="714"
+         y2="618"
+         id="line13" />
+      <line
+         x1="906"
+         y1="208"
+         x2="906"
+         y2="618"
+         id="line14" />
+      <line
+         x1="1098"
+         y1="208"
+         x2="1098"
+         y2="618"
+         id="line15" />
+    </g>
+    <g
+       class="sans label"
+       id="g19"
+       style="font-size:16px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#1e293b"
+       transform="matrix(0.26458333,0,0,0.26458333,-32.835205,24.341667)">
+      <text
+         x="84"
+         y="246"
+         id="text15">path_fixed</text>
+      <text
+         x="84"
+         y="326"
+         id="text16">empty_path</text>
+      <text
+         x="84"
+         y="406"
+         id="text17">relative_dirfd</text>
+      <text
+         x="84"
+         y="486"
+         id="text18">path_rotate_first</text>
+      <text
+         x="84"
+         y="566"
+         id="text19">path_rotate_repeat</text>
+    </g>
+    <g
+       id="g34"
+       transform="matrix(0.26458333,0,0,0.26458333,-32.835205,24.341667)">
+      <rect
+         x="330"
+         y="220"
+         width="580.5"
+         height="18"
+         rx="5"
+         fill="#94a3b8"
+         id="rect19" />
+      <rect
+         x="330"
+         y="244"
+         width="361.69"
+         height="18"
+         rx="5"
+         fill="#0f766e"
+         id="rect20" />
+      <text
+         x="920"
+         y="234"
+         class="sans value"
+         id="text20"
+         style="font-weight:600;font-size:13px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#334155">12,093.816</text>
+      <text
+         x="702"
+         y="258"
+         class="sans value"
+         id="text21"
+         style="font-weight:600;font-size:13px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#334155">7,535.152</text>
+      <rect
+         x="1130"
+         y="225"
+         width="76"
+         height="34"
+         rx="17"
+         fill="#ecfdf5"
+         stroke="#a7f3d0"
+         id="rect21" />
+      <text
+         x="1168"
+         y="247"
+         text-anchor="middle"
+         class="sans improve"
+         id="text22"
+         style="font-weight:700;font-size:14px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#047857">−37.7%</text>
+      <rect
+         x="330"
+         y="300"
+         width="242.11"
+         height="18"
+         rx="5"
+         fill="#94a3b8"
+         id="rect22" />
+      <rect
+         x="330"
+         y="324"
+         width="175.50999"
+         height="18"
+         rx="5"
+         fill="#0f766e"
+         id="rect23" />
+      <text
+         x="582"
+         y="314"
+         class="sans value"
+         id="text23"
+         style="font-weight:600;font-size:13px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#334155">5,043.937</text>
+      <text
+         x="516"
+         y="338"
+         class="sans value"
+         id="text24"
+         style="font-weight:600;font-size:13px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#334155">3,656.498</text>
+      <rect
+         x="1130"
+         y="305"
+         width="76"
+         height="34"
+         rx="17"
+         fill="#ecfdf5"
+         stroke="#a7f3d0"
+         id="rect24" />
+      <text
+         x="1168"
+         y="327"
+         text-anchor="middle"
+         class="sans improve"
+         id="text25"
+         style="font-weight:700;font-size:14px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#047857">−27.5%</text>
+      <rect
+         x="330"
+         y="380"
+         width="353.82001"
+         height="18"
+         rx="5"
+         fill="#94a3b8"
+         id="rect25" />
+      <rect
+         x="330"
+         y="404"
+         width="284.59"
+         height="18"
+         rx="5"
+         fill="#0f766e"
+         id="rect26" />
+      <text
+         x="694"
+         y="394"
+         class="sans value"
+         id="text26"
+         style="font-weight:600;font-size:13px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#334155">7,371.228</text>
+      <text
+         x="626"
+         y="418"
+         class="sans value"
+         id="text27"
+         style="font-weight:600;font-size:13px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#334155">5,929.000</text>
+      <rect
+         x="1130"
+         y="385"
+         width="76"
+         height="34"
+         rx="17"
+         fill="#ecfdf5"
+         stroke="#a7f3d0"
+         id="rect27" />
+      <text
+         x="1168"
+         y="407"
+         text-anchor="middle"
+         class="sans improve"
+         id="text28"
+         style="font-weight:700;font-size:14px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#047857">−19.6%</text>
+      <rect
+         x="330"
+         y="460"
+         width="682.31"
+         height="18"
+         rx="5"
+         fill="#94a3b8"
+         id="rect28" />
+      <rect
+         x="330"
+         y="484"
+         width="397.95001"
+         height="18"
+         rx="5"
+         fill="#0f766e"
+         id="rect29" />
+      <text
+         x="1022"
+         y="474"
+         class="sans value"
+         id="text29"
+         style="font-weight:600;font-size:13px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#334155">14,214.844</text>
+      <text
+         x="740"
+         y="498"
+         class="sans value"
+         id="text30"
+         style="font-weight:600;font-size:13px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#334155">8,290.625</text>
+      <rect
+         x="1130"
+         y="465"
+         width="76"
+         height="34"
+         rx="17"
+         fill="#ecfdf5"
+         stroke="#a7f3d0"
+         id="rect30" />
+      <text
+         x="1168"
+         y="487"
+         text-anchor="middle"
+         class="sans improve"
+         id="text31"
+         style="font-weight:700;font-size:14px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#047857">−41.7%</text>
+      <rect
+         x="330"
+         y="540"
+         width="614.77002"
+         height="18"
+         rx="5"
+         fill="#94a3b8"
+         id="rect31" />
+      <rect
+         x="330"
+         y="564"
+         width="399.95999"
+         height="18"
+         rx="5"
+         fill="#0f766e"
+         id="rect32" />
+      <text
+         x="954"
+         y="554"
+         class="sans value"
+         id="text32"
+         style="font-weight:600;font-size:13px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#334155">12,807.666</text>
+      <text
+         x="742"
+         y="578"
+         class="sans value"
+         id="text33"
+         style="font-weight:600;font-size:13px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#334155">8,332.568</text>
+      <rect
+         x="1130"
+         y="545"
+         width="76"
+         height="34"
+         rx="17"
+         fill="#ecfdf5"
+         stroke="#a7f3d0"
+         id="rect33" />
+      <text
+         x="1168"
+         y="567"
+         text-anchor="middle"
+         class="sans improve"
+         id="text34"
+         style="font-weight:700;font-size:14px;font-family:'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;fill:#047857">−34.9%</text>
+    </g>
+    <line
+       x1="54.477295"
+       y1="187.85417"
+       x2="257.67728"
+       y2="187.85417"
+       stroke="#94a3b8"
+       stroke-width="0.3175"
+       id="line34" />
+  </g>
+</svg>

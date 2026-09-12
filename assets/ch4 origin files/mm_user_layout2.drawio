@@ -1,0 +1,103 @@
+<mxfile host="app.diagrams.net" agent="Codex">
+  <diagram id="cosmos-mm-user-layout" name="CosmOS process virtual address layout">
+    <mxGraphModel dx="2192" dy="1462" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1500" background="#F6FBFC" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#123D4C;fontSize=30;" value="&lt;b&gt;CosmOS 进程虚拟地址空间布局&lt;/b&gt;" vertex="1">
+          <mxGeometry height="55" width="1500" x="450" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#527889;fontSize=16;" value="当前 QEMU virt 配置 · RISC-V / LoongArch64 · 地址按代码常量推导" vertex="1">
+          <mxGeometry height="38" width="1500" x="450" y="75" as="geometry" />
+        </mxCell>
+        <mxCell id="common" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF5F8;strokeColor=#55C8D5;strokeWidth=2;fontColor=#123D4C;fontSize=16;align=center;verticalAlign=middle;spacing=8;" value="&lt;b&gt;共同规则&lt;/b&gt;&lt;br&gt;4 KiB 页 · 39-bit VA · 低半区用户上界 USER_SPACE_END = 0x0000_0040_0000_0000（256 GiB）" vertex="1">
+          <mxGeometry height="76" width="2300" x="50" y="135" as="geometry" />
+        </mxCell>
+        <mxCell id="rvPanel" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1298B2;strokeWidth=3;" value="" vertex="1">
+          <mxGeometry height="1120" width="1110" x="50" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="laPanel" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#28A86E;strokeWidth=3;" value="" vertex="1">
+          <mxGeometry height="1120" width="1110" x="1240" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="rvHeader" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F3F7;strokeColor=#1298B2;strokeWidth=2;fontColor=#123D4C;align=center;verticalAlign=middle;spacing=7;" value="&lt;b&gt;RISC-V · Sv39&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:14px&quot;&gt;进程 root 共享 kernel high-half；trampoline 在高地址&lt;/font&gt;" vertex="1">
+          <mxGeometry height="62" width="1066" x="72" y="265" as="geometry" />
+        </mxCell>
+        <mxCell id="laHeader" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F7EB;strokeColor=#28A86E;strokeWidth=2;fontColor=#123D4C;align=center;verticalAlign=middle;spacing=7;" value="&lt;b&gt;LoongArch64 · 3-level paging&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:14px&quot;&gt;kernel text / RAM / MMIO 主要由 DMW 直映射提供&lt;/font&gt;" vertex="1">
+          <mxGeometry height="62" width="1066" x="1262" y="265" as="geometry" />
+        </mxCell>
+        <mxCell id="rvKernel" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D4EEF3;strokeColor=#1298B2;strokeWidth=2;fontColor=#123D4C;align=center;verticalAlign=middle;spacing=7;" value="&lt;b&gt;Kernel high-half（每个进程 root 可见）&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:14px&quot;&gt;[0xffff_ffc0_0000_0000, 0xffff_ffff_ffff_ffff]&lt;br&gt;kernel heap ≤ 1 GiB · RAM = KERNEL_ADDR_OFFSET + PA&lt;br&gt;MMIO = 0xffff_ffe0_0000_0000 + PA · PTE 无 U&lt;/font&gt;" vertex="1">
+          <mxGeometry height="145" width="930" x="140" y="345" as="geometry" />
+        </mxCell>
+        <mxCell id="laDmw" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DDF4E7;strokeColor=#28A86E;strokeWidth=2;fontColor=#123D4C;align=center;verticalAlign=middle;spacing=7;" value="&lt;b&gt;DMW 直映射（不属于普通低半区 PGDL）&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:14px&quot;&gt;DMW1 cached：0x9000_0000_0000_0000 | PA&lt;br&gt;DMW0 uncached MMIO：0x8000_0000_0000_0000 | PA&lt;br&gt;kernel text / RAM / kernel stack 主要走 DMW&lt;/font&gt;" vertex="1">
+          <mxGeometry height="145" width="930" x="1330" y="345" as="geometry" />
+        </mxCell>
+        <mxCell id="rvBoundary" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#0D6F86;fontSize=14;" value="USER_SPACE_END = 0x0000_0040_0000_0000" vertex="1">
+          <mxGeometry height="38" width="930" x="140" y="495" as="geometry" />
+        </mxCell>
+        <mxCell id="laBoundary" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#197C54;fontSize=14;" value="USER_SPACE_END = 0x0000_0040_0000_0000" vertex="1">
+          <mxGeometry height="38" width="930" x="1330" y="495" as="geometry" />
+        </mxCell>
+        <mxCell id="rvSpecial" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F3F7;strokeColor=#1298B2;strokeWidth=2;fontColor=#123D4C;align=center;verticalAlign=middle;spacing=7;" value="&lt;b&gt;用户区顶部特殊页&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Trap context: 0x0000_003f_ffff_e000 − tid × 4 KiB&lt;br&gt;trampoline: 0xffff_ffff_ffff_f000 · S-mode RX&lt;br&gt;均无 U 权限；trap context 每线程 1 页&lt;/font&gt;" vertex="1">
+          <mxGeometry height="105" width="930" x="140" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="laSpecial" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F7EB;strokeColor=#28A86E;strokeWidth=2;fontColor=#123D4C;align=center;verticalAlign=middle;spacing=7;" value="&lt;b&gt;用户区顶部特殊页&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Trap context：0x0000_003f_ffff_e000 − tid × 4 KiB&lt;br&gt;trampoline：0x0000_003f_ffff_f000 · S-mode RX&lt;br&gt;trampoline 位于低半区最后一页，但无 U 权限&lt;/font&gt;" vertex="1">
+          <mxGeometry height="105" width="930" x="1330" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="rvStack" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F3F7;strokeColor=#1298B2;strokeWidth=2;fontColor=#123D4C;align=center;verticalAlign=middle;spacing=7;" value="&lt;b&gt;用户栈（向低地址增长）&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;主线程 [0x0800_0000, 0x0880_0000) = 8 MiB&lt;br&gt;tid &gt; 0：每线程 8 MiB，线程间隔 4 KiB guard&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="930" x="140" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="laStack" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F7EB;strokeColor=#28A86E;strokeWidth=2;fontColor=#123D4C;align=center;verticalAlign=middle;spacing=7;" value="&lt;b&gt;用户栈（向低地址增长）&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;主线程 [0x3e_0000_0000, 0x3e_0080_0000) = 8 MiB&lt;br&gt;每线程间隔 4 KiB guard；页表中按 VMA 管理&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="930" x="1330" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="rvGap" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F4F6;strokeColor=#9AAFB8;strokeWidth=2;dashed=1;fontColor=#527889;fontSize=14;align=center;verticalAlign=middle;" value="稀疏用户 VA / 未映射 VMA（非比例示意）" vertex="1">
+          <mxGeometry height="58" width="930" x="140" y="795" as="geometry" />
+        </mxCell>
+        <mxCell id="laHeapWindow" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F7EB;strokeColor=#28A86E;strokeWidth=2;fontColor=#123D4C;align=center;verticalAlign=middle;spacing=7;" value="&lt;b&gt;kernel heap：低地址中的 supervisor-only 窗口&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;[0x0000_0038_0000_0000, 0x0000_0038_4000_0000]&lt;br&gt;1 GiB；mmap 选址主动跳过&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="930" x="1330" y="795" as="geometry" />
+        </mxCell>
+        <mxCell id="rvMmap" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F3F7;strokeColor=#1298B2;strokeWidth=2;fontColor=#123D4C;align=center;verticalAlign=middle;spacing=7;" value="&lt;b&gt;mmap 与用户 vDSO&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;mmap_base = 0x0000_0001_0000_0000&lt;br&gt;vDSO = mmap_base − 4 KiB = 0x0000_0000_ffff_f000&lt;br&gt;匿名 / 文件映射从基址向上寻找空洞&lt;/font&gt;" vertex="1">
+          <mxGeometry height="105" width="930" x="140" y="875" as="geometry" />
+        </mxCell>
+        <mxCell id="laMmap" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F7EB;strokeColor=#28A86E;strokeWidth=2;fontColor=#123D4C;align=center;verticalAlign=middle;spacing=7;" value="&lt;b&gt;mmap 与用户 vDSO&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;mmap_base = 0x0000_0020_0000_0000&lt;br&gt;vDSO = 0x0000_001f_ffff_f000（mmap_base − 4 KiB）&lt;br&gt;匿名 / 文件映射从基址向上寻找空洞&lt;/font&gt;" vertex="1">
+          <mxGeometry height="105" width="930" x="1330" y="895" as="geometry" />
+        </mxCell>
+        <mxCell id="rvInterp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F3F7;strokeColor=#1298B2;strokeWidth=2;fontColor=#123D4C;align=center;verticalAlign=middle;spacing=7;" value="&lt;b&gt;动态链接器（若存在 PT_INTERP）&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;INTERP_BASE = 0x0000_0002_0000_0000 · ld.so 固定 load bias&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="930" x="140" y="1000" as="geometry" />
+        </mxCell>
+        <mxCell id="laInterp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F7EB;strokeColor=#28A86E;strokeWidth=2;fontColor=#123D4C;align=center;verticalAlign=middle;spacing=7;" value="&lt;b&gt;动态链接器（若存在 PT_INTERP）&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;INTERP_BASE = 0x0000_001e_0000_0000 · ld.so 固定 load bias&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="930" x="1330" y="1020" as="geometry" />
+        </mxCell>
+        <mxCell id="rvBrk" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F3F7;strokeColor=#1298B2;strokeWidth=2;fontColor=#123D4C;align=center;verticalAlign=middle;spacing=7;" value="&lt;b&gt;进程堆 brk / sbrk&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;start_brk = ELF 镜像末尾 → current_brk · 不可越过 mmap_base&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="930" x="140" y="1095" as="geometry" />
+        </mxCell>
+        <mxCell id="laBrk" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F7EB;strokeColor=#28A86E;strokeWidth=2;fontColor=#123D4C;align=center;verticalAlign=middle;spacing=7;" value="&lt;b&gt;进程堆 brk / sbrk&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;start_brk = ELF 镜像末尾 → current_brk · 不可越过 mmap_base；还需避开 kernel heap&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="930" x="1330" y="1115" as="geometry" />
+        </mxCell>
+        <mxCell id="rvElf" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F3F7;strokeColor=#1298B2;strokeWidth=2;fontColor=#123D4C;align=center;verticalAlign=middle;spacing=7;" value="&lt;b&gt;ELF 用户映像（低地址）&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;PT_LOAD：text / rodata / data / BSS&lt;br&gt;ET_DYN / PIE load bias = 0x0020_0000&lt;br&gt;权限 = PT_LOAD R/W/X + U；部分页可懒映射&lt;/font&gt;" vertex="1">
+          <mxGeometry height="105" width="930" x="140" y="1190" as="geometry" />
+        </mxCell>
+        <mxCell id="laElf" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F7EB;strokeColor=#28A86E;strokeWidth=2;fontColor=#123D4C;align=center;verticalAlign=middle;spacing=7;" value="&lt;b&gt;ELF 用户映像（低地址）&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;PT_LOAD：text / rodata / data / BSS&lt;br&gt;PIE load bias = 0x0020_0000；权限带 U&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="930" x="1330" y="1210" as="geometry" />
+        </mxCell>
+        <mxCell id="rvZero" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#0D6F86;fontSize=13;fontFamily=monospace;" value="0x0000_0000_0000_0000" vertex="1">
+          <mxGeometry height="30" width="260" x="138" y="1300" as="geometry" />
+        </mxCell>
+        <mxCell id="laZero" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#197C54;fontSize=13;fontFamily=monospace;" value="0x0000_0000_0000_0000" vertex="1">
+          <mxGeometry height="30" width="260" x="1328" y="1300" as="geometry" />
+        </mxCell>
+        <mxCell id="rvAxis" edge="1" parent="1" style="edgeStyle=none;html=1;strokeColor=#1298B2;strokeWidth=2;endArrow=block;endFill=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="102" y="1280" as="sourcePoint" />
+            <mxPoint x="102" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="laAxis" edge="1" parent="1" style="edgeStyle=none;html=1;strokeColor=#28A86E;strokeWidth=2;endArrow=block;endFill=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1292" y="1280" as="sourcePoint" />
+            <mxPoint x="1292" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
