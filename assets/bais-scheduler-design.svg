@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="850" viewBox="0 0 1800 850" role="img" aria-labelledby="title desc">
+  <title id="title">BAIS 调度器框图</title>
+  <desc id="desc">应用提示形成每 hart 的 phase 快照；AI 任务经过稳定映射，普通任务与 deferred completion 根据预计完成时间评分，两条路径最终进入目标 hart 的本地 CFS 运行队列。</desc>
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L12 6L0 12Z" fill="#315f7d"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L12 6L0 12Z" fill="#287a68"/>
+    </marker>
+    <style>
+      .font{font-family:"Noto Sans CJK SC","Source Han Sans SC","Microsoft YaHei","PingFang SC",sans-serif}
+      .mono{font-family:"JetBrains Mono","SFMono-Regular",Consolas,monospace}
+      .lane{font-size:26px;font-weight:700;letter-spacing:1.5px}
+      .title{font-size:34px;font-weight:700;fill:#17364d}
+      .body{font-size:28px;font-weight:450;fill:#29485e}
+      .small{font-size:26px;font-weight:430;fill:#667c8c}
+      .formula{font-size:27px;font-weight:500;fill:#8a5b20}
+      .arrow-blue{fill:none;stroke:#315f7d;stroke-width:2.6;marker-end:url(#arrow-blue)}
+      .arrow-green{fill:none;stroke:#287a68;stroke-width:2.6;marker-end:url(#arrow-green)}
+    </style>
+  </defs>
+
+  <rect width="1800" height="850" fill="#ffffff"/>
+
+  <!-- Control plane -->
+  <text x="60" y="44" class="font lane" fill="#287a68">PHASE 语义与状态</text>
+  <rect x="60" y="68" width="410" height="130" rx="10" fill="#eef8f5" stroke="#79b8aa" stroke-width="2"/>
+  <text x="265" y="111" text-anchor="middle" class="font title">应用 phase 提示</text>
+  <text x="265" y="151" text-anchor="middle" class="mono small">REGISTER · PHASE_START</text>
+  <text x="265" y="184" text-anchor="middle" class="mono small">PROGRESS · ARRIVED</text>
+
+  <path d="M470 133H548" class="arrow-green"/>
+
+  <rect x="560" y="68" width="590" height="130" rx="10" fill="#eef8f5" stroke="#79b8aa" stroke-width="2"/>
+  <text x="855" y="111" text-anchor="middle" class="font title">每 hart 的 phase 快照</text>
+  <text x="855" y="153" text-anchor="middle" class="font body">runtime Aᵢ · progress Pᵢ · arrived</text>
+  <text x="855" y="188" text-anchor="middle" class="font body">reservation Qᵢ · debt Dᵢ</text>
+
+  <!-- non-AI lane -->
+  <text x="60" y="274" class="font lane" fill="#a36a24">可调度干扰路径</text>
+  <rect x="60" y="298" width="410" height="154" rx="10" fill="#fff8ec" stroke="#d7ad6b" stroke-width="2"/>
+  <text x="265" y="358" text-anchor="middle" class="font title">可调度 non-AI 任务</text>
+  <text x="265" y="406" text-anchor="middle" class="font small">普通任务 · block / net worker</text>
+
+  <path d="M470 375H548" class="arrow-blue"/>
+
+  <rect x="560" y="298" width="590" height="154" rx="10" fill="#fff8ec" stroke="#d7ad6b" stroke-width="2"/>
+  <text x="855" y="345" text-anchor="middle" class="font title">预计完成时间放置</text>
+  <text x="855" y="390" text-anchor="middle" class="mono formula">scoreᵢ = Rᵢ + Qᵢ × E</text>
+  <text x="855" y="428" text-anchor="middle" class="mono formula">target = arg minᵢ (scoreᵢ, Dᵢ)</text>
+
+  <!-- The snapshot feeds the score through the gap between the two rows. -->
+  <path d="M855 198V284" class="arrow-green"/>
+
+  <path d="M1150 375H1228" class="arrow-blue"/>
+
+  <!-- AI lane -->
+  <text x="60" y="500" class="font lane" fill="#315f7d">AI 任务路径</text>
+  <rect x="60" y="524" width="410" height="154" rx="10" fill="#f1f6fb" stroke="#8eb4cc" stroke-width="2"/>
+  <text x="265" y="580" text-anchor="middle" class="font title">注册 AI 任务</text>
+  <text x="265" y="626" text-anchor="middle" class="font small">PID 匹配 · SCHED_OTHER</text>
+
+  <path d="M470 601H548" class="arrow-blue"/>
+
+  <rect x="560" y="524" width="590" height="154" rx="10" fill="#f1f6fb" stroke="#8eb4cc" stroke-width="2"/>
+  <text x="855" y="580" text-anchor="middle" class="font title">稳定 worker 映射</text>
+  <text x="855" y="626" text-anchor="middle" class="mono small">home = nth_cpu(allowed, tid)</text>
+
+  <path d="M1150 601H1228" class="arrow-blue"/>
+
+  <!-- Common output -->
+  <rect x="1240" y="298" width="500" height="380" rx="10" fill="#f5f7f9" stroke="#8fa4b3" stroke-width="2"/>
+  <text x="1490" y="340" text-anchor="middle" class="font title">目标 hart 的本地 RunQueue</text>
+  <line x1="1280" y1="365" x2="1700" y2="365" stroke="#c3ced6" stroke-width="1.5"/>
+
+  <rect x="1280" y="400" width="180" height="102" rx="8" fill="#ffffff" stroke="#a9bac6" stroke-width="1.5"/>
+  <text x="1370" y="439" text-anchor="middle" class="font body">hart 0</text>
+  <text x="1370" y="480" text-anchor="middle" class="font small">CFS queue</text>
+
+  <rect x="1518" y="400" width="180" height="102" rx="8" fill="#ffffff" stroke="#a9bac6" stroke-width="1.5"/>
+  <text x="1608" y="439" text-anchor="middle" class="font body">hart 1</text>
+  <text x="1608" y="480" text-anchor="middle" class="font small">CFS queue</text>
+
+  <text x="1490" y="548" text-anchor="middle" class="font title">…</text>
+
+  <rect x="1280" y="576" width="418" height="62" rx="8" fill="#ffffff" stroke="#a9bac6" stroke-width="1.5"/>
+  <text x="1489" y="617" text-anchor="middle" class="font small">CFS vruntime 决定核内次序</text>
+
+  <!-- Scope notes -->
+  <line x1="60" y1="748" x2="1740" y2="748" stroke="#c8d2d9" stroke-width="1.5"/>
+  <text x="60" y="790" class="font small">硬边界：CPU affinity 与 online mask</text>
+  <text x="560" y="790" class="font small">旁路：SCHED_FIFO / SCHED_RR</text>
+  <text x="1120" y="790" class="font small">范围外：hard IRQ 到达位置与 DMA steering</text>
+</svg>

@@ -135,6 +135,10 @@ if y == 0 {
 
 #include "ch2-task.typ"
 
+= BAIS 调度器设计
+
+#include "ch2-bais.typ"
+
 = 进程管理
 
 #include "ch3-process.typ"
